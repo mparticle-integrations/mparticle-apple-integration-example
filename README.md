@@ -14,7 +14,7 @@ Please refer to installation instructions in the core mParticle Apple SDK [READM
 
 ## Create Your Own Integration
 
-Detailed instructions on how to implement your own integration with the mParticle Apple SDK can be found [here](https://github.com/mparticle-integrations/mparticle-apple-integration-example/wiki).
+Detailed instructions on how to implement your own integration with the mParticle Apple SDK can be found [here](https://github.com/mparticle-integrations/mparticle-apple-integration-example/wiki/Kit-Integration-Development).
 
 
 ## Support
