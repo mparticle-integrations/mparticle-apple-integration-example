@@ -12,6 +12,11 @@ A kit takes care of initializing and forwarding information depending on what yo
 Please refer to installation instructions in the core mParticle Apple SDK [README](https://github.com/mParticle/mparticle-apple-sdk#get-the-sdk), or check out our [SDK Documentation](http://docs.mparticle.com/#sdk-documentation) site to learn more.
 
 
+## Create Your Own Integration
+
+Detailed instructions on how to implement your own integration with the mParticle Apple SDK can be found [here](https://github.com/mparticle-integrations/mparticle-apple-integration-example/wiki).
+
+
 ## Support
 
 Questions? Give us a shout at <support@mparticle.com>
