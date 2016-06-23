@@ -90,7 +90,7 @@
     });
 }
 
-- (id const)kitInstance {
+- (id const)providerKitInstance {
     if (![self started]) {
         return nil;
     }
