@@ -1,5 +1,5 @@
 //
-//  MPKitCompanyName.m
+//  MPKitApptentive.m
 //
 //  Copyright 2016 mParticle, Inc.
 //
@@ -16,7 +16,7 @@
 //  limitations under the License.
 //
 
-#import "MPKitCompanyName.h"
+#import "MPKitApptentive.h"
 
 #import "MPEvent.h"
 #import "MPProduct.h"
@@ -35,9 +35,9 @@
 
 /* Import your header file here
 */
-//#import <CompanyName.h>
+#import <Apptentive.h>
 
-@implementation MPKitCompanyName
+@implementation MPKitApptentive
 
 /*
     mParticle will supply a unique kit code for you. Please contact our team
@@ -47,7 +47,7 @@
 }
 
 + (void)load {
-    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"CompanyName" className:@"MPKitCompanyName" startImmediately:YES];
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"Apptentive" className:@"MPKitApptentive" startImmediately:YES];
     [MParticle registerExtension:kitRegister];
 }
 

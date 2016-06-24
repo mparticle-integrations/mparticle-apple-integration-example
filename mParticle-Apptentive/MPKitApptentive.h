@@ -1,5 +1,5 @@
 //
-//  MPKitCompanyName.h
+//  MPKitApptentive.h
 //
 //  Copyright 2016 mParticle, Inc.
 //
@@ -19,7 +19,7 @@
 #import <Foundation/Foundation.h>
 #import <mParticle_Apple_SDK/mParticle.h>
 
-@interface MPKitCompanyName : NSObject <MPKitProtocol>
+@interface MPKitApptentive : NSObject <MPKitProtocol>
 
 @property (nonatomic, strong, nonnull) NSDictionary *configuration;
 @property (nonatomic, strong, nullable) NSDictionary *launchOptions;
