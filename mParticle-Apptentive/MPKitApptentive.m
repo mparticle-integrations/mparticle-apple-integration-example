@@ -33,9 +33,26 @@
 #import "MPDateFormatter.h"
 #import "MPEnums.h"
 
+#warning remove once we are integrated
+NSInteger const MPKitInstanceApptentive = 97;
+
 /* Import your header file here
 */
 #import <Apptentive.h>
+
+NSString * const APIKeyKey = @"APIKey";
+
+@interface MPKitApptentive ()
+
+// iOS 8 and earlier
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *lastName;
+
+// iOS 9 and later
+@property (strong, nonatomic) NSPersonNameComponents *nameComponents;
+@property (strong, nonatomic) NSPersonNameComponentsFormatter *nameFormatter;
+
+@end
 
 @implementation MPKitApptentive
 
@@ -43,7 +60,7 @@
     mParticle will supply a unique kit code for you. Please contact our team
 */
 + (NSNumber *)kitCode {
-    return @999;
+    return @(97);
 }
 
 + (void)load {
@@ -56,7 +73,7 @@
 #pragma mark Kit instance and lifecycle
 - (nonnull instancetype)initWithConfiguration:(nonnull NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
     self = [super init];
-    NSString *appKey = configuration[@"<dictionary key to retrieve API Key>"];
+    NSString *appKey = configuration[APIKeyKey];
     if (!self || !appKey) {
         return nil;
     }
@@ -74,11 +91,16 @@
     static dispatch_once_t kitPredicate;
 
     dispatch_once(&kitPredicate, ^{
-        /*
-            Start your SDK here. The configuration dictionary can be retrieved from self.configuration
-         */
+        NSString *APIKey = self.configuration[APIKeyKey];
+
+        [Apptentive sharedConnection].APIKey = APIKey;
 
         _started = YES;
+
+		if ([NSPersonNameComponents class]) {
+			_nameFormatter = [[NSPersonNameComponentsFormatter alloc] init];
+			_nameComponents = [[NSPersonNameComponents alloc] init];
+		}
 
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
@@ -93,235 +115,112 @@
 - (id const)providerKitInstance {
     if (![self started]) {
         return nil;
-    }
-
-    /*
-        If your company SDK instance is available and is applicable (Please return nil if your SDK is based on class methods)
-     */
-    BOOL kitInstanceAvailable = NO;
-    if (kitInstanceAvailable) {
-        /* Return an instance of your company's SDK (if applicable) */
     } else {
-        return nil;
+        return [Apptentive sharedConnection];
     }
 }
 
 
 #pragma mark Application
-/*
-    Implement this method if your SDK retrieves deep-linking information from a remote server and returns it to the host app
-*/
-// - (MPKitExecStatus *)checkForDeferredDeepLinkWithCompletionHandler:(void(^)(NSDictionary<NSString *, NSString *> *linkInfo, NSError *error))completionHandler {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceBranchMetrics) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
 
-/*
-    Implement this method if your SDK handles a user interacting with a remote notification action
-*/
-// - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+- (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
+   [[Apptentive sharedConnection] didReceiveRemoteNotification:userInfo fromViewController:nil];
 
-/*
-    Implement this method if your SDK receives and handles remote notifications
-*/
-// - (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
 
-/*
-    Implement this method if your SDK registers the device token for remote notifications
-*/
-// - (MPKitExecStatus *)setDeviceToken:(NSData *)deviceToken {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+- (MPKitExecStatus *)setDeviceToken:(NSData *)deviceToken {
+    [[Apptentive sharedConnection] setPushNotificationIntegration:ApptentivePushProviderApptentive withDeviceToken:deviceToken];
 
-/*
-    Implement this method if your SDK handles continueUserActivity method from the App Delegate
-*/
-// - (nonnull MPKitExecStatus *)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceBranchMetrics) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
-
-/*
-    Implement this method if your SDK handles the iOS 9 and above App Delegate method to open URL with options
-*/
-// - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url options:(nullable NSDictionary<NSString *, id> *)options {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceBranchMetrics) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
-
-/*
-    Implement this method if your SDK handles the iOS 8 and below App Delegate method open URL
-*/
-// - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nullable id)annotation {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceBranchMetrics) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
 
 #pragma mark User attributes and identities
-/*
-    Implement this method if your SDK sets user attributes. The core mParticle SDK also sets the userAttributes property.
-*/
-// - (MPKitExecStatus *)setUserAttribute:(NSString *)key value:(NSString *)value {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
 
-/*
-    Implement this method if your SDK allows for incrementing numeric user attributes.
-*/
-// - (MPKitExecStatus *)incrementUserAttribute:(NSString *)key byValue:(NSNumber *)value {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+- (MPKitExecStatus *)setUserAttribute:(NSString *)key value:(NSString *)value {
+	if ([key isEqualToString:mParticleUserAttributeFirstName]) {
+		if (self.nameComponents) {
+			self.nameComponents.givenName = value;
+		} else {
+			self.firstName = value;
+		}
+	} else if ([key isEqualToString:mParticleUserAttributeLastName]) {
+		if (self.nameComponents) {
+			self.nameComponents.familyName = value;
+		} else {
+			self.lastName = value;
+		}
+	} else {
+		[[Apptentive sharedConnection] addCustomPersonData:value withKey:key];
+	}
 
-/*
-    Implement this method if your SDK resets user attributes.
-*/
-// - (MPKitExecStatus *)removeUserAttribute:(NSString *)key {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+	NSString *name;
+	if (self.nameComponents) {
+		name = [self.nameFormatter stringFromPersonNameComponents:self.nameComponents];
+	} else {
+		if (self.firstName.length && self.lastName.length) {
+			name = [@[ self.firstName, self.lastName ] componentsJoinedByString:@" "];
+		} else if (self.firstName.length) {
+			name = self.firstName;
+		} else if (self.lastName.length) {
+			name = self.lastName;
+		}
+	}
 
-/*
-    Implement this method if your SDK sets user identities.
-*/
-// - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
-//     /*  Your code goes here.
-//         If the execution is not successful, or the identity type is not supported, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//         Please see MPEnums.h > MPUserIdentity for all supported user identities
-//      */
-//
-//      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
-//      return execStatus;
-// }
+	[Apptentive sharedConnection].personName = name;
+
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
+
+- (MPKitExecStatus *)removeUserAttribute:(NSString *)key {
+	[[Apptentive sharedConnection] removeCustomPersonDataWithKey:key];
+}
+
+- (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
+	if (identityType == MPUserIdentityEmail) {
+		[Apptentive sharedConnection].personEmailAddress = identityString;
+	} else if (identityType == MPUserIdentityCustomerId) {
+		if ([Apptentive sharedConnection].personName.length == 0) {
+			[Apptentive sharedConnection].personName == identityString;
+		}
+	}
+
+     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:MPKitReturnCodeSuccess];
+     return execStatus;
+}
 
 #pragma mark e-Commerce
-/*
-    Implement this method if your SDK supports commerce events.
-    If your SDK does support commerce event, but does not support all commerce event actions available in the mParticle SDK,
-    expand the received commerce event into regular events and log them accordingly (see sample code below)
-    Please see MPCommerceEvent.h > MPCommerceEventAction for complete list
-*/
-// - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess forwardCount:0];
-//
-//     // In this example, this SDK only supports the 'Purchase' commerce event action
-//     if (commerceEvent.action == MPCommerceEventActionPurchase) {
-//             /* Your code goes here. */
-//
-//             [execStatus incrementForwardCount];
-//         }
-//     } else { // Other commerce events are expanded and logged as regular events
-//         NSArray *expandedInstructions = [commerceEvent expandedInstructions];
-//
-//         for (MPCommerceEventInstruction *commerceEventInstruction in expandedInstructions) {
-//             [self logEvent:commerceEventInstruction.event];
-//             [execStatus incrementForwardCount];
-//         }
-//     }
-//
-//     return execStatus;
-// }
+
+ - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
+	 MPTransactionAttributes *transactionAttributes = commerceEvent.transactionAttributes;
+		NSMutableArray *commerceItems = [NSMutableArray arrayWithCapacity:commerceEvent.products.count];
+
+		for (MPProduct *product in commerceEvent.products) {
+			NSDictionary *item = [Apptentive extendedDataCommerceItemWithItemID:product.sku name:product.name category:product.category price:product.price quantity:product.quantity currency:commerceEvent.currency];
+
+			[commerceItems addObject:item];
+		}
+
+		NSDictionary *commerceData = [Apptentive extendedDataCommerceWithTransactionID:transactionAttributes.transactionId affiliation:transactionAttributes.affiliation revenue:transactionAttributes.revenue shipping:transactionAttributes.shipping tax:transactionAttributes.tax currency:commerceEvent.currency commerceItems:commerceItems];
+
+	 MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:MPKitReturnCodeSuccess forwardCount:0];
+
+     return execStatus;
+ }
 
 #pragma mark Events
-/*
-    Implement this method if your SDK logs user events.
-    Please see MPEvent.h
-*/
-// - (MPKitExecStatus *)logEvent:(MPEvent *)event {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
 
-/*
-    Implement this method if your SDK logs screen events
-    Please see MPEvent.h
-*/
-// - (MPKitExecStatus *)logScreen:(MPEvent *)event {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCrittercism) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+- (MPKitExecStatus *)logEvent:(MPEvent *)event {
+#warning get front view controller
+    UIViewController *viewController = nil;
 
-#pragma mark Assorted
-/*
-    Implement this method if your SDK implements an opt out mechanism for users.
-*/
-// - (MPKitExecStatus *)setOptOut:(BOOL)optOut {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:returnCode];
-//     return execStatus;
-// }
+    BOOL success = [[Apptentive sharedConnection] engage:event.name fromViewController:viewController];
+
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:success ? MPKitReturnCodeSuccess : MPKitReturnCodeRequirementsNotMet];
+    return execStatus;
+}
 
 @end

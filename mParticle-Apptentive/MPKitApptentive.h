@@ -17,7 +17,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <mParticle_Apple_SDK/mParticle.h>
+#import <mParticle.h>
 
 @interface MPKitApptentive : NSObject <MPKitProtocol>
 
