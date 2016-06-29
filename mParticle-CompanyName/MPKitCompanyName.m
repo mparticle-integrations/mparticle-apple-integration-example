@@ -17,21 +17,7 @@
 //
 
 #import "MPKitCompanyName.h"
-
-#import "MPEvent.h"
-#import "MPProduct.h"
-#import "MPProduct+Dictionary.h"
-#import "MPCommerceEvent.h"
-#import "MPCommerceEvent+Dictionary.h"
-#import "MPCommerceEventInstruction.h"
-#import "MPTransactionAttributes.h"
-#import "MPTransactionAttributes+Dictionary.h"
-#import "MPIHasher.h"
 #import "mParticle.h"
-#import "MPKitRegister.h"
-#import "NSDictionary+MPCaseInsensitive.h"
-#import "MPDateFormatter.h"
-#import "MPEnums.h"
 
 /* Import your header file here
 */
