@@ -33,14 +33,12 @@
 #import "MPDateFormatter.h"
 #import "MPEnums.h"
 
-#warning remove once we are integrated
-NSInteger const MPKitInstanceApptentive = 97;
-
-/* Import your header file here
-*/
 #import <Apptentive.h>
 
-NSString * const APIKeyKey = @"APIKey";
+#warning this should be removed once we're an official kit
+NSInteger const MPKitInstanceApptentive = 97;
+
+NSString * const APIKeyKey = @"appKey";
 
 @interface MPKitApptentive ()
 
@@ -56,9 +54,6 @@ NSString * const APIKeyKey = @"APIKey";
 
 @implementation MPKitApptentive
 
-/*
-    mParticle will supply a unique kit code for you. Please contact our team
-*/
 + (NSNumber *)kitCode {
     return @(97);
 }
@@ -120,23 +115,6 @@ NSString * const APIKeyKey = @"APIKey";
     }
 }
 
-
-#pragma mark Application
-
-- (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
-   [[Apptentive sharedConnection] didReceiveRemoteNotification:userInfo fromViewController:nil];
-
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:MPKitReturnCodeSuccess];
-    return execStatus;
-}
-
-- (MPKitExecStatus *)setDeviceToken:(NSData *)deviceToken {
-    [[Apptentive sharedConnection] setPushNotificationIntegration:ApptentivePushProviderApptentive withDeviceToken:deviceToken];
-
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:MPKitReturnCodeSuccess];
-    return execStatus;
-}
-
 #pragma mark User attributes and identities
 
 - (MPKitExecStatus *)setUserAttribute:(NSString *)key value:(NSString *)value {
@@ -194,6 +172,31 @@ NSString * const APIKeyKey = @"APIKey";
 
 #pragma mark e-Commerce
 
+- (NSString *)nameForCommerceEventAction:(MPCommerceEventAction)action {
+	switch (action) {
+		case MPCommerceEventActionAddToCart:
+			return @"Add To Cart";
+		case MPCommerceEventActionRemoveFromCart:
+			return @"Remove From Cart";
+		case MPCommerceEventActionAddToWishList:
+			return @"Add To Wish List";
+		case MPCommerceEventActionRemoveFromWishlist:
+			return @"Remove From Wishlist";
+		case MPCommerceEventActionCheckout:
+			return @"Checkout";
+		case MPCommerceEventActionCheckoutOptions:
+			return @"Checkout Options";
+		case MPCommerceEventActionClick:
+			return @"Click";
+		case MPCommerceEventActionViewDetail:
+			return @"View Detail";
+		case MPCommerceEventActionPurchase:
+			return @"Purchase";
+		case MPCommerceEventActionRefund:
+			return @"Refund";
+	}
+}
+
  - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
 	 MPTransactionAttributes *transactionAttributes = commerceEvent.transactionAttributes;
 		NSMutableArray *commerceItems = [NSMutableArray arrayWithCapacity:commerceEvent.products.count];
@@ -206,6 +209,9 @@ NSString * const APIKeyKey = @"APIKey";
 
 		NSDictionary *commerceData = [Apptentive extendedDataCommerceWithTransactionID:transactionAttributes.transactionId affiliation:transactionAttributes.affiliation revenue:transactionAttributes.revenue shipping:transactionAttributes.shipping tax:transactionAttributes.tax currency:commerceEvent.currency commerceItems:commerceItems];
 
+	 NSString *eventName = [NSString stringWithFormat:@"eCommerce - %@", [self nameForCommerceEventAction:commerceEvent.action]];
+	 [[Apptentive sharedConnection] engage:eventName withCustomData:nil withExtendedData:@[commerceData] fromViewController:nil];
+
 	 MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:MPKitReturnCodeSuccess forwardCount:0];
 
      return execStatus;
@@ -214,10 +220,7 @@ NSString * const APIKeyKey = @"APIKey";
 #pragma mark Events
 
 - (MPKitExecStatus *)logEvent:(MPEvent *)event {
-#warning get front view controller
-    UIViewController *viewController = nil;
-
-    BOOL success = [[Apptentive sharedConnection] engage:event.name fromViewController:viewController];
+    BOOL success = [[Apptentive sharedConnection] engage:event.name fromViewController:nil];
 
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:success ? MPKitReturnCodeSuccess : MPKitReturnCodeRequirementsNotMet];
     return execStatus;
