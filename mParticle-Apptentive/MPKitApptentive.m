@@ -17,26 +17,8 @@
 //
 
 #import "MPKitApptentive.h"
-
-#import "MPEvent.h"
-#import "MPProduct.h"
-#import "MPProduct+Dictionary.h"
-#import "MPCommerceEvent.h"
-#import "MPCommerceEvent+Dictionary.h"
-#import "MPCommerceEventInstruction.h"
-#import "MPTransactionAttributes.h"
-#import "MPTransactionAttributes+Dictionary.h"
-#import "MPIHasher.h"
 #import "mParticle.h"
-#import "MPKitRegister.h"
-#import "NSDictionary+MPCaseInsensitive.h"
-#import "MPDateFormatter.h"
-#import "MPEnums.h"
-
 #import <Apptentive.h>
-
-#warning this should be removed once we're an official kit
-NSInteger const MPKitInstanceApptentive = 97;
 
 NSString * const APIKeyKey = @"appKey";
 
@@ -92,10 +74,10 @@ NSString * const APIKeyKey = @"appKey";
 
         _started = YES;
 
-		if ([NSPersonNameComponents class]) {
-			_nameFormatter = [[NSPersonNameComponentsFormatter alloc] init];
-			_nameComponents = [[NSPersonNameComponents alloc] init];
-		}
+        if ([NSPersonNameComponents class]) {
+            _nameFormatter = [[NSPersonNameComponentsFormatter alloc] init];
+            _nameComponents = [[NSPersonNameComponents alloc] init];
+        }
 
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
@@ -118,21 +100,21 @@ NSString * const APIKeyKey = @"appKey";
 #pragma mark User attributes and identities
 
 - (MPKitExecStatus *)setUserAttribute:(NSString *)key value:(NSString *)value {
-	if ([key isEqualToString:mParticleUserAttributeFirstName]) {
-		if (self.nameComponents) {
-			self.nameComponents.givenName = value;
-		} else {
-			self.firstName = value;
-		}
-	} else if ([key isEqualToString:mParticleUserAttributeLastName]) {
-		if (self.nameComponents) {
-			self.nameComponents.familyName = value;
-		} else {
-			self.lastName = value;
-		}
-	} else {
-		[[Apptentive sharedConnection] addCustomPersonData:value withKey:key];
-	}
+    if ([key isEqualToString:mParticleUserAttributeFirstName]) {
+        if (self.nameComponents) {
+            self.nameComponents.givenName = value;
+        } else {
+            self.firstName = value;
+        }
+    } else if ([key isEqualToString:mParticleUserAttributeLastName]) {
+        if (self.nameComponents) {
+            self.nameComponents.familyName = value;
+        } else {
+            self.lastName = value;
+        }
+    } else {
+        [[Apptentive sharedConnection] addCustomPersonData:value withKey:key];
+    }
 
 	NSString *name = nil;
 	
@@ -152,80 +134,90 @@ NSString * const APIKeyKey = @"appKey";
 		[Apptentive sharedConnection].personName = name;
 	}
 
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:MPKitReturnCodeSuccess];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
 - (MPKitExecStatus *)removeUserAttribute:(NSString *)key {
-	[[Apptentive sharedConnection] removeCustomPersonDataWithKey:key];
+    [[Apptentive sharedConnection] removeCustomPersonDataWithKey:key];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
 }
 
 - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
-	if (identityType == MPUserIdentityEmail) {
-		[Apptentive sharedConnection].personEmailAddress = identityString;
-	} else if (identityType == MPUserIdentityCustomerId) {
-		if ([Apptentive sharedConnection].personName.length == 0) {
-			[Apptentive sharedConnection].personName == identityString;
-		}
-	}
+    MPKitReturnCode returnCode;
 
-     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:MPKitReturnCodeSuccess];
-     return execStatus;
+    if (identityType == MPUserIdentityEmail) {
+        [Apptentive sharedConnection].personEmailAddress = identityString;
+        returnCode = MPKitReturnCodeSuccess;
+    } else if (identityType == MPUserIdentityCustomerId) {
+        if ([Apptentive sharedConnection].personName.length == 0) {
+            [Apptentive sharedConnection].personName == identityString;
+        }
+        returnCode = MPKitReturnCodeSuccess;
+    } else {
+        returnCode = MPKitReturnCodeRequirementsNotMet;
+    }
+
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
 }
 
 #pragma mark e-Commerce
 
 - (NSString *)nameForCommerceEventAction:(MPCommerceEventAction)action {
-	switch (action) {
-		case MPCommerceEventActionAddToCart:
-			return @"Add To Cart";
-		case MPCommerceEventActionRemoveFromCart:
-			return @"Remove From Cart";
-		case MPCommerceEventActionAddToWishList:
-			return @"Add To Wish List";
-		case MPCommerceEventActionRemoveFromWishlist:
-			return @"Remove From Wishlist";
-		case MPCommerceEventActionCheckout:
-			return @"Checkout";
-		case MPCommerceEventActionCheckoutOptions:
-			return @"Checkout Options";
-		case MPCommerceEventActionClick:
-			return @"Click";
-		case MPCommerceEventActionViewDetail:
-			return @"View Detail";
-		case MPCommerceEventActionPurchase:
-			return @"Purchase";
-		case MPCommerceEventActionRefund:
-			return @"Refund";
-	}
+    switch (action) {
+        case MPCommerceEventActionAddToCart:
+            return @"Add To Cart";
+        case MPCommerceEventActionRemoveFromCart:
+            return @"Remove From Cart";
+        case MPCommerceEventActionAddToWishList:
+            return @"Add To Wish List";
+        case MPCommerceEventActionRemoveFromWishlist:
+            return @"Remove From Wishlist";
+        case MPCommerceEventActionCheckout:
+            return @"Checkout";
+        case MPCommerceEventActionCheckoutOptions:
+            return @"Checkout Options";
+        case MPCommerceEventActionClick:
+            return @"Click";
+        case MPCommerceEventActionViewDetail:
+            return @"View Detail";
+        case MPCommerceEventActionPurchase:
+            return @"Purchase";
+        case MPCommerceEventActionRefund:
+            return @"Refund";
+    }
 }
 
- - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
-	 MPTransactionAttributes *transactionAttributes = commerceEvent.transactionAttributes;
-		NSMutableArray *commerceItems = [NSMutableArray arrayWithCapacity:commerceEvent.products.count];
+- (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
+    MPTransactionAttributes *transactionAttributes = commerceEvent.transactionAttributes;
+    NSMutableArray *commerceItems = [NSMutableArray arrayWithCapacity:commerceEvent.products.count];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess forwardCount:0];
 
-		for (MPProduct *product in commerceEvent.products) {
-			NSDictionary *item = [Apptentive extendedDataCommerceItemWithItemID:product.sku name:product.name category:product.category price:product.price quantity:product.quantity currency:commerceEvent.currency];
+    for (MPProduct *product in commerceEvent.products) {
+        NSDictionary *item = [Apptentive extendedDataCommerceItemWithItemID:product.sku name:product.name category:product.category price:product.price quantity:product.quantity currency:commerceEvent.currency];
 
-			[commerceItems addObject:item];
-		}
+        [commerceItems addObject:item];
+        [execStatus incrementForwardCount];
+    }
 
-		NSDictionary *commerceData = [Apptentive extendedDataCommerceWithTransactionID:transactionAttributes.transactionId affiliation:transactionAttributes.affiliation revenue:transactionAttributes.revenue shipping:transactionAttributes.shipping tax:transactionAttributes.tax currency:commerceEvent.currency commerceItems:commerceItems];
+    NSDictionary *commerceData = [Apptentive extendedDataCommerceWithTransactionID:transactionAttributes.transactionId affiliation:transactionAttributes.affiliation revenue:transactionAttributes.revenue shipping:transactionAttributes.shipping tax:transactionAttributes.tax currency:commerceEvent.currency commerceItems:commerceItems];
+    [execStatus incrementForwardCount];
 
-	 NSString *eventName = [NSString stringWithFormat:@"eCommerce - %@", [self nameForCommerceEventAction:commerceEvent.action]];
-	 [[Apptentive sharedConnection] engage:eventName withCustomData:nil withExtendedData:@[commerceData] fromViewController:nil];
+    NSString *eventName = [NSString stringWithFormat:@"eCommerce - %@", [self nameForCommerceEventAction:commerceEvent.action]];
+    [[Apptentive sharedConnection] engage:eventName withCustomData:nil withExtendedData:@[commerceData] fromViewController:nil];
+    [execStatus incrementForwardCount];
 
-	 MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:MPKitReturnCodeSuccess forwardCount:0];
-
-     return execStatus;
- }
+    return execStatus;
+}
 
 #pragma mark Events
 
 - (MPKitExecStatus *)logEvent:(MPEvent *)event {
     BOOL success = [[Apptentive sharedConnection] engage:event.name fromViewController:nil];
 
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:success ? MPKitReturnCodeSuccess : MPKitReturnCodeRequirementsNotMet];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:success ? MPKitReturnCodeSuccess : MPKitReturnCodeRequirementsNotMet];
     return execStatus;
 }
 
