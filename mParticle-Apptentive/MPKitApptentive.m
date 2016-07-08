@@ -134,7 +134,8 @@ NSString * const APIKeyKey = @"appKey";
 		[[Apptentive sharedConnection] addCustomPersonData:value withKey:key];
 	}
 
-	NSString *name;
+	NSString *name = nil;
+	
 	if (self.nameComponents) {
 		name = [self.nameFormatter stringFromPersonNameComponents:self.nameComponents];
 	} else {
@@ -147,7 +148,9 @@ NSString * const APIKeyKey = @"appKey";
 		}
 	}
 
-	[Apptentive sharedConnection].personName = name;
+	if (name) {
+		[Apptentive sharedConnection].personName = name;
+	}
 
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptentive) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
