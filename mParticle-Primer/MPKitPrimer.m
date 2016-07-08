@@ -29,7 +29,7 @@
     mParticle will supply a unique kit code for you. Please contact our team
 */
 + (NSNumber *)kitCode {
-    return @999;
+    return @100;
 }
 
 + (void)load {
