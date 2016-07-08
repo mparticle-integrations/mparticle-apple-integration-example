@@ -1,5 +1,5 @@
 //
-//  MPKitCompanyName.h
+//  MPKitPrimer.h
 //
 //  Copyright 2016 mParticle, Inc.
 //
@@ -20,7 +20,7 @@
 #import "MPKitExecStatus.h"
 #import "MPKitProtocol.h"
 
-@interface MPKitCompanyName : NSObject <MPKitProtocol>
+@interface MPKitPrimer : NSObject <MPKitProtocol>
 
 @property (nonatomic, strong, nonnull) NSDictionary *configuration;
 @property (nonatomic, strong, nullable) NSDictionary *launchOptions;

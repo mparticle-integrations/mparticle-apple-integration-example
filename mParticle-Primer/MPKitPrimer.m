@@ -1,5 +1,5 @@
 //
-//  MPKitCompanyName.m
+//  MPKitPrimer.m
 //
 //  Copyright 2016 mParticle, Inc.
 //
@@ -16,14 +16,14 @@
 //  limitations under the License.
 //
 
-#import "MPKitCompanyName.h"
+#import "MPKitPrimer.h"
 #import "mParticle.h"
 
 /* Import your header file here
 */
-//#import <CompanyName.h>
+//#import <Primer.h>
 
-@implementation MPKitCompanyName
+@implementation MPKitPrimer
 
 /*
     mParticle will supply a unique kit code for you. Please contact our team
@@ -33,7 +33,7 @@
 }
 
 + (void)load {
-    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"CompanyName" className:@"MPKitCompanyName" startImmediately:YES];
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"Primer" className:@"MPKitPrimer" startImmediately:YES];
     [MParticle registerExtension:kitRegister];
 }
 
@@ -82,11 +82,11 @@
     }
 
     /*
-        If your company SDK instance is available and is applicable (Please return nil if your SDK is based on class methods)
+        If Primer SDK instance is available and is applicable (Please return nil if your SDK is based on class methods)
      */
     BOOL kitInstanceAvailable = NO;
     if (kitInstanceAvailable) {
-        /* Return an instance of your company's SDK (if applicable) */
+        /* Return an instance of Primer's SDK (if applicable) */
     } else {
         return nil;
     }
