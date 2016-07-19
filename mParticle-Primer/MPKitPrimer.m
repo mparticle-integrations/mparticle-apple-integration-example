@@ -148,19 +148,6 @@
     return status;
 }
 
-- (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
-    
-    MPKitExecStatus *status = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess forwardCount:0];
-    
-    NSArray *expandedInstructions = [commerceEvent expandedInstructions];
-    for (MPCommerceEventInstruction *commerceEventInstruction in expandedInstructions) {
-        [self logEvent:commerceEventInstruction.event];
-        [status incrementForwardCount];
-    }
-    
-    return status;
-}
-
 #pragma mark - Assorted
 
 - (nonnull MPKitExecStatus *)setDebugMode:(BOOL)debugMode {
