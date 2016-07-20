@@ -1,0 +1,309 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DB45D60D1D3EC77800C4055E /* mParticle_Primer.h in Headers */ = {isa = PBXBuildFile; fileRef = DB45D60C1D3EC77800C4055E /* mParticle_Primer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DB45D6161D3EC9BC00C4055E /* MPKitPrimer.h in Headers */ = {isa = PBXBuildFile; fileRef = DB45D6141D3EC9BC00C4055E /* MPKitPrimer.h */; };
+		DB45D6171D3EC9BC00C4055E /* MPKitPrimer.m in Sources */ = {isa = PBXBuildFile; fileRef = DB45D6151D3EC9BC00C4055E /* MPKitPrimer.m */; };
+		DB45D61C1D3ECD8D00C4055E /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB45D6181D3ECD7A00C4055E /* mParticle_Apple_SDK.framework */; };
+		DB45D61D1D3ECD8D00C4055E /* Primer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB45D6191D3ECD7A00C4055E /* Primer.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DB45D6091D3EC77800C4055E /* mParticle_Primer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mParticle_Primer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB45D60C1D3EC77800C4055E /* mParticle_Primer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mParticle_Primer.h; sourceTree = "<group>"; };
+		DB45D60E1D3EC77800C4055E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB45D6141D3EC9BC00C4055E /* MPKitPrimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitPrimer.h; sourceTree = "<group>"; };
+		DB45D6151D3EC9BC00C4055E /* MPKitPrimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPKitPrimer.m; sourceTree = "<group>"; };
+		DB45D6181D3ECD7A00C4055E /* mParticle_Apple_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = mParticle_Apple_SDK.framework; path = Carthage/Build/iOS/mParticle_Apple_SDK.framework; sourceTree = "<group>"; };
+		DB45D6191D3ECD7A00C4055E /* Primer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Primer.framework; path = Carthage/Build/iOS/Primer.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DB45D6051D3EC77800C4055E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB45D61C1D3ECD8D00C4055E /* mParticle_Apple_SDK.framework in Frameworks */,
+				DB45D61D1D3ECD8D00C4055E /* Primer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DB45D5FF1D3EC77800C4055E = {
+			isa = PBXGroup;
+			children = (
+				DB45D6181D3ECD7A00C4055E /* mParticle_Apple_SDK.framework */,
+				DB45D6191D3ECD7A00C4055E /* Primer.framework */,
+				DB45D60B1D3EC77800C4055E /* mParticle-Primer */,
+				DB45D60A1D3EC77800C4055E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DB45D60A1D3EC77800C4055E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB45D6091D3EC77800C4055E /* mParticle_Primer.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DB45D60B1D3EC77800C4055E /* mParticle-Primer */ = {
+			isa = PBXGroup;
+			children = (
+				DB45D6141D3EC9BC00C4055E /* MPKitPrimer.h */,
+				DB45D6151D3EC9BC00C4055E /* MPKitPrimer.m */,
+				DB45D60C1D3EC77800C4055E /* mParticle_Primer.h */,
+				DB45D60E1D3EC77800C4055E /* Info.plist */,
+			);
+			path = "mParticle-Primer";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DB45D6061D3EC77800C4055E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB45D60D1D3EC77800C4055E /* mParticle_Primer.h in Headers */,
+				DB45D6161D3EC9BC00C4055E /* MPKitPrimer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DB45D6081D3EC77800C4055E /* mParticle-Primer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB45D6111D3EC77800C4055E /* Build configuration list for PBXNativeTarget "mParticle-Primer" */;
+			buildPhases = (
+				DB45D6041D3EC77800C4055E /* Sources */,
+				DB45D6051D3EC77800C4055E /* Frameworks */,
+				DB45D6061D3EC77800C4055E /* Headers */,
+				DB45D6071D3EC77800C4055E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "mParticle-Primer";
+			productName = "mParticle-Primer";
+			productReference = DB45D6091D3EC77800C4055E /* mParticle_Primer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DB45D6001D3EC77800C4055E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = mParticle;
+				TargetAttributes = {
+					DB45D6081D3EC77800C4055E = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = DB45D6031D3EC77800C4055E /* Build configuration list for PBXProject "mParticle-Primer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DB45D5FF1D3EC77800C4055E;
+			productRefGroup = DB45D60A1D3EC77800C4055E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DB45D6081D3EC77800C4055E /* mParticle-Primer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DB45D6071D3EC77800C4055E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DB45D6041D3EC77800C4055E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB45D6171D3EC9BC00C4055E /* MPKitPrimer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DB45D60F1D3EC77800C4055E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DB45D6101D3EC77800C4055E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		DB45D6121D3EC77800C4055E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "mParticle-Primer/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-Primer";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DB45D6131D3EC77800C4055E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "mParticle-Primer/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-Primer";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DB45D6031D3EC77800C4055E /* Build configuration list for PBXProject "mParticle-Primer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB45D60F1D3EC77800C4055E /* Debug */,
+				DB45D6101D3EC77800C4055E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB45D6111D3EC77800C4055E /* Build configuration list for PBXNativeTarget "mParticle-Primer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB45D6121D3EC77800C4055E /* Debug */,
+				DB45D6131D3EC77800C4055E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DB45D6001D3EC77800C4055E /* Project object */;
+}
