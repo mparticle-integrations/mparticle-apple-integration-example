@@ -17,7 +17,7 @@
 //
 
 #import "MPKitPrimer.h"
-#import "mParticle.h"
+
 #import <Primer/Primer.h>
 
 @implementation MPKitPrimer
@@ -74,7 +74,7 @@
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *userInfo = @{mParticleKitInstanceKey: [[self class] kitCode]}
+            NSDictionary *userInfo = @{mParticleKitInstanceKey: [[self class] kitCode]};
             [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification object:nil userInfo:userInfo];
         });
     });
@@ -140,12 +140,7 @@
 
 - (nonnull MPKitExecStatus *)logScreen:(nonnull MPEvent *)event {
     
-    MPKitExecStatus *status = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess forwardCount:0];
-    
-    [self logEvent:event];
-    [status incrementForwardCount];
-    
-    return status;
+    return [self logEvent:event];;
 }
 
 #pragma mark - Assorted

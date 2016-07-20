@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = "8.0"
     s.ios.source_files      = 'mParticle-Primer/*.{h,m,mm}'
     s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 6.2'
-    s.ios.dependency 'Primer', '~> 3.1'
+    s.ios.dependency 'Primer', '3.1.0'
 end
