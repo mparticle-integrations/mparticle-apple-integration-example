@@ -87,6 +87,7 @@
     BOOL kitInstanceAvailable = NO;
     if (kitInstanceAvailable) {
         /* Return an instance of your company's SDK (if applicable) */
+        return nil;
     } else {
         return nil;
     }
