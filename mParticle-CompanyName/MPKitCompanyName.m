@@ -23,6 +23,9 @@
 */
 //#import <CompanyName.h>
 
+// This is temporary to allow compilation (will be provided by core SDK)
+NSUInteger MPKitInstanceCompanyName = 999;
+
 @implementation MPKitCompanyName
 
 /*
@@ -104,7 +107,7 @@
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceBranchMetrics) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -117,7 +120,7 @@
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -130,7 +133,7 @@
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -143,7 +146,7 @@
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -156,7 +159,7 @@
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceBranchMetrics) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -169,7 +172,7 @@
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceBranchMetrics) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -182,7 +185,7 @@
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceBranchMetrics) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -196,7 +199,7 @@
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -209,7 +212,7 @@
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -222,7 +225,7 @@
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -236,7 +239,7 @@
 //         Please see MPEnums.h > MPUserIdentity for all supported user identities
 //      */
 //
-//      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
+//      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
 //      return execStatus;
 // }
 
@@ -248,7 +251,7 @@
     Please see MPCommerceEvent.h > MPCommerceEventAction for complete list
 */
 // - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess forwardCount:0];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess forwardCount:0];
 //
 //     // In this example, this SDK only supports the 'Purchase' commerce event action
 //     if (commerceEvent.action == MPCommerceEventActionPurchase) {
@@ -279,7 +282,7 @@
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -307,7 +310,7 @@
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:returnCode];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:returnCode];
 //     return execStatus;
 // }
 
