@@ -26,6 +26,10 @@
 static NSString *const ALIAS_KEY = @"mparticleAlias";
 static NSString *const CUSTOMER_ID_KEY = @"mparticleCustomerId";
 static NSString *const VIEWED_EVENT_FORMAT = @"Viewed %@ Screen";
+static NSString *const APP_KEY = @"appKey";
+static NSString *const DEVICE_PAIRING_KEY = @"devicePairing";
+static NSString *const DELAY_UNTIL_TESTS_ARE_AVAILABLE_KEY = @"delayUntilTestsAreAvailable";
+static NSString *const LOG_LEVEL_KEY = @"logLevel";
 
 + (NSNumber *)kitCode {
     return @105;
@@ -36,12 +40,18 @@ static NSString *const VIEWED_EVENT_FORMAT = @"Viewed %@ Screen";
     [MParticle registerExtension:kitRegister];
 }
 
+- (MPKitExecStatus*) makeStatus:(MPKitReturnCode)code {
+    return [[MPKitExecStatus alloc]
+            initWithSDKCode:@(MPKitInstanceApptimize)
+            returnCode:code];
+}
+
 #pragma mark - MPKitInstanceProtocol methods
 
 #pragma mark Kit instance and lifecycle
 - (nonnull instancetype)initWithConfiguration:(nonnull NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
     self = [super init];
-    NSString *appKey = configuration[@"appKey"];
+    NSString *appKey = configuration[APP_KEY];
     if (!self || !appKey) {
         return nil;
     }
@@ -56,78 +66,107 @@ static NSString *const VIEWED_EVENT_FORMAT = @"Viewed %@ Screen";
 }
 
 - (void)start {
-    static dispatch_once_t kitPredicate;
-    
-    dispatch_once(&kitPredicate, ^{
-        [Apptimize startApptimizeWithApplicationKey:self.configuration[@"appkey"]];
-        
+    NSDictionary *options = [self buildApptimizeOptions];
+    void(^start_block)(void) = ^{
+        [Apptimize startApptimizeWithApplicationKey:self.configuration[APP_KEY] options:options];
         _started = YES;
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
-                                                                object:nil
-                                                              userInfo:userInfo];
-        });
-    });
+        NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
+        [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
+                                                            object:nil
+                                                          userInfo:userInfo];
+    };
+    static dispatch_once_t kitPredicate;
+    dispatch_once( &kitPredicate, ^{
+        if( [NSThread isMainThread] ) {
+            start_block();
+        } else {
+            dispatch_async( dispatch_get_main_queue(), start_block );
+        }
+    } );
+}
+
+- (nonnull NSDictionary*)buildApptimizeOptions {
+    NSMutableDictionary *o = [NSMutableDictionary new];
+    [o setObject:[NSNumber numberWithBool:FALSE] forKey:ApptimizeEnableThirdPartyEventImportingOption];
+    
+    NSString *pairing = [self configValueForKey:DEVICE_PAIRING_KEY];
+    if( pairing ) {
+        [o setObject:[NSNumber numberWithBool:[pairing boolValue]] forKey:ApptimizeDevicePairingOption];
+    }
+    
+    NSString *delay = [self configValueForKey:DELAY_UNTIL_TESTS_ARE_AVAILABLE_KEY];
+    if( delay ) {
+        [o setObject:[NSNumber numberWithDouble:[delay doubleValue]] forKey:ApptimizeDelayUntilTestsAreAvailableOption];
+    }
+    
+    NSString *logLevel = [self configValueForKey:LOG_LEVEL_KEY];
+    if( delay ) {
+        [o setObject:logLevel forKey:ApptimizeLogLevelOption];
+    }
+    
+    return o;
+}
+
+- (nullable NSString*) configValueForKey:(NSString*)key {
+    NSString *value = [self.launchOptions objectForKey:key];
+    if( value == nil ) {
+        value = [self.configuration objectForKey:key];
+    }
+    return value;
 }
 
 #pragma mark User attributes and identities
 
 - (MPKitExecStatus *)setUserAttribute:(NSString *)key value:(NSString *)value {
     [Apptimize setUserAttributeString:value forKey:key];
-    
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptimize) returnCode:MPKitReturnCodeSuccess];
-    return execStatus;
+    return [self makeStatus:MPKitReturnCodeSuccess];
 }
 
 - (MPKitExecStatus *)removeUserAttribute:(NSString *)key {
     [Apptimize removeUserAttributeForKey:key];
-    
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptimize) returnCode:MPKitReturnCodeSuccess];
-    return execStatus;
+    return [self makeStatus:MPKitReturnCodeSuccess];
 }
 
  - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
-     if (identityType == MPUserIdentityCustomerId) {
-         [Apptimize setUserAttributeString:identityString forKey:CUSTOMER_ID_KEY];
-     } else if (identityType == MPUserIdentityCustomerId) {
-         [Apptimize setUserAttributeString:identityString forKey:ALIAS_KEY];
-     } else {
-         // didn't do anything
-         MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptimize) returnCode:MPKitReturnCodeUnavailable];
-         return execStatus;
+     MPKitReturnCode code;
+     switch( identityType ) {
+         case MPUserIdentityCustomerId: {
+             [Apptimize setUserAttributeString:identityString forKey:CUSTOMER_ID_KEY];
+             code = MPKitReturnCodeSuccess;
+             break;
+         }
+         case MPUserIdentityAlias: {
+             [Apptimize setUserAttributeString:identityString forKey:ALIAS_KEY];
+             code = MPKitReturnCodeSuccess;
+             break;
+         }
+         default: {
+             code = MPKitReturnCodeUnavailable;
+             break;
+         }
      }
-     
-     
-      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptimize) returnCode:MPKitReturnCodeSuccess];
-      return execStatus;
+     return [self makeStatus:code];
  }
 
 #pragma mark Events
 
 - (MPKitExecStatus *)logEvent:(MPEvent *)event {
     [Apptimize track:event.name];
-    
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptimize) returnCode:MPKitReturnCodeSuccess];
-    return execStatus;
+    return [self makeStatus:MPKitReturnCodeSuccess];
 }
 
 - (MPKitExecStatus *)logScreen:(MPEvent *)event {
     NSString *screenEvent = [NSString stringWithFormat:VIEWED_EVENT_FORMAT, event.name];
     [Apptimize track:screenEvent];
-    
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptimize) returnCode:MPKitReturnCodeSuccess];
-    return execStatus;
+    return [self makeStatus:MPKitReturnCodeSuccess];
 }
 
 #pragma mark Assorted
 - (MPKitExecStatus *)setOptOut:(BOOL)optOut {
-    [Apptimize disable];
-    
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceApptimize) returnCode:MPKitReturnCodeSuccess];
-    return execStatus;
+    if( optOut ) {
+        [Apptimize disable];
+    }
+    return [self makeStatus:MPKitReturnCodeSuccess];
 }
 
 @end
