@@ -97,14 +97,16 @@ static NSString *const LOG_LEVEL_KEY = @"logLevel";
 - (void)configureApptimizeDevicePairing:(NSMutableDictionary*)o {
     NSString *pairing = [self configValueForKey:DEVICE_PAIRING_KEY];
     if( pairing ) {
-        [o setObject:[NSNumber numberWithBool:[pairing boolValue]] forKey:ApptimizeDevicePairingOption];
+        NSNumber *boxedPairing = [NSNumber numberWithBool:[pairing boolValue]];
+        [o setObject:boxedPairing forKey:ApptimizeDevicePairingOption];
     }
 }
 
 - (void)configureApptimizeDelayUntilTestsAreAvailable:(NSMutableDictionary*)o {
     NSString *delay = [self configValueForKey:DELAY_UNTIL_TESTS_ARE_AVAILABLE_KEY];
     if( delay ) {
-        [o setObject:[NSNumber numberWithDouble:[delay doubleValue]] forKey:ApptimizeDelayUntilTestsAreAvailableOption];
+        NSNumber *boxedDelay = [NSNumber numberWithDouble:[delay doubleValue]];
+        [o setObject:boxedDelay forKey:ApptimizeDelayUntilTestsAreAvailableOption];
     }
 }
 
