@@ -34,6 +34,7 @@ static NSString *const LOG_LEVEL_MP_KEY = @"logLevel";
 static NSString *const INSTALL_TAG = @"install";
 static NSString *const LOGOUT_TAG = @"logout";
 static NSString *const UPDATE_TAG = @"update";
+static NSString *const LTV_TAG = @"ltv";
 static NSString *const VIEWED_TAG_FORMAT = @"screenView %@";
 
 + (NSNumber *)kitCode {
@@ -184,6 +185,13 @@ static NSString *const VIEWED_TAG_FORMAT = @"screenView %@";
 
 - (nonnull MPKitExecStatus *)logUpdate {
     [Apptimize track:UPDATE_TAG];
+    return [self makeStatus:MPKitReturnCodeSuccess];
+}
+
+#pragma mark e-Commerce
+
+- (nonnull MPKitExecStatus *)logLTVIncrease:(double)increaseAmount event:(nonnull MPEvent *)event {
+    [Apptimize track:LTV_TAG value:increaseAmount];
     return [self makeStatus:MPKitReturnCodeSuccess];
 }
 
