@@ -31,10 +31,10 @@ static NSString *const APP_MP_KEY = @"appKey";
 static NSString *const DEVICE_PAIRING_MP_KEY = @"devicePairing";
 static NSString *const DELAY_UNTIL_TESTS_ARE_AVAILABLE_MP_KEY = @"delayUntilTestsAreAvailable";
 static NSString *const LOG_LEVEL_MP_KEY = @"logLevel";
-static NSString *const INSTALL_TAG = @"mp:install";
-static NSString *const LOGOUT_TAG = @"mp:logout";
-static NSString *const UPDATE_TAG = @"mp:update";
-static NSString *const VIEWED_TAG_FORMAT = @"mp:screenView %@";
+static NSString *const INSTALL_TAG = @"install";
+static NSString *const LOGOUT_TAG = @"logout";
+static NSString *const UPDATE_TAG = @"update";
+static NSString *const VIEWED_TAG_FORMAT = @"screenView %@";
 
 + (NSNumber *)kitCode {
     return @105;
