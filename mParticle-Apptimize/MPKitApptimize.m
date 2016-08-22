@@ -88,23 +88,31 @@ static NSString *const LOG_LEVEL_KEY = @"logLevel";
 - (nonnull NSDictionary*)buildApptimizeOptions {
     NSMutableDictionary *o = [NSMutableDictionary new];
     [o setObject:[NSNumber numberWithBool:FALSE] forKey:ApptimizeEnableThirdPartyEventImportingOption];
-    
+    [self configureApptimizeDevicePairing:o];
+    [self configureApptimizeDelayUntilTestsAreAvailable:o];
+    [self configureApptimizeLogLevel:o];
+    return o;
+}
+
+- (void)configureApptimizeDevicePairing:(NSMutableDictionary*)o {
     NSString *pairing = [self configValueForKey:DEVICE_PAIRING_KEY];
     if( pairing ) {
         [o setObject:[NSNumber numberWithBool:[pairing boolValue]] forKey:ApptimizeDevicePairingOption];
     }
-    
+}
+
+- (void)configureApptimizeDelayUntilTestsAreAvailable:(NSMutableDictionary*)o {
     NSString *delay = [self configValueForKey:DELAY_UNTIL_TESTS_ARE_AVAILABLE_KEY];
     if( delay ) {
         [o setObject:[NSNumber numberWithDouble:[delay doubleValue]] forKey:ApptimizeDelayUntilTestsAreAvailableOption];
     }
-    
+}
+
+- (void)configureApptimizeLogLevel:(NSMutableDictionary*)o {
     NSString *logLevel = [self configValueForKey:LOG_LEVEL_KEY];
-    if( delay ) {
+    if( logLevel ) {
         [o setObject:logLevel forKey:ApptimizeLogLevelOption];
     }
-    
-    return o;
 }
 
 - (nullable NSString*) configValueForKey:(NSString*)key {
