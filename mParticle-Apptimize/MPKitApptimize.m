@@ -21,15 +21,20 @@
 
 #import "Apptimize/Apptimize.h"
 
+@interface MPKitApptimize()
+@property (nonatomic, unsafe_unretained) BOOL started;
+@end
+
 @implementation MPKitApptimize
 
-static NSString *const ALIAS_KEY = @"mparticleAlias";
-static NSString *const CUSTOMER_ID_KEY = @"mparticleCustomerId";
-static NSString *const VIEWED_EVENT_FORMAT = @"Viewed %@ Screen";
-static NSString *const APP_KEY = @"appKey";
-static NSString *const DEVICE_PAIRING_KEY = @"devicePairing";
-static NSString *const DELAY_UNTIL_TESTS_ARE_AVAILABLE_KEY = @"delayUntilTestsAreAvailable";
-static NSString *const LOG_LEVEL_KEY = @"logLevel";
+static NSString *const APP_MP_KEY = @"appKey";
+static NSString *const DEVICE_PAIRING_MP_KEY = @"devicePairing";
+static NSString *const DELAY_UNTIL_TESTS_ARE_AVAILABLE_MP_KEY = @"delayUntilTestsAreAvailable";
+static NSString *const LOG_LEVEL_MP_KEY = @"logLevel";
+static NSString *const INSTALL_TAG = @"mp:install";
+static NSString *const LOGOUT_TAG = @"mp:logout";
+static NSString *const UPDATE_TAG = @"mp:update";
+static NSString *const VIEWED_TAG_FORMAT = @"mp:screenView %@";
 
 + (NSNumber *)kitCode {
     return @105;
@@ -51,7 +56,7 @@ static NSString *const LOG_LEVEL_KEY = @"logLevel";
 #pragma mark Kit instance and lifecycle
 - (nonnull instancetype)initWithConfiguration:(nonnull NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
     self = [super init];
-    NSString *appKey = configuration[APP_KEY];
+    NSString *appKey = configuration[APP_MP_KEY];
     if (!self || !appKey) {
         return nil;
     }
@@ -68,8 +73,8 @@ static NSString *const LOG_LEVEL_KEY = @"logLevel";
 - (void)start {
     NSDictionary *options = [self buildApptimizeOptions];
     void(^start_block)(void) = ^{
-        [Apptimize startApptimizeWithApplicationKey:self.configuration[APP_KEY] options:options];
-        _started = YES;
+        [Apptimize startApptimizeWithApplicationKey:self.configuration[APP_MP_KEY] options:options];
+        self.started = YES;
         NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
         [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
                                                             object:nil
@@ -95,7 +100,7 @@ static NSString *const LOG_LEVEL_KEY = @"logLevel";
 }
 
 - (void)configureApptimizeDevicePairing:(NSMutableDictionary*)o {
-    NSString *pairing = [self configValueForKey:DEVICE_PAIRING_KEY];
+    NSString *pairing = [self configValueForKey:DEVICE_PAIRING_MP_KEY];
     if( pairing ) {
         NSNumber *boxedPairing = [NSNumber numberWithBool:[pairing boolValue]];
         [o setObject:boxedPairing forKey:ApptimizeDevicePairingOption];
@@ -103,7 +108,7 @@ static NSString *const LOG_LEVEL_KEY = @"logLevel";
 }
 
 - (void)configureApptimizeDelayUntilTestsAreAvailable:(NSMutableDictionary*)o {
-    NSString *delay = [self configValueForKey:DELAY_UNTIL_TESTS_ARE_AVAILABLE_KEY];
+    NSString *delay = [self configValueForKey:DELAY_UNTIL_TESTS_ARE_AVAILABLE_MP_KEY];
     if( delay ) {
         NSNumber *boxedDelay = [NSNumber numberWithDouble:[delay doubleValue]];
         [o setObject:boxedDelay forKey:ApptimizeDelayUntilTestsAreAvailableOption];
@@ -111,7 +116,7 @@ static NSString *const LOG_LEVEL_KEY = @"logLevel";
 }
 
 - (void)configureApptimizeLogLevel:(NSMutableDictionary*)o {
-    NSString *logLevel = [self configValueForKey:LOG_LEVEL_KEY];
+    NSString *logLevel = [self configValueForKey:LOG_LEVEL_MP_KEY];
     if( logLevel ) {
         [o setObject:logLevel forKey:ApptimizeLogLevelOption];
     }
@@ -127,26 +132,22 @@ static NSString *const LOG_LEVEL_KEY = @"logLevel";
 
 #pragma mark User attributes and identities
 
-- (MPKitExecStatus *)setUserAttribute:(NSString *)key value:(NSString *)value {
+- (nonnull MPKitExecStatus *)setUserAttribute:(NSString *)key value:(NSString *)value {
     [Apptimize setUserAttributeString:value forKey:key];
     return [self makeStatus:MPKitReturnCodeSuccess];
 }
 
-- (MPKitExecStatus *)removeUserAttribute:(NSString *)key {
+- (nonnull MPKitExecStatus *)removeUserAttribute:(NSString *)key {
     [Apptimize removeUserAttributeForKey:key];
     return [self makeStatus:MPKitReturnCodeSuccess];
 }
 
- - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
+ - (nonnull MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
      MPKitReturnCode code;
      switch( identityType ) {
-         case MPUserIdentityCustomerId: {
-             [Apptimize setUserAttributeString:identityString forKey:CUSTOMER_ID_KEY];
-             code = MPKitReturnCodeSuccess;
-             break;
-         }
+         case MPUserIdentityCustomerId:
          case MPUserIdentityAlias: {
-             [Apptimize setUserAttributeString:identityString forKey:ALIAS_KEY];
+             [Apptimize setPilotTargetingID:identityString];
              code = MPKitReturnCodeSuccess;
              break;
          }
@@ -160,19 +161,35 @@ static NSString *const LOG_LEVEL_KEY = @"logLevel";
 
 #pragma mark Events
 
-- (MPKitExecStatus *)logEvent:(MPEvent *)event {
+- (nonnull MPKitExecStatus *)logEvent:(MPEvent *)event {
     [Apptimize track:event.name];
     return [self makeStatus:MPKitReturnCodeSuccess];
 }
 
-- (MPKitExecStatus *)logScreen:(MPEvent *)event {
-    NSString *screenEvent = [NSString stringWithFormat:VIEWED_EVENT_FORMAT, event.name];
+- (nonnull MPKitExecStatus *)logScreen:(MPEvent *)event {
+    NSString *screenEvent = [NSString stringWithFormat:VIEWED_TAG_FORMAT, event.name];
     [Apptimize track:screenEvent];
     return [self makeStatus:MPKitReturnCodeSuccess];
 }
 
+- (nonnull MPKitExecStatus *)logInstall {
+    [Apptimize track:INSTALL_TAG];
+    return [self makeStatus:MPKitReturnCodeSuccess];
+}
+
+- (nonnull MPKitExecStatus *)logout {
+    [Apptimize track:LOGOUT_TAG];
+    return [self makeStatus:MPKitReturnCodeSuccess];
+}
+
+- (nonnull MPKitExecStatus *)logUpdate {
+    [Apptimize track:UPDATE_TAG];
+    return [self makeStatus:MPKitReturnCodeSuccess];
+}
+
 #pragma mark Assorted
-- (MPKitExecStatus *)setOptOut:(BOOL)optOut {
+
+- (nonnull MPKitExecStatus *)setOptOut:(BOOL)optOut {
     if( optOut ) {
         [Apptimize disable];
     }
