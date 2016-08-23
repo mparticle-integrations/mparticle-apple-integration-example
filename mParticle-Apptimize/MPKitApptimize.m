@@ -144,20 +144,14 @@ static NSString *const VIEWED_TAG_FORMAT = @"screenView %@";
 }
 
  - (nonnull MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
-     MPKitReturnCode code;
      switch( identityType ) {
          case MPUserIdentityCustomerId:
          case MPUserIdentityAlias: {
              [Apptimize setPilotTargetingID:identityString];
-             code = MPKitReturnCodeSuccess;
-             break;
-         }
-         default: {
-             code = MPKitReturnCodeUnavailable;
              break;
          }
      }
-     return [self makeStatus:code];
+     return [self makeStatus:MPKitReturnCodeSuccess];
  }
 
 #pragma mark Events
