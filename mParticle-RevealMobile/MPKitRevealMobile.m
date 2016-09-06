@@ -19,9 +19,29 @@
 #import "MPKitRevealMobile.h"
 #import "mParticle.h"
 
+// This rather convoluded set of #defines allows you to pass in environment variables
+// for buddy build but not require them if you're not.
+//
+// Do to the XCode mechanism provided, you will get directive defined as empty instead
+// of undefined if there is no environment variable defined. This is seems overly complex
+// for such a simple task, but it handles all of the cases as far as I can see.
+#define STRINGIFY(str) @#str
+#define EXPAND_STRING(str) STRINGIFY(str)
+#define NO_OTHER_MACRO_STARTS_WITH_THIS_NAME_
+#define IS_EMPTY(name) defined(NO_OTHER_MACRO_STARTS_WITH_THIS_NAME_ ## name)
+#define EMPTY(name) IS_EMPTY(name)
+
+#define DO_EXPAND(VAL)  VAL ## 1
+#define EXPAND(VAL)     DO_EXPAND(VAL)
+
+#if !defined(USE_DEBUG_BEACONS) || (EXPAND(USE_DEBUG_BEACONS) == 1)
+#define USE_DEBUG_BEACONS               0
+#endif
+
 /* Import your header file here
-*/
-//#import <RevealMobile.h>
+ */
+#import "Reveal.h"
+//@import Reveal
 
 // This is temporary to allow compilation (will be provided by core SDK)
 NSUInteger MPKitInstanceRevealMobile = 112;
@@ -46,8 +66,8 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 - (nonnull instancetype)initWithConfiguration:(nonnull NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
     self = [super init];
 
-    NSLog( @"configuration:\n%@\nstartImmediatly: %d", configuration, startImmediately );
-    NSString *appKey = configuration[@"<dictionary key to retrieve API Key>"];
+    NSLog( @"MPKitRevealMobile initWithConfiguration:\n%@\nstartImmediatly: %d", configuration, startImmediately );
+    NSString *appKey = configuration[@"apiKey"];
     if (!self || !appKey) {
         return nil;
     }
@@ -68,8 +88,34 @@ NSUInteger MPKitInstanceRevealMobile = 112;
         /*
             Start your SDK here. The configuration dictionary can be retrieved from self.configuration
          */
+        NSString *appKey = self.configuration[@"apiKey"];
+        // Get a reference to the SDK object
+       Reveal *theSDK = [Reveal sharedInstance];
+       //theSDK.locationManager = [RVLAltLocatioManager new];
+       
+       // Turn on debug logging, not for production
+       theSDK.debug = YES;
+       
+       [theSDK setupWithAPIKey: apiKey andServiceType: serviceType];
 
         _started = YES;
+
+        // Override the beacon list for testing with known local beacons.
+#if USE_DEBUG_BEACONS == 1
+        theSDK.debugUUIDs = @[
+                              @"B9407F30-F5F8-466E-AFF9-25556B57FE6D",
+                              @"23538c90-4e4c-4183-a32b-381cfd11c465",
+                              @"97faaca4-d7f1-416d-a5a4-e922dc6edb29",
+                              @"40A1EB68-883C-45D7-918B-CAB98350B1B1",
+                              ];
+#endif
+    
+        // Once the config values are set, start the SDK.
+        // The SDK will contact the server for further config info
+        // and start monitoring for beacons.
+        [theSDK start];
+
+        NSLog( @"MPKitRevealMobile start completed" );
 
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
