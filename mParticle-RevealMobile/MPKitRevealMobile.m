@@ -24,7 +24,7 @@
 //#import <CompanyName.h>
 
 // This is temporary to allow compilation (will be provided by core SDK)
-NSUInteger MPKitInstanceRevealMobile = 999;
+NSUInteger MPKitInstanceRevealMobile = 112;
 
 @implementation MPKitRevealMobile
 
@@ -284,7 +284,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
         Please see MPKitExecStatus.h for all exec status codes
      */
 
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
