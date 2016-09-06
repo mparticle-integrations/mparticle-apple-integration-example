@@ -46,6 +46,12 @@
 // This is temporary to allow compilation (will be provided by core SDK)
 NSUInteger MPKitInstanceRevealMobile = 112;
 
+@interface MPKitRevealMobile ()
+
+@property( nonatomic, strong) Reveal *sdk;
+
+@end
+
 @implementation MPKitRevealMobile
 
 /*
@@ -90,19 +96,19 @@ NSUInteger MPKitInstanceRevealMobile = 112;
          */
         NSString *appKey = self.configuration[@"apiKey"];
         // Get a reference to the SDK object
-       Reveal *theSDK = [Reveal sharedInstance];
-       //theSDK.locationManager = [RVLAltLocatioManager new];
+       self.sdk = [Reveal sharedInstance];
+       //self.sdk.locationManager = [RVLAltLocatioManager new];
        
        // Turn on debug logging, not for production
-       theSDK.debug = YES;
+       self.sdk.debug = YES;
        
-       [theSDK setupWithAPIKey: apiKey andServiceType: serviceType];
+       [self.sdk setupWithAPIKey: apiKey andServiceType: serviceType];
 
         _started = YES;
 
         // Override the beacon list for testing with known local beacons.
 #if USE_DEBUG_BEACONS == 1
-        theSDK.debugUUIDs = @[
+        self.sdk.debugUUIDs = @[
                               @"B9407F30-F5F8-466E-AFF9-25556B57FE6D",
                               @"23538c90-4e4c-4183-a32b-381cfd11c465",
                               @"97faaca4-d7f1-416d-a5a4-e922dc6edb29",
@@ -113,7 +119,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
         // Once the config values are set, start the SDK.
         // The SDK will contact the server for further config info
         // and start monitoring for beacons.
-        [theSDK start];
+        [self.sdk start];
 
         NSLog( @"MPKitRevealMobile start completed" );
 
@@ -135,13 +141,8 @@ NSUInteger MPKitInstanceRevealMobile = 112;
     /*
         If your company SDK instance is available and is applicable (Please return nil if your SDK is based on class methods)
      */
-    BOOL kitInstanceAvailable = NO;
-    if (kitInstanceAvailable) {
-        /* Return an instance of your company's SDK (if applicable) */
-        return nil;
-    } else {
-        return nil;
-    }
+
+    return self.sdk;
 }
 
 
