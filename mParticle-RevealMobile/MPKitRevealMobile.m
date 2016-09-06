@@ -36,7 +36,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 }
 
 + (void)load {
-    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"CompanyName" className:@"MPKitCompanyName" startImmediately:YES];
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"RevealMobile" className:@"MPKitRevealMobile" startImmediately:YES];
     [MParticle registerExtension:kitRegister];
 }
 
