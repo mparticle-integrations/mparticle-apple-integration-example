@@ -1,5 +1,5 @@
 //
-//  MPKitCompanyName.m
+//  MPKitRevealMobile.m
 //
 //  Copyright 2016 mParticle, Inc.
 //
@@ -19,12 +19,32 @@
 #import "MPKitRevealMobile.h"
 #import "mParticle.h"
 
+// This rather convoluded set of #defines allows you to pass in environment variables
+// for buddy build but not require them if you're not.
+//
+// Do to the XCode mechanism provided, you will get directive defined as empty instead
+// of undefined if there is no environment variable defined. This is seems overly complex
+// for such a simple task, but it handles all of the cases as far as I can see.
+#define STRINGIFY(str) @#str
+#define EXPAND_STRING(str) STRINGIFY(str)
+#define NO_OTHER_MACRO_STARTS_WITH_THIS_NAME_
+#define IS_EMPTY(name) defined(NO_OTHER_MACRO_STARTS_WITH_THIS_NAME_ ## name)
+#define EMPTY(name) IS_EMPTY(name)
+
+#define DO_EXPAND(VAL)  VAL ## 1
+#define EXPAND(VAL)     DO_EXPAND(VAL)
+
+#if !defined(USE_DEBUG_BEACONS) || (EXPAND(USE_DEBUG_BEACONS) == 1)
+#define USE_DEBUG_BEACONS               0
+#endif
+
 /* Import your header file here
-*/
-//#import <CompanyName.h>
+ */
+#import "Reveal.h"
+//@import Reveal
 
 // This is temporary to allow compilation (will be provided by core SDK)
-NSUInteger MPKitInstanceRevealMobile = 999;
+NSUInteger MPKitInstanceRevealMobile = 112;
 
 @implementation MPKitRevealMobile
 
@@ -32,11 +52,11 @@ NSUInteger MPKitInstanceRevealMobile = 999;
     mParticle will supply a unique kit code for you. Please contact our team
 */
 + (NSNumber *)kitCode {
-    return @999;
+    return @112;
 }
 
 + (void)load {
-    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"CompanyName" className:@"MPKitCompanyName" startImmediately:YES];
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"RevealMobile" className:@"MPKitRevealMobile" startImmediately:YES];
     [MParticle registerExtension:kitRegister];
 }
 
@@ -45,7 +65,9 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 #pragma mark Kit instance and lifecycle
 - (nonnull instancetype)initWithConfiguration:(nonnull NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
     self = [super init];
-    NSString *appKey = configuration[@"<dictionary key to retrieve API Key>"];
+
+    NSLog( @"MPKitRevealMobile initWithConfiguration:\n%@\nstartImmediatly: %d", configuration, startImmediately );
+    NSString *appKey = configuration[@"apiKey"];
     if (!self || !appKey) {
         return nil;
     }
@@ -66,8 +88,34 @@ NSUInteger MPKitInstanceRevealMobile = 999;
         /*
             Start your SDK here. The configuration dictionary can be retrieved from self.configuration
          */
+        NSString *appKey = self.configuration[@"apiKey"];
+        // Get a reference to the SDK object
+       Reveal *theSDK = [Reveal sharedInstance];
+       //theSDK.locationManager = [RVLAltLocatioManager new];
+       
+       // Turn on debug logging, not for production
+       theSDK.debug = YES;
+       
+       [theSDK setupWithAPIKey: apiKey andServiceType: serviceType];
 
         _started = YES;
+
+        // Override the beacon list for testing with known local beacons.
+#if USE_DEBUG_BEACONS == 1
+        theSDK.debugUUIDs = @[
+                              @"B9407F30-F5F8-466E-AFF9-25556B57FE6D",
+                              @"23538c90-4e4c-4183-a32b-381cfd11c465",
+                              @"97faaca4-d7f1-416d-a5a4-e922dc6edb29",
+                              @"40A1EB68-883C-45D7-918B-CAB98350B1B1",
+                              ];
+#endif
+    
+        // Once the config values are set, start the SDK.
+        // The SDK will contact the server for further config info
+        // and start monitoring for beacons.
+        [theSDK start];
+
+        NSLog( @"MPKitRevealMobile start completed" );
 
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
@@ -107,7 +155,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -120,7 +168,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -133,7 +181,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -146,7 +194,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -159,7 +207,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -172,7 +220,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -185,7 +233,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -199,7 +247,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -212,7 +260,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -225,7 +273,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -239,7 +287,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 //         Please see MPEnums.h > MPUserIdentity for all supported user identities
 //      */
 //
-//      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //      return execStatus;
 // }
 
@@ -251,7 +299,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
     Please see MPCommerceEvent.h > MPCommerceEventAction for complete list
 */
 // - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess forwardCount:0];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess forwardCount:0];
 //
 //     // In this example, this SDK only supports the 'Purchase' commerce event action
 //     if (commerceEvent.action == MPCommerceEventActionPurchase) {
@@ -276,15 +324,15 @@ NSUInteger MPKitInstanceRevealMobile = 999;
     Implement this method if your SDK logs user events.
     Please see MPEvent.h
 */
-// - (MPKitExecStatus *)logEvent:(MPEvent *)event {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+- (MPKitExecStatus *)logEvent:(MPEvent *)event {
+    /*  Your code goes here.
+        If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+        Please see MPKitExecStatus.h for all exec status codes
+     */
+
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
 
 /*
     Implement this method if your SDK logs screen events
@@ -310,7 +358,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:returnCode];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:returnCode];
 //     return execStatus;
 // }
 
