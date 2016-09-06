@@ -32,7 +32,7 @@ NSUInteger MPKitInstanceRevealMobile = 999;
     mParticle will supply a unique kit code for you. Please contact our team
 */
 + (NSNumber *)kitCode {
-    return @999;
+    return @112;
 }
 
 + (void)load {
@@ -45,6 +45,8 @@ NSUInteger MPKitInstanceRevealMobile = 999;
 #pragma mark Kit instance and lifecycle
 - (nonnull instancetype)initWithConfiguration:(nonnull NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
     self = [super init];
+
+    NSLog( @"configuration:\n%@\nstartImmediatly: %d", configuration, startImmediately );
     NSString *appKey = configuration[@"<dictionary key to retrieve API Key>"];
     if (!self || !appKey) {
         return nil;
@@ -276,15 +278,15 @@ NSUInteger MPKitInstanceRevealMobile = 999;
     Implement this method if your SDK logs user events.
     Please see MPEvent.h
 */
-// - (MPKitExecStatus *)logEvent:(MPEvent *)event {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+- (MPKitExecStatus *)logEvent:(MPEvent *)event {
+    /*  Your code goes here.
+        If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+        Please see MPKitExecStatus.h for all exec status codes
+     */
+
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
 
 /*
     Implement this method if your SDK logs screen events
