@@ -1,5 +1,5 @@
 //
-//  MPKitCompanyName.m
+//  MPKitRevealMobile.m
 //
 //  Copyright 2016 mParticle, Inc.
 //
@@ -21,7 +21,7 @@
 
 /* Import your header file here
 */
-//#import <CompanyName.h>
+//#import <RevealMobile.h>
 
 // This is temporary to allow compilation (will be provided by core SDK)
 NSUInteger MPKitInstanceRevealMobile = 112;
@@ -109,7 +109,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -122,7 +122,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -135,7 +135,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -148,7 +148,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -161,7 +161,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -174,7 +174,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -187,7 +187,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -201,7 +201,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -214,7 +214,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -227,7 +227,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -241,7 +241,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 //         Please see MPEnums.h > MPUserIdentity for all supported user identities
 //      */
 //
-//      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess];
 //      return execStatus;
 // }
 
@@ -253,7 +253,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
     Please see MPCommerceEvent.h > MPCommerceEventAction for complete list
 */
 // - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess forwardCount:0];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:MPKitReturnCodeSuccess forwardCount:0];
 //
 //     // In this example, this SDK only supports the 'Purchase' commerce event action
 //     if (commerceEvent.action == MPCommerceEventActionPurchase) {
@@ -312,7 +312,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:returnCode];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceRevealMobile) returnCode:returnCode];
 //     return execStatus;
 // }
 
