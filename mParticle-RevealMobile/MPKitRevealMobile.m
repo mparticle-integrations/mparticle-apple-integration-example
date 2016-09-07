@@ -40,7 +40,7 @@
 
 /* Import your header file here
  */
-#import "Reveal.h"
+#import <Reveal/Reveal.h>
 //@import Reveal
 
 // This is temporary to allow compilation (will be provided by core SDK)
@@ -101,7 +101,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
        
        // Turn on debug logging, not for production
        self.sdk.debug = YES;
-       self.sdk.delegate = self
+       self.sdk.delegate = self;
        
        [self.sdk setupWithAPIKey: apiKey andServiceType: serviceType];
 
