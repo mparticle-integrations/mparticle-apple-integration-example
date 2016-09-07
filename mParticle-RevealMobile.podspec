@@ -15,7 +15,8 @@ Pod::Spec.new do |s|
     #s.social_media_url = "https://twitter.com/mparticles"
 
     s.ios.deployment_target = "8.0"
-    s.ios.source_files      = 'mParticle-CompanyName/*.{h,m,mm}'
+    #s.ios.source_files      = 'mParticle-CompanyName/*.{h,m,mm}'
+    s.ios.source_files      = 'iOS/mParticle-CompanyName/*.{h,m,mm}'
     s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 6.7'
     s.source_files = 'mParticle-RevealMobile/Reveal'
     s.requires_arc = true
