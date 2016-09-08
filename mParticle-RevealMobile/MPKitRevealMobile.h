@@ -17,8 +17,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MPKitExecStatus.h"
-#import "MPKitProtocol.h"
+#import <mParticle_Apple_SDK/MPKitExecStatus.h>
+#import <mParticle_Apple_SDK/MPKitProtocol.h>
 
 @interface MPKitRevealMobile : NSObject <MPKitProtocol>
 
