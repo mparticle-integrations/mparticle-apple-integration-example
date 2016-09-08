@@ -49,7 +49,6 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 @interface MPKitRevealMobile () <RVLBeaconDelegate>
 
 @property( nonatomic, strong) Reveal *sdk;
-@property( nonatomic, strong) NSString* apiKey;
 
 @end
 
@@ -76,8 +75,6 @@ NSUInteger MPKitInstanceRevealMobile = 112;
     NSLog( @"MPKitRevealMobile initWithConfiguration:\n%@\nstartImmediatly: %d", configuration, startImmediately );
     NSString *appKey = configuration[@"apiKey"];
     if ( self && appKey) {
-        self.apiKey = appKey;
-
         _configuration = configuration;
 
         if (startImmediately) {
@@ -104,7 +101,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
        self.sdk.debug = YES;
        self.sdk.delegate = self;
        
-       [self.sdk setupWithAPIKey: self.apiKey andServiceType: RVLServiceTypeProduction];
+       [self.sdk setupWithAPIKey: appKey andServiceType: RVLServiceTypeProduction];
 
         _started = YES;
 
