@@ -20,6 +20,8 @@
 #import <mParticle_Apple_SDK/MPKitExecStatus.h>
 #import <mParticle_Apple_SDK/MPKitProtocol.h>
 
+@class Reveal;
+
 @interface MPKitRevealMobile : NSObject <MPKitProtocol>
 
 @property (nonatomic, strong, nonnull) NSDictionary *configuration;
@@ -27,5 +29,8 @@
 @property (nonatomic, unsafe_unretained, readonly) BOOL started;
 @property (nonatomic, strong, nullable) NSDictionary<NSString *, id> *userAttributes;
 @property (nonatomic, strong, nullable) NSArray<NSDictionary<NSString *, id> *> *userIdentities;
+
+// the Reveal Instance
+@property( nonatomic, strong) Reveal *sdk;
 
 @end

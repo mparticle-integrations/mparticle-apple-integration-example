@@ -48,8 +48,6 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 
 @interface MPKitRevealMobile () <RVLBeaconDelegate>
 
-@property( nonatomic, strong) Reveal *sdk;
-
 @end
 
 @implementation MPKitRevealMobile
