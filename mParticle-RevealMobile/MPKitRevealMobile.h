@@ -31,6 +31,6 @@
 @property (nonatomic, strong, nullable) NSArray<NSDictionary<NSString *, id> *> *userIdentities;
 
 // the Reveal Instance
-@property( nonatomic, strong) Reveal *sdk;
+@property( nonatomic, strong, nullable) Reveal *sdk;
 
 @end
