@@ -102,16 +102,6 @@ NSUInteger MPKitInstanceRevealMobile = 112;
        [self.sdk setupWithAPIKey: appKey andServiceType: RVLServiceTypeProduction];
 
         _started = YES;
-
-        // Override the beacon list for testing with known local beacons.
-#if USE_DEBUG_BEACONS == 1
-        self.sdk.debugUUIDs = @[
-                              @"B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-                              @"23538c90-4e4c-4183-a32b-381cfd11c465",
-                              @"97faaca4-d7f1-416d-a5a4-e922dc6edb29",
-                              @"40A1EB68-883C-45D7-918B-CAB98350B1B1",
-                              ];
-#endif
     
         // Once the config values are set, start the SDK.
         // The SDK will contact the server for further config info
