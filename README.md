@@ -1,4 +1,4 @@
-# Reveal Mobile mParticle Apple Kit Library
+# mParticle Apple Kit Library
 
 A kit is an extension to the core [mParticle Apple SDK](https://github.com/mParticle/mparticle-apple-sdk). A kit works as a bridge between the mParticle SDK and a partner SDK. It abstracts the implementation complexity, simplifying the implementation for developers.
 

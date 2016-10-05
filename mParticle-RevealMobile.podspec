@@ -8,19 +8,17 @@ Pod::Spec.new do |s|
                        DESC
 
     s.homepage         = "https://www.mparticle.com"
-    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.license          = { :type => 'Apache 2.0', :file => 'LICENSE' }
     s.author           = { "Reveal Mobile" => "support@revealmobile.com", "Sean Doherty" => "sean.doherty@crosscomm.net", "Bobby Skinner" => "bobby.skinner@crosscomm.net" }
     #s.source           = { :git => "https://github.com/mparticle-integrations/mparticle-apple-integration-RevealMobile.git", :tag => s.version.to_s }
     s.source           = { :git => "https://github.com/bobbyski/mparticle-apple-integration-example.git", :tag => s.version.to_s }
-    #s.social_media_url = "https://twitter.com/mparticles"
 
     s.ios.deployment_target = "8.0"
-    s.ios.source_files      = 'mParticle-CompanyName/*.{h,m,mm}'
+    s.ios.source_files      = 'mParticle-RevealMobile/*.{h,m,mm}'
     s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 6.7'
     s.ios.dependency 'Reveal', '~> 1.3'
-    s.source_files = 'mParticle-RevealMobile/**/*'
+    #s.source_files = 'mParticle-RevealMobile/**/*'
     s.requires_arc = true
-    #s.ios.dependency 'CompanyName', '9.9.9'
 
 
 end

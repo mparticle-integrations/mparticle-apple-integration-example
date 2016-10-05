@@ -92,23 +92,20 @@ NSUInteger MPKitInstanceRevealMobile = 112;
          */
         NSString *appKey = self.configuration[@"apiKey"];
         // Get a reference to the SDK object
-       self.sdk = [Reveal sharedInstance];
-       //self.sdk.locationManager = [RVLAltLocatioManager new];
+       self.revealSDK = [Reveal sharedInstance];
        
        // Turn on debug logging, not for production
-       self.sdk.debug = YES;
-       self.sdk.delegate = self;
+       self.revealSDK.debug = YES;
+       self.revealSDK.delegate = self;
        
-       [self.sdk setupWithAPIKey: appKey andServiceType: RVLServiceTypeProduction];
+       [self.revealSDK setupWithAPIKey: appKey andServiceType: RVLServiceTypeProduction];
 
         _started = YES;
     
         // Once the config values are set, start the SDK.
         // The SDK will contact the server for further config info
         // and start monitoring for beacons.
-        [self.sdk start];
-
-        NSLog( @"MPKitRevealMobile start completed" );
+        [self.revealSDK start];
 
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
@@ -129,7 +126,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
         If your company SDK instance is available and is applicable (Please return nil if your SDK is based on class methods)
      */
 
-    return self.sdk;
+    return self.revealSDK;
 }
 
 
@@ -318,7 +315,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
         Please see MPKitExecStatus.h for all exec status codes
      */
 
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@([[self class] kitCode]) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
