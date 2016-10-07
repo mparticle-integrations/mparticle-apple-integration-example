@@ -51,6 +51,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 - (nonnull instancetype)initWithConfiguration:(nonnull NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
     self = [super init];
 
+    NSString *appKey = configuration[@"apiKey"];
     if ( self && appKey) {
         _configuration = configuration;
 
