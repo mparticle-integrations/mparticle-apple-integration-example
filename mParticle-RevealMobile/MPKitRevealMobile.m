@@ -19,25 +19,6 @@
 #import "MPKitRevealMobile.h"
 #import "mParticle.h"
 
-// This rather convoluded set of #defines allows you to pass in environment variables
-// for buddy build but not require them if you're not.
-//
-// Do to the XCode mechanism provided, you will get directive defined as empty instead
-// of undefined if there is no environment variable defined. This is seems overly complex
-// for such a simple task, but it handles all of the cases as far as I can see.
-#define STRINGIFY(str) @#str
-#define EXPAND_STRING(str) STRINGIFY(str)
-#define NO_OTHER_MACRO_STARTS_WITH_THIS_NAME_
-#define IS_EMPTY(name) defined(NO_OTHER_MACRO_STARTS_WITH_THIS_NAME_ ## name)
-#define EMPTY(name) IS_EMPTY(name)
-
-#define DO_EXPAND(VAL)  VAL ## 1
-#define EXPAND(VAL)     DO_EXPAND(VAL)
-
-#if !defined(USE_DEBUG_BEACONS) || (EXPAND(USE_DEBUG_BEACONS) == 1)
-#define USE_DEBUG_BEACONS               0
-#endif
-
 /* Import your header file here
  */
 #import <Reveal/Reveal.h>
@@ -70,8 +51,6 @@ NSUInteger MPKitInstanceRevealMobile = 112;
 - (nonnull instancetype)initWithConfiguration:(nonnull NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
     self = [super init];
 
-    NSLog( @"MPKitRevealMobile initWithConfiguration:\n%@\nstartImmediatly: %d", configuration, startImmediately );
-    NSString *appKey = configuration[@"apiKey"];
     if ( self && appKey) {
         _configuration = configuration;
 
@@ -315,7 +294,7 @@ NSUInteger MPKitInstanceRevealMobile = 112;
         Please see MPKitExecStatus.h for all exec status codes
      */
 
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@([[self class] kitCode]) returnCode:MPKitReturnCodeSuccess];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode: [[self class] kitCode] returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 

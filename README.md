@@ -26,18 +26,6 @@ Detailed instructions on how to implement your own integration with the mParticl
 
 Questions? Give us a shout at <support@mparticle.com>
 
-
-
-## Usage
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-## Installation
-
-Reveal Mobile is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-    pod "mParticle-RevealMobile"
-
 ## Authors
 
 Reveal Mobile, Inc, support@revealmobile.com
@@ -48,4 +36,5 @@ Bobby Skinner, bobby.skinner@crosscomm.net
 
 ## License
 
-The Reveal Mobile SDK is available under the MIT license. See the LICENSE file for more info.
+-This mParticle Apple Kit is available under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0). See the LICENSE file for more info.
+The Reveal mParticle integration is available under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0). See the LICENSE file for more info.
