@@ -17,8 +17,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <mParticle_Apple_SDK/MPKitExecStatus.h>
-#import <mParticle_Apple_SDK/MPKitProtocol.h>
+#import "MPKitExecStatus.h"
+#import "MPKitProtocol.h"
 
 @class Reveal;
 
