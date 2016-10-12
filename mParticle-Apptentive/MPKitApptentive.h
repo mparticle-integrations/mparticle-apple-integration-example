@@ -17,7 +17,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <mParticle.h>
+#import "MPKitExecStatus.h"
+#import "MPKitProtocol.h"
 
 @interface MPKitApptentive : NSObject <MPKitProtocol>
 
