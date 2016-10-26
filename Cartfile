@@ -1,0 +1,2 @@
+#github "CompanyName/CompanyName" == 9.9.9
+github "mparticle/mparticle-apple-sdk" ~> 6.10.0
