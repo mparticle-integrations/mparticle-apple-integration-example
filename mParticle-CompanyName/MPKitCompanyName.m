@@ -101,7 +101,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 /*
     Implement this method if your SDK retrieves deep-linking information from a remote server and returns it to the host app
 */
-// - (MPKitExecStatus *)checkForDeferredDeepLinkWithCompletionHandler:(void(^)(NSDictionary<NSString *, NSString *> *linkInfo, NSError *error))completionHandler {
+// - (MPKitExecStatus *)checkForDeferredDeepLinkWithCompletionHandler:(void(^)(NSDictionary *linkInfo, NSError *error))completionHandler {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
 //         Please see MPKitExecStatus.h for all exec status codes
