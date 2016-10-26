@@ -17,8 +17,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MPKitExecStatus.h"
-#import "MPKitProtocol.h"
+#if defined(__has_include) && __has_include(<mParticle_Apple_SDK/mParticle.h>)
+#import <mParticle_Apple_SDK/mParticle.h>
+#else
+#import "mParticle.h"
+#endif
 
 @interface MPKitCompanyName : NSObject <MPKitProtocol>
 
