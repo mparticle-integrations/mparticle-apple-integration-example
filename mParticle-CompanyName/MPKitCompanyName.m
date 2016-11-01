@@ -17,11 +17,14 @@
 //
 
 #import "MPKitCompanyName.h"
-#import "mParticle.h"
 
 /* Import your header file here
 */
-//#import <CompanyName.h>
+//#if defined(__has_include) && __has_include(<CompanyName/CompanyName.h>)
+//#import <CompanyName/CompanyName.h>
+//#else
+//#import "CompanyName.h"
+//#endif
 
 // This is temporary to allow compilation (will be provided by core SDK)
 NSUInteger MPKitInstanceCompanyName = 999;
