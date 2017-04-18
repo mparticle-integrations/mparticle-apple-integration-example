@@ -16,6 +16,29 @@ Please refer to installation instructions in the core mParticle Apple SDK [READM
 
 Detailed instructions on how to implement your own integration with the mParticle Apple SDK can be found [here](https://github.com/mparticle-integrations/mparticle-apple-integration-example/wiki/Kit-Integration-Development).
 
+## Deep-linking
+
+Call the mParticle SDK `checkForDeferredDeepLinkWithCompletionHandler:` method to retrieve the respective information.
+
+The completionHandler will get passed the linkInfo dictionary with the following data.
+
+```json
+{
+	"destinationURL" : <the destination url>,
+	"clickedURL", <the clicked url>
+}
+
+```
+
+Add in the following to store the clicked url on app load.
+
+```objective-c
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+    [[MParticle sharedInstance] continueUserActivity:userActivity restorationHandler:restorationHandler];
+    
+    return YES;
+}
+```
 
 ## Support
 

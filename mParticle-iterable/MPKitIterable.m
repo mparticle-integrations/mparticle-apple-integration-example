@@ -1,5 +1,5 @@
 //
-//  MPKitCompanyName.m
+//  MPKitIterable.m
 //
 //  Copyright 2016 mParticle, Inc.
 //
@@ -16,30 +16,36 @@
 //  limitations under the License.
 //
 
-#import "MPKitCompanyName.h"
+#import "MPKitIterable.h"
 
 /* Import your header file here
 */
-//#if defined(__has_include) && __has_include(<CompanyName/CompanyName.h>)
-//#import <CompanyName/CompanyName.h>
-//#else
-//#import "CompanyName.h"
-//#endif
+#if defined(__has_include) && __has_include(<IterableSDK/IterableAPI.h>)
+#import <IterableSDK/IterableAPI.h>
+#else
+#import "IterableAPI.h"
+#endif
 
 // This is temporary to allow compilation (will be provided by core SDK)
-NSUInteger MPKitInstanceCompanyName = 999;
+NSUInteger MPKitInstanceIterable = 1003;
 
-@implementation MPKitCompanyName
+@interface MPKitIterable() {
+    NSURL *clickedURL;
+}
+
+@end
+
+@implementation MPKitIterable
 
 /*
     mParticle will supply a unique kit code for you. Please contact our team
 */
 + (NSNumber *)kitCode {
-    return @999;
+    return @1003;
 }
 
 + (void)load {
-    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"CompanyName" className:@"MPKitCompanyName" startImmediately:YES];
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"Iterable" className:@"MPKitIterable" startImmediately:YES];
     [MParticle registerExtension:kitRegister];
 }
 
@@ -104,15 +110,24 @@ NSUInteger MPKitInstanceCompanyName = 999;
 /*
     Implement this method if your SDK retrieves deep-linking information from a remote server and returns it to the host app
 */
-// - (MPKitExecStatus *)checkForDeferredDeepLinkWithCompletionHandler:(void(^)(NSDictionary *linkInfo, NSError *error))completionHandler {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+ - (MPKitExecStatus *)checkForDeferredDeepLinkWithCompletionHandler:(void(^)(NSDictionary *linkInfo, NSError *error))completionHandler {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+     
+     ITEActionBlock callbackBlock = ^(NSString* destinationURL) {
+         //Handle Original URL deeplink here
+         NSDictionary *getAndTrackParams = [[NSDictionary alloc] initWithObjectsAndKeys:@"destinationURL", destinationURL, @"clickedURL", clickedURL, nil];
+         NSError *getAndTrackError;
+         completionHandler(getAndTrackParams, getAndTrackError);
+     };
+     [IterableAPI getAndTrackDeeplink:clickedURL callbackBlock:callbackBlock];
+
+     
+     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
+     return execStatus;
+ }
 
 /*
     Implement this method if your SDK handles a user interacting with a remote notification action
@@ -123,7 +138,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -136,7 +151,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -149,22 +164,23 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
 /*
     Implement this method if your SDK handles continueUserActivity method from the App Delegate
 */
-// - (nonnull MPKitExecStatus *)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+ - (nonnull MPKitExecStatus *)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+     clickedURL = userActivity.webpageURL;
+
+     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
+     return execStatus;
+ }
 
 /*
     Implement this method if your SDK handles the iOS 9 and above App Delegate method to open URL with options
@@ -175,7 +191,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -188,7 +204,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -202,7 +218,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -215,7 +231,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -228,7 +244,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -242,7 +258,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPEnums.h > MPUserIdentity for all supported user identities
 //      */
 //
-//      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
 //      return execStatus;
 // }
 
@@ -254,7 +270,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
     Please see MPCommerceEvent.h > MPCommerceEventAction for complete list
 */
 // - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess forwardCount:0];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess forwardCount:0];
 //
 //     // In this example, this SDK only supports the 'Purchase' commerce event action
 //     if (commerceEvent.action == MPCommerceEventActionPurchase) {
@@ -285,7 +301,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
 //     return execStatus;
 // }
 
@@ -313,7 +329,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:returnCode];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:returnCode];
 //     return execStatus;
 // }
 
