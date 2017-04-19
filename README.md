@@ -11,16 +11,11 @@ A kit takes care of initializing and forwarding information depending on what yo
 
 Please refer to installation instructions in the core mParticle Apple SDK [README](https://github.com/mParticle/mparticle-apple-sdk#get-the-sdk), or check out our [SDK Documentation](http://docs.mparticle.com/#mobile-sdk-guide) site to learn more.
 
-
-## Create Your Own Integration
-
-Detailed instructions on how to implement your own integration with the mParticle Apple SDK can be found [here](https://github.com/mparticle-integrations/mparticle-apple-integration-example/wiki/Kit-Integration-Development).
-
 ## Deep-linking
 
 Call the mParticle SDK `checkForDeferredDeepLinkWithCompletionHandler:` method to retrieve the respective information.
 
-The completionHandler will get passed the linkInfo dictionary with the following data.
+The completionHandler will get passed the linkInfo dictionary with the following data. Use the destinationURL to navigate to your 
 
 ```json
 {
@@ -30,7 +25,7 @@ The completionHandler will get passed the linkInfo dictionary with the following
 
 ```
 
-Add in the following to store the clicked url on app load.
+In order for the deeplink to be retrieved properly on app load you need to call the mParticle continueUserActivity to store the clicked url from the userActivity.
 
 ```objective-c
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
