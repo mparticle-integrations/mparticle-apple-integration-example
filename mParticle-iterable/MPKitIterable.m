@@ -18,14 +18,6 @@
 
 #import "MPKitIterable.h"
 
-/* Import your header file here
-*/
-#if defined(__has_include) && __has_include(<IterableSDK/IterableAPI.h>)
-#import <IterableSDK/IterableAPI.h>
-#else
-#import "IterableAPI.h"
-#endif
-
 // This is temporary to allow compilation (will be provided by core SDK)
 NSUInteger MPKitInstanceIterable = 1003;
 
@@ -116,10 +108,6 @@ NSUInteger MPKitInstanceIterable = 1003;
  }
 
  - (nonnull MPKitExecStatus *)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler {
-     /*  Your code goes here.
-         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-         Please see MPKitExecStatus.h for all exec status codes
-      */
      clickedURL = userActivity.webpageURL;
 
      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];

@@ -14,5 +14,4 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = "8.0"
     s.ios.source_files      = 'mParticle-Iterable/*.{h,m,mm}'
     s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 6.11.0'
-    s.ios.dependency 'IterableSDK', '4.3.0'
 end

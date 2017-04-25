@@ -23,6 +23,8 @@
 #import "mParticle.h"
 #endif
 
+#import "IterableMPHelper.h"
+
 @interface MPKitIterable : NSObject <MPKitProtocol>
 
 @property (nonatomic, strong, nonnull) NSDictionary *configuration;
