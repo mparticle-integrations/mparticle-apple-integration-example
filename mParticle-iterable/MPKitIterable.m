@@ -46,8 +46,7 @@ NSUInteger MPKitInstanceIterable = 1003;
 #pragma mark Kit instance and lifecycle
 - (nonnull instancetype)initWithConfiguration:(nonnull NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
     self = [super init];
-    NSString *appKey = configuration[@"<dictionary key to retrieve API Key>"];
-    if (!self || !appKey) {
+    if (!self) {
         return nil;
     }
 
@@ -76,21 +75,6 @@ NSUInteger MPKitInstanceIterable = 1003;
         });
     });
 }
-
-- (id const)providerKitInstance {
-    if (![self started]) {
-        return nil;
-    }
-
-    BOOL kitInstanceAvailable = NO;
-    if (kitInstanceAvailable) {
-        /* Return an instance of your company's SDK (if applicable) */
-        return nil;
-    } else {
-        return nil;
-    }
-}
-
 
 #pragma mark Application
  - (MPKitExecStatus *)checkForDeferredDeepLinkWithCompletionHandler:(void(^)(NSDictionary *linkInfo, NSError *error))completionHandler {

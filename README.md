@@ -25,16 +25,6 @@ The completionHandler will get passed the linkInfo dictionary with the following
 
 ```
 
-In order for the deeplink to be retrieved properly on app load you need to call the mParticle continueUserActivity to store the clicked url from the userActivity.
-
-```objective-c
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
-    [[MParticle sharedInstance] continueUserActivity:userActivity restorationHandler:restorationHandler];
-    
-    return YES;
-}
-```
-
 ## Support
 
 Questions? Give us a shout at <support@mparticle.com>
