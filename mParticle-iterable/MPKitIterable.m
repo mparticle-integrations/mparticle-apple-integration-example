@@ -18,9 +18,6 @@
 
 #import "MPKitIterable.h"
 
-// This is temporary to allow compilation (will be provided by core SDK)
-NSUInteger MPKitInstanceIterable = 1003;
-
 @interface MPKitIterable() {
     NSURL *clickedURL;
 }
@@ -29,9 +26,6 @@ NSUInteger MPKitInstanceIterable = 1003;
 
 @implementation MPKitIterable
 
-/*
-    mParticle will supply a unique kit code for you. Please contact our team
-*/
 + (NSNumber *)kitCode {
     return @1003;
 }
@@ -85,16 +79,15 @@ NSUInteger MPKitInstanceIterable = 1003;
          completionHandler(getAndTrackParams, getAndTrackError);
      };
      [IterableAPI getAndTrackDeeplink:clickedURL callbackBlock:callbackBlock];
-
      
-     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
+     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[MPKitIterable kitCode] returnCode:MPKitReturnCodeSuccess];
      return execStatus;
  }
 
  - (nonnull MPKitExecStatus *)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler {
      clickedURL = userActivity.webpageURL;
 
-     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceIterable) returnCode:MPKitReturnCodeSuccess];
+     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[MPKitIterable kitCode] returnCode:MPKitReturnCodeSuccess];
      return execStatus;
  }
 
