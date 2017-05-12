@@ -18,8 +18,11 @@
 
 #import "MPKitIterable.h"
 
+NSString *const destinationDeeplinkURL = @"destinationURL";
+NSString *const clickedDeeplinkURL = @"clickedURL";
+
 @interface MPKitIterable() {
-    NSURL *clickedURL;
+    NSDictionary *getAndTrackParams;
 }
 
 @end
@@ -72,20 +75,20 @@
 
 #pragma mark Application
  - (MPKitExecStatus *)checkForDeferredDeepLinkWithCompletionHandler:(void(^)(NSDictionary *linkInfo, NSError *error))completionHandler {
-     ITEActionBlock callbackBlock = ^(NSString* destinationURL) {
-         //Handle Original URL deeplink here
-         NSDictionary *getAndTrackParams = [[NSDictionary alloc] initWithObjectsAndKeys:@"destinationURL", destinationURL, @"clickedURL", clickedURL, nil];
-         NSError *getAndTrackError;
-         completionHandler(getAndTrackParams, getAndTrackError);
-     };
-     [IterableAPI getAndTrackDeeplink:clickedURL callbackBlock:callbackBlock];
+     completionHandler(getAndTrackParams, nil);
      
      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[MPKitIterable kitCode] returnCode:MPKitReturnCodeSuccess];
      return execStatus;
  }
 
  - (nonnull MPKitExecStatus *)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler {
-     clickedURL = userActivity.webpageURL;
+     NSURL *clickedURL = userActivity.webpageURL;
+     
+     getAndTrackParams = nil;
+     ITEActionBlock callbackBlock = ^(NSString* destinationURL) {
+        getAndTrackParams = [[NSDictionary alloc] initWithObjectsAndKeys: destinationURL, destinationDeeplinkURL, clickedURL, clickedDeeplinkURL, nil];
+     };
+     [IterableAPI getAndTrackDeeplink:clickedURL callbackBlock:callbackBlock];
 
      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[MPKitIterable kitCode] returnCode:MPKitReturnCodeSuccess];
      return execStatus;
