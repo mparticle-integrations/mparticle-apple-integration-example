@@ -11,11 +11,19 @@ A kit takes care of initializing and forwarding information depending on what yo
 
 Please refer to installation instructions in the core mParticle Apple SDK [README](https://github.com/mParticle/mparticle-apple-sdk#get-the-sdk), or check out our [SDK Documentation](http://docs.mparticle.com/#mobile-sdk-guide) site to learn more.
 
+## Deep-linking
 
-## Create Your Own Integration
+Call the mParticle SDK `checkForDeferredDeepLinkWithCompletionHandler:` method to retrieve the respective information.
 
-Detailed instructions on how to implement your own integration with the mParticle Apple SDK can be found [here](https://github.com/mparticle-integrations/mparticle-apple-integration-example/wiki/Kit-Integration-Development).
+The completionHandler will get passed the linkInfo dictionary with the following data. Use the destinationURL to navigate to your desired location within the app.
 
+```json
+{
+	"destinationURL" : <the destination url>,
+	"clickedURL", <the clicked url>
+}
+
+```
 
 ## Support
 
