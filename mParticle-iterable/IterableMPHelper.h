@@ -27,7 +27,19 @@ typedef void (^ITEActionBlock)(NSString *);
  @param callbackBlock   the callback to send after the webpageURL is called
  
  @discussion            passes the string of the redirected URL to the callback
- */+(void) getAndTrackDeeplink:(NSURL *)webpageURL callbackBlock:(ITEActionBlock)callbackBlock;
+ */
++(void) getAndTrackDeeplink:(NSURL *)webpageURL callbackBlock:(ITEActionBlock)callbackBlock;
+
+/*!
+ @method
+ 
+ @abstract Checks for iterable URLs
+ 
+ @param webpageURL      the URL that was clicked
+ 
+ @return if the url is from iterable
+ */
++(BOOL) isIterableDeeplink:(NSURL *)webpageURL;
 
 @end
 

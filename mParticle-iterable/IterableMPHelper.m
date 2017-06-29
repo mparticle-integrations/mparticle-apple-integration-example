@@ -35,4 +35,12 @@
     }
 }
 
++(BOOL) isIterableDeeplink:(NSURL *)webpageURL
+{
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:ITBL_DEEPLINK_IDENTIFIER options:0 error:NULL];
+    NSString *urlString = webpageURL.absoluteString;
+    NSTextCheckingResult *match = [regex firstMatchInString:urlString options:0 range:NSMakeRange(0, [urlString length])];
+    
+    return match;
+
 @end
