@@ -13,6 +13,10 @@ typedef void (^ITEActionBlock)(NSString *);
 
 #define ITBL_DEEPLINK_IDENTIFIER @"/a/[a-zA-Z0-9]+"
 
+// Keys in the linkInfo passed to the -checkForDeferredDeepLinkWithCompletionHandler: handler
+extern NSString * _Nonnull const IterableDestinationURLKey;
+extern NSString * _Nonnull const IterableClickedURLKey;
+
 /**
  `IterableAPI` contains all the essential functions for communicating with Iterable's API
  */
