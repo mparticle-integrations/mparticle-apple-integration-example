@@ -90,9 +90,11 @@
      
      getAndTrackParams = nil;
      ITEActionBlock callbackBlock = ^(NSString* destinationURL) {
-         completionHandlerCopy(getAndTrackParams, nil);
-         completionHandlerCopy = nil;
          getAndTrackParams = [[NSDictionary alloc] initWithObjectsAndKeys: destinationURL, IterableDestinationURLKey, clickedURL, IterableClickedURLKey, nil];
+         if (completionHandlerCopy) {
+             completionHandlerCopy(getAndTrackParams, nil);
+             completionHandlerCopy = nil;
+         }
      };
      [IterableAPI getAndTrackDeeplink:clickedURL callbackBlock:callbackBlock];
 
