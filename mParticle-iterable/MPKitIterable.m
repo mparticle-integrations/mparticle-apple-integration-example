@@ -18,9 +18,6 @@
 
 #import "MPKitIterable.h"
 
-NSString *const destinationDeeplinkURL = @"destinationURL";
-NSString *const clickedDeeplinkURL = @"clickedURL";
-
 @interface MPKitIterable() {
     NSDictionary *getAndTrackParams;
     void (^completionHandlerCopy)(NSDictionary *, NSError *);
@@ -93,9 +90,11 @@ NSString *const clickedDeeplinkURL = @"clickedURL";
      
      getAndTrackParams = nil;
      ITEActionBlock callbackBlock = ^(NSString* destinationURL) {
-         getAndTrackParams = [[NSDictionary alloc] initWithObjectsAndKeys: destinationURL, destinationDeeplinkURL, clickedURL, clickedDeeplinkURL, nil];
-         completionHandlerCopy(getAndTrackParams, nil);
-         completionHandlerCopy = nil;
+         getAndTrackParams = [[NSDictionary alloc] initWithObjectsAndKeys: destinationURL, IterableDestinationURLKey, clickedURL, IterableClickedURLKey, nil];
+         if (completionHandlerCopy) {
+             completionHandlerCopy(getAndTrackParams, nil);
+             completionHandlerCopy = nil;
+         }
      };
      [IterableAPI getAndTrackDeeplink:clickedURL callbackBlock:callbackBlock];
 
