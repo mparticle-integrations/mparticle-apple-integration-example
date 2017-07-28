@@ -29,6 +29,15 @@
 #import "ROKOMobi.h"
 #endif
 
+@protocol MPKitROKOMobiProvider
+
+- (nullable ROKOInstaBot *)getInstaBot;
+
+@end
+
+@interface MPKitROKOMobiProxy : NSObject <MPKitROKOMobiProvider>
+@end
+
 @interface MPKitROKOMobi : NSObject <MPKitProtocol>
 
 @property (nonatomic, strong, nonnull) NSDictionary *configuration;

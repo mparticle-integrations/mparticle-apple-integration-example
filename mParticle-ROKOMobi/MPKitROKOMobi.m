@@ -18,24 +18,42 @@
 
 #import "MPKitROKOMobi.h"
 
-@interface MPKitROKOMobi() <ROKOLinkManagerDelegate>
-
-@property (nonatomic, strong) ROKOPush *pusher;
-@property (nonatomic, strong) ROKOLinkManager *linkManager;
+@interface MPKitROKOMobiProxy ()
 
 @property (nonatomic, strong) ROKOInstaBot *instabot;
 
 @end
 
-@implementation MPKitROKOMobi
+@implementation MPKitROKOMobiProxy
 
 @synthesize instabot = _instabot;
 
-- (ROKOInstaBot *)instabot {
+- (ROKOInstaBot *)getInstaBot {
     if (!_instabot) {
         _instabot = [ROKOInstaBot new];
     }
     return _instabot;
+}
+
+@end
+
+@interface MPKitROKOMobi() <ROKOLinkManagerDelegate>
+
+@property (nonatomic, strong) ROKOPush *pusher;
+@property (nonatomic, strong) ROKOLinkManager *linkManager;
+@property (nonatomic, strong) id <MPKitROKOMobiProvider> proxy;
+
+@end
+
+@implementation MPKitROKOMobi
+
+@synthesize proxy = _proxy;
+
+- (id <MPKitROKOMobiProvider>)proxy {
+    if (!_proxy) {
+        _proxy = [MPKitROKOMobiProxy new];
+    }
+    return _proxy;
 }
 
 /*
@@ -90,63 +108,37 @@
 }
 
 - (id const)providerKitInstance {
-    return [self started] ? self.instabot : nil;
+    return [self started] ? self.proxy : nil;
 }
 
 
 #pragma mark Application
-/*
-    Implement this method if your SDK retrieves deep-linking information from a remote server and returns it to the host app
-*/
-//- (MPKitExecStatus *)checkForDeferredDeepLinkWithCompletionHandler:(void(^)(NSDictionary *linkInfo, NSError *error))completionHandler {
-//    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
-//    return execStatus;
-//}
 
-/*
-    Implement this method if your SDK handles continueUserActivity method from the App Delegate
-*/
 - (nonnull MPKitExecStatus *)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler {
     [_linkManager  continueUserActivity:userActivity];
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
-/*
-    Implement this method if your SDK handles the iOS 9 and above App Delegate method to open URL with options
-*/
 - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url options:(nullable NSDictionary<NSString *, id> *)options {
     [_linkManager handleDeepLink:url];
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
-/*
-    Implement this method if your SDK handles the iOS 8 and below App Delegate method open URL
-*/
-// - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nullable id)annotation {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+- (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nullable id)annotation {
+    [_linkManager handleDeepLink:url];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
 
 #pragma mark Push
 
-/*
- Implement this method if your SDK handles a user interacting with a remote notification action
- */
 - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
-/*
- Implement this method if your SDK receives and handles remote notifications
- */
 - (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
     
     if (_pusher) {
@@ -157,9 +149,6 @@
     return execStatus;
 }
 
-/*
- Implement this method if your SDK registers the device token for remote notifications
- */
 - (MPKitExecStatus *)setDeviceToken:(NSData *)deviceToken {
     
     _pusher = [[ROKOPush alloc]init];
@@ -179,15 +168,14 @@
 /*
     Implement this method if your SDK sets user attributes. The core mParticle SDK also sets the userAttributes property.
 */
-// - (MPKitExecStatus *)setUserAttribute:(NSString *)key value:(NSString *)value {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+- (MPKitExecStatus *)setUserAttribute:(NSString *)key value:(NSString *)value {
+    ROKOPortalManager *portalManager = [ROKOComponentManager sharedManager].portalManager;
+    
+    [portalManager setUserCustomProperty:value forKey:key completionBlock:^(NSError * _Nullable error) {}];
+    
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
 
 /*
     Implement this method if your SDK allows for incrementing numeric user attributes.
@@ -215,9 +203,6 @@
 //     return execStatus;
 // }
 
-/*
-    Implement this method if your SDK sets user identities.
-*/
  - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
      
      ROKOPortalManager *portalManager = [ROKOComponentManager sharedManager].portalManager;
@@ -231,10 +216,7 @@
  }
 
 #pragma mark Events
-/*
-    Implement this method if your SDK logs user events.
-    Please see MPEvent.h
-*/
+
  - (MPKitExecStatus *)logEvent:(MPEvent *)event {
 
      [ROKOLogger addEvent:event.name];
