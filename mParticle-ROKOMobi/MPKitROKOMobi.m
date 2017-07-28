@@ -55,10 +55,6 @@
     }
     return _proxy;
 }
-
-/*
-    mParticle will supply a unique kit code for you. Please contact our team
-*/
 + (NSNumber *)kitCode {
     return @123;
 }
@@ -165,64 +161,38 @@
 }
 
 #pragma mark User attributes and identities
-/*
-    Implement this method if your SDK sets user attributes. The core mParticle SDK also sets the userAttributes property.
-*/
+
 - (MPKitExecStatus *)setUserAttribute:(NSString *)key value:(NSString *)value {
     ROKOPortalManager *portalManager = [ROKOComponentManager sharedManager].portalManager;
     
-    [portalManager setUserCustomProperty:value forKey:key completionBlock:^(NSError * _Nullable error) {}];
+    [portalManager setUserCustomProperty:value forKey:key completionBlock:^(NSError * _Nullable error) {
+        NSLog(@"%@", error);
+    }];
     
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
-/*
-    Implement this method if your SDK allows for incrementing numeric user attributes.
-*/
-// - (MPKitExecStatus *)incrementUserAttribute:(NSString *)key byValue:(NSNumber *)value {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
-
-/*
-    Implement this method if your SDK resets user attributes.
-*/
-// - (MPKitExecStatus *)removeUserAttribute:(NSString *)key {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
-
- - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
+- (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
      
-     ROKOPortalManager *portalManager = [ROKOComponentManager sharedManager].portalManager;
+    ROKOPortalManager *portalManager = [ROKOComponentManager sharedManager].portalManager;
      
-     [portalManager setUserWithName:identityString referralCode:nil linkShareChannel:nil completionBlock:^(NSError * _Nullable error) {
-         NSLog(@"%@", error);
-     }];
+    [portalManager setUserWithName:identityString referralCode:nil linkShareChannel:nil completionBlock:^(NSError * _Nullable error) {
+        NSLog(@"%@", error);
+    }];
      
-     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
-     return execStatus;
- }
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
 
 #pragma mark Events
 
- - (MPKitExecStatus *)logEvent:(MPEvent *)event {
+- (MPKitExecStatus *)logEvent:(MPEvent *)event {
 
-     [ROKOLogger addEvent:event.name];
-     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
-     return execStatus;
- }
+    [ROKOLogger addEvent:event.name];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
 
 
 #pragma mark ROKOLinkManagerDelegate proxy
