@@ -11,10 +11,10 @@ Pod::Spec.new do |s|
     s.license          = { :type => 'Apache 2.0', :file => 'LICENSE' }
     s.author           = { "mParticle" => "support@mparticle.com" }
     s.source           = { :git => "https://github.com/ROKOLabs/mparticle-apple-integration-example.git", :tag => s.version.to_s }
-    s.social_media_url = "https://twitter.com/mparticles"
+    s.social_media_url = "https://twitter.com/rokolabs"
 
     s.ios.deployment_target = "8.0"
     s.ios.source_files      = 'mParticle-ROKOMobi/*.{h,m,mm}'
     s.ios.dependency 'mParticle-Apple-SDK/mParticle'
-    #s.ios.dependency 'ROKOMobi', '9.9.9'
+    s.ios.dependency 'ROKO.Mobi'
 end
