@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "mParticle-ROKOMobi"
-    s.version          = "1.11.0"
+    s.version          = "1.0.0"
     s.summary          = "ROKOMobi integration for mParticle"
 
     s.description      = <<-DESC

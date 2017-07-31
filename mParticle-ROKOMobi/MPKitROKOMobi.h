@@ -1,7 +1,7 @@
 //
 //  MPKitROKOMobi.h
 //
-//  Copyright 2016 mParticle, Inc.
+//  Copyright 2017 ROKO Labs, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -31,11 +31,20 @@
 
 @protocol MPKitROKOMobiProvider
 
+/**
+ * Provides direct access to ROKOInstaBot object.
+ * 
+ * @return ROKOInstaBot instance.
+ */
 - (nullable ROKOInstaBot *)getInstaBot;
 
-@end
+/**
+ * Provides direct access to ROKOLinkManager object.
+ *
+ * @return ROKOLinkManager instance. 
+ */
+- (nullable ROKOLinkManager *)getLinkManager;
 
-@interface MPKitROKOMobiProxy : NSObject <MPKitROKOMobiProvider>
 @end
 
 @interface MPKitROKOMobi : NSObject <MPKitProtocol>
@@ -45,9 +54,5 @@
 @property (nonatomic, unsafe_unretained, readonly) BOOL started;
 @property (nonatomic, strong, nullable) NSDictionary<NSString *, id> *userAttributes;
 @property (nonatomic, strong, nullable) NSArray<NSDictionary<NSString *, id> *> *userIdentities;
-
-@property (nonatomic, weak, nullable) id <ROKOLinkManagerDelegate> linkManagerDelegate;
-
-
 
 @end
