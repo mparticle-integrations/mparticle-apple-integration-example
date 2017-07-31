@@ -27,8 +27,6 @@
 
 @implementation MPKitROKOMobiProxy
 
-@synthesize instabot = _instabot, linkManager = _linkManager;
-
 - (ROKOInstaBot *)getInstaBot {
     @synchronized (self) {
         if (!_instabot) {
@@ -58,8 +56,6 @@
 @end
 
 @implementation MPKitROKOMobi
-
-@synthesize proxy = _proxy;
 
 - (id <MPKitROKOMobiProvider>)proxy {
     @synchronized (self) {
