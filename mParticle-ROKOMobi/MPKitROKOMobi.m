@@ -98,7 +98,7 @@
 
     dispatch_once(&kitPredicate, ^{
         _started = YES;
-        
+        [ROKOComponentManager sharedManager];
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
 
