@@ -98,7 +98,7 @@
 
     dispatch_once(&kitPredicate, ^{
         _started = YES;
-        
+        [ROKOComponentManager sharedManager];
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
 
@@ -184,10 +184,22 @@
     return execStatus;
 }
 
+- (MPKitExecStatus *)logout {
+    [[ROKOComponentManager sharedManager].portalManager logoutWithCompletionBlock:^(NSError * _Nullable error) {
+        if (error) NSLog(@"%@", error);
+    }];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
+
 #pragma mark Events
 
 - (MPKitExecStatus *)logEvent:(MPEvent *)event {
-    [ROKOLogger addEvent:event.name];
+    if (event.info) {
+        [ROKOLogger addEvent:event.name withParameters:event.info];
+    } else {
+        [ROKOLogger addEvent:event.name];
+    }
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceROKOMobi) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
