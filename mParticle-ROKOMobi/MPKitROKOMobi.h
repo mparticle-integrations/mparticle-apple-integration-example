@@ -1,7 +1,7 @@
 //
-//  MPKitCompanyName.h
+//  MPKitROKOMobi.h
 //
-//  Copyright 2016 mParticle, Inc.
+//  Copyright 2017 ROKO Labs, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -23,7 +23,31 @@
 #import "mParticle.h"
 #endif
 
-@interface MPKitCompanyName : NSObject <MPKitProtocol>
+#if defined(__has_include) && __has_include(<ROKOMobi/ROKOMobi.h>)
+#import <ROKOMobi/ROKOMobi.h>
+#else
+#import "ROKOMobi.h"
+#endif
+
+@protocol MPKitROKOMobiProvider
+
+/**
+ * Provides direct access to ROKOInstaBot object.
+ * 
+ * @return ROKOInstaBot instance.
+ */
+- (nullable ROKOInstaBot *)getInstaBot;
+
+/**
+ * Provides direct access to ROKOLinkManager object.
+ *
+ * @return ROKOLinkManager instance. 
+ */
+- (nullable ROKOLinkManager *)getLinkManager;
+
+@end
+
+@interface MPKitROKOMobi : NSObject <MPKitProtocol>
 
 @property (nonatomic, strong, nonnull) NSDictionary *configuration;
 @property (nonatomic, strong, nullable) NSDictionary *launchOptions;
