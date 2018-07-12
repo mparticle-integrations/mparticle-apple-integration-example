@@ -32,6 +32,13 @@ NSUInteger MPKitInstanceCompanyName = 999;
 @implementation MPKitCompanyName
 
 static const NSString * API_KEY = @"apiKey";
+static const NSString * TaplyticsOptionDelayLoad =          @"TaplyticsOptionDelayLoad";
+static const NSString * TaplyticsOptionShowLaunchImage  =   @"TaplyticsOptionShowLaunchImage";
+static const NSString * TaplyticsOptionLaunchImageType =    @"TaplyticsOptionLaunchImageType";
+static const NSString * TaplyticsOptionShowShakeMenu =      @"TaplyticsOptionShowShakeMenu";
+static const NSString * TaplyticsOptionDisableBorders =     @"TaplyticsOptionDisableBorders";
+static const NSString * TaplyticsOptionAsyncLoading     =   @"TaplyticsOptionAsyncLoading";
+
 static const NSString * EventViewAppeared = @"viewAppeared";
 
 /*
@@ -68,21 +75,91 @@ static const NSString * EventViewAppeared = @"viewAppeared";
 
 - (void)start {
     static dispatch_once_t kitPredicate;
-
+    NSDictionary *options = [self getTaplyticsOptions];
     dispatch_once(&kitPredicate, ^{
         
-        [Taplytics startTaplytics:configuration[API_KEY]];
+        NSString * apiKey = configuration[API_KEY];
+        
+        if ([options count] == 0) {
+            [Taplytics startTaplytics:apiKey];
+        } else {
+            [Taplytics startTaplytics:apiKey options: options];
+        }
 
         _started = YES;
 
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
-
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
                                                                 object:nil
                                                               userInfo:userInfo];
         });
     });
+}
+
+- (NSDictionary *)getTaplyticsOptions {
+    NSMutableDictionary *options = [NSMutableDictionary new];
+    [self setDelayLoadOption:options];
+    [self setShowLaunchImage:options];
+    [self setLaunchImageType:options];
+    [self setShowShakeMenu:options];
+    [self setDisableBorders:options];
+    [self setAsyncLoading:options];
+    
+    return options;
+}
+
+- (void)setDelayLoadOption:(NSMutableDictionary *)dic {
+    NSString *delayLoadValue = [self getValueFromConfigurationOptions:TaplyticsOptionDelayLoad];
+    if (delayLoadValue) {
+        NSNumber *delay = @([delayLoad intValue]);
+        [dic setObject:delay forKey:TaplyticsOptionDelayLoad];
+    }
+}
+
+- (void)setShowLaunchImage:(NSMutableDictionary *)dic {
+    NSString *showLaunchImageValue = [self getValueFromConfigurationOptions:TaplyticsOptionShowLaunchImage];
+    if (showLaunchImageValue) {
+        NSNumber *showLaunchImage = @([showLaunchImageValue intValue])
+        [dic setObject:showLaunchImage forKey:TaplyticsOptionShowLaunchImage];
+    }
+}
+
+- (void)setLaunchImageType:(NSMutableDictionary *)dic {
+    NSString *launchImageType = [self getValueFromConfigurationOptions:TaplyticsOptionLaunchImageType];
+    if (launchImageType) {
+        [dic setObject:launchImageType forKey:TaplyticsOptionLaunchImageType];
+    }
+}
+
+- (void)setShowShakeMenu:(NSMutableDictionary *)dic {
+    NSString *showShakeMenuValue = [self getValueFromConfigurationOptions:TaplyticsOptionShowShakeMenu];
+    if (showShakeMenuValue) {
+        NSNumber *showShakeMenu = @([showShakeMenuValue intValue])
+        [dic setObject:showLaunchImage forKey:TaplyticsOptionShowShakeMenu];
+    }
+}
+
+- (void)setDisableBorders:(NSMutableDictionary *)dic {
+    NSString *disableBordersValue = [self getValueFromConfigurationOptions:TaplyticsOptionDisableBorders];
+    if (disableBordersValue) {
+        NSNumber *disableBorders = @([disableBordersValue intValue])
+        [dic setObject:disableBorders forKey:TaplyticsOptionDisableBorders];
+    }
+}
+
+- (void)setAsyncLoading:(NSMutableDictionary *)dic {
+    NSString *setAsyncLoadingValue = [self getValueFromConfigurationOptions:TaplyticsOptionAsyncLoading];
+    if (setAsyncLoadingValue) {
+        NSNumber *setAsyncLoading = @([setAsyncLoadingValue intValue])
+        [dic setObject:setAsyncLoading forKey:TaplyticsOptionAsyncLoading];
+    }
+}
+
+- (NSString *)getValueFromConfigurationOptions:(NSString *)key {
+    NSString * value = [self.configuration objectForKey:key];
+    return value;
 }
 
 - (id const)providerKitInstance {
