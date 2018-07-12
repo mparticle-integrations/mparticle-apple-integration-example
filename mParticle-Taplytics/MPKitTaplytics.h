@@ -17,13 +17,20 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #if defined(__has_include) && __has_include(<mParticle_Apple_SDK/mParticle.h>)
 #import <mParticle_Apple_SDK/mParticle.h>
 #else
 #import "mParticle.h"
 #endif
 
-@interface MPKitCompanyName : NSObject <MPKitProtocol>
+#if defined(__has_include) && __has_include(<ROKOMobi/ROKOMobi.h>)
+#import <Taplytics/Taplytics.h>
+#else
+#import "Taplytics.h"
+#endif
+
+@interface MPKitTaplytics : NSObject <MPKitProtocol>
 
 @property (nonatomic, strong, nonnull) NSDictionary *configuration;
 @property (nonatomic, strong, nullable) NSDictionary *launchOptions;
