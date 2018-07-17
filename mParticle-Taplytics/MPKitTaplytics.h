@@ -24,7 +24,7 @@
 #import "mParticle.h"
 #endif
 
-#if defined(__has_include) && __has_include(<ROKOMobi/ROKOMobi.h>)
+#if defined(__has_include) && __has_include(<Taplytics/Taplytics.h>)
 #import <Taplytics/Taplytics.h>
 #else
 #import "Taplytics.h"

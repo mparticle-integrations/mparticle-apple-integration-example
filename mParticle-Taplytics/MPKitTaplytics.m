@@ -20,24 +20,18 @@
 
 /* Import your header file here
 */
-//#if defined(__has_include) && __has_include(<CompanyName/CompanyName.h>)
-//#import <CompanyName/CompanyName.h>
-//#else
-//#import "CompanyName.h"
-//#endif
+#if defined(__has_include) && __has_include(<Taplytics/Taplytics.h>)
+#import <Taplytics/Taplytics.h>
+#else
+#import "Taplytics.h"
+#endif
 
 // This is temporary to allow compilation (will be provided by core SDK)
 NSUInteger MPKitInstanceCompanyName = 999;
 
-@implementation MPKitCompanyName
+@implementation MPKitTaplytics
 
 static const NSString * API_KEY = @"apiKey";
-static const NSString * TaplyticsOptionDelayLoad =          @"TaplyticsOptionDelayLoad";
-static const NSString * TaplyticsOptionShowLaunchImage  =   @"TaplyticsOptionShowLaunchImage";
-static const NSString * TaplyticsOptionLaunchImageType =    @"TaplyticsOptionLaunchImageType";
-static const NSString * TaplyticsOptionShowShakeMenu =      @"TaplyticsOptionShowShakeMenu";
-static const NSString * TaplyticsOptionDisableBorders =     @"TaplyticsOptionDisableBorders";
-static const NSString * TaplyticsOptionAsyncLoading     =   @"TaplyticsOptionAsyncLoading";
 
 static const NSString * EventViewAppeared = @"viewAppeared";
 
@@ -78,12 +72,12 @@ static const NSString * EventViewAppeared = @"viewAppeared";
     NSDictionary *options = [self getTaplyticsOptions];
     dispatch_once(&kitPredicate, ^{
         
-        NSString * apiKey = configuration[API_KEY];
+        NSString * apiKey = _configuration[API_KEY];
         
         if ([options count] == 0) {
-            [Taplytics startTaplytics:apiKey];
+            [Taplytics startTaplyticsAPIKey:apiKey];
         } else {
-            [Taplytics startTaplytics:apiKey options: options];
+            [Taplytics startTaplyticsAPIKey:apiKey options:options];
         }
 
         _started = YES;
@@ -113,7 +107,7 @@ static const NSString * EventViewAppeared = @"viewAppeared";
 - (void)setDelayLoadOption:(NSMutableDictionary *)dic {
     NSString *delayLoadValue = [self getValueFromConfigurationOptions:TaplyticsOptionDelayLoad];
     if (delayLoadValue) {
-        NSNumber *delay = @([delayLoad intValue]);
+        NSNumber *delay = @([delayLoadValue intValue]);
         [dic setObject:delay forKey:TaplyticsOptionDelayLoad];
     }
 }
@@ -121,7 +115,7 @@ static const NSString * EventViewAppeared = @"viewAppeared";
 - (void)setShowLaunchImage:(NSMutableDictionary *)dic {
     NSString *showLaunchImageValue = [self getValueFromConfigurationOptions:TaplyticsOptionShowLaunchImage];
     if (showLaunchImageValue) {
-        NSNumber *showLaunchImage = @([showLaunchImageValue intValue])
+        NSNumber *showLaunchImage = @([showLaunchImageValue intValue]);
         [dic setObject:showLaunchImage forKey:TaplyticsOptionShowLaunchImage];
     }
 }
@@ -136,15 +130,15 @@ static const NSString * EventViewAppeared = @"viewAppeared";
 - (void)setShowShakeMenu:(NSMutableDictionary *)dic {
     NSString *showShakeMenuValue = [self getValueFromConfigurationOptions:TaplyticsOptionShowShakeMenu];
     if (showShakeMenuValue) {
-        NSNumber *showShakeMenu = @([showShakeMenuValue intValue])
-        [dic setObject:showLaunchImage forKey:TaplyticsOptionShowShakeMenu];
+        NSNumber *showShakeMenu = @([showShakeMenuValue intValue]);
+        [dic setObject:showShakeMenu forKey:TaplyticsOptionShowShakeMenu];
     }
 }
 
 - (void)setDisableBorders:(NSMutableDictionary *)dic {
     NSString *disableBordersValue = [self getValueFromConfigurationOptions:TaplyticsOptionDisableBorders];
     if (disableBordersValue) {
-        NSNumber *disableBorders = @([disableBordersValue intValue])
+        NSNumber *disableBorders = @([disableBordersValue intValue]);
         [dic setObject:disableBorders forKey:TaplyticsOptionDisableBorders];
     }
 }
@@ -152,7 +146,7 @@ static const NSString * EventViewAppeared = @"viewAppeared";
 - (void)setAsyncLoading:(NSMutableDictionary *)dic {
     NSString *setAsyncLoadingValue = [self getValueFromConfigurationOptions:TaplyticsOptionAsyncLoading];
     if (setAsyncLoadingValue) {
-        NSNumber *setAsyncLoading = @([setAsyncLoadingValue intValue])
+        NSNumber *setAsyncLoading = @([setAsyncLoadingValue intValue]);
         [dic setObject:setAsyncLoading forKey:TaplyticsOptionAsyncLoading];
     }
 }
@@ -178,7 +172,7 @@ static const NSString * EventViewAppeared = @"viewAppeared";
 
 - (MPKitExecStatus*) createStatus:(MPKitReturnCode)code {
     return [[MPKitExecStatus alloc]
-            initWithSDKCode:@(MPKitInstanceTaplytics)
+            initWithSDKCode:@(MPKitInstanceCompanyName)
             returnCode:code];
 }
 
@@ -231,7 +225,8 @@ static const NSString * EventViewAppeared = @"viewAppeared";
      // In this example, this SDK only supports the 'Purchase' commerce event action
      if (commerceEvent.action == MPCommerceEventActionPurchase) {
          /* Your code goes here. */
-         [Taplytics logRevenue:commerceEvent.productListName value:commerceEvent.checkoutStep];
+         
+         [Taplytics logRevenue:commerceEvent.productListName revenue:[NSNumber numberWithInteger:commerceEvent.checkoutStep]];
          [execStatus incrementForwardCount];
          
      } else { // Other commerce events are expanded and logged as regular events
@@ -270,7 +265,7 @@ static const NSString * EventViewAppeared = @"viewAppeared";
  - (MPKitExecStatus *)logScreen:(MPEvent *)event {
      
      NSString * screenName = event.name;
-     [Taplytics logEvent:EventViewAppeared value:screenName];
+     [Taplytics logEvent:EventViewAppeared value:screenName metaData:nil];
      
      return [self createStatus:MPKitReturnCodeSuccess];
  }
@@ -283,9 +278,9 @@ static const NSString * EventViewAppeared = @"viewAppeared";
      BOOL hasOptedOut = [Taplytics hasUserOptedOutTracking];
 
      if (!hasOptedOut && optOut) {
-         [Taplytics optOutTracking];
+         [Taplytics optOutUserTracking];
      } else if (hasOptedOut && !optOut) {
-         [Taplytics optInTracking];
+         [Taplytics optInUserTracking];
      }
      return [self createStatus:MPKitReturnCodeSuccess];
  }
