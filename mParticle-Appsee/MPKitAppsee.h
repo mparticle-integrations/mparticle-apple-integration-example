@@ -1,5 +1,5 @@
 //
-//  MPKitCompanyName.h
+//  MPKitAppsee.h
 //
 //  Copyright 2016 mParticle, Inc.
 //
@@ -23,7 +23,7 @@
 #import "mParticle.h"
 #endif
 
-@interface MPKitCompanyName : NSObject <MPKitProtocol>
+@interface MPKitAppsee : NSObject <MPKitProtocol>
 
 @property (nonatomic, strong, nonnull) NSDictionary *configuration;
 @property (nonatomic, strong, nullable) NSDictionary *launchOptions;
