@@ -1,7 +1,7 @@
 //
-//  MPKitCompanyName.h
+//  MPKitTaplytics.h
 //
-//  Copyright 2016 mParticle, Inc.
+//  Copyright 2018 mParticle, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -37,5 +37,8 @@
 @property (nonatomic, unsafe_unretained, readonly) BOOL started;
 @property (nonatomic, strong, nullable) NSDictionary<NSString *, id> *userAttributes;
 @property (nonatomic, strong, nullable) NSArray<NSDictionary<NSString *, id> *> *userIdentities;
+
++ (NSDictionary * _Nonnull)tlOptions;
++ (void)setTLOptions:(NSDictionary * _Nonnull)options;
 
 @end
