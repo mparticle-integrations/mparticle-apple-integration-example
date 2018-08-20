@@ -28,8 +28,10 @@
 
 static NSDictionary * _Nullable taplyticsOptions;
 
-static const NSString * API_KEY = @"apiKey";
-static const NSString * EventViewAppeared = @"viewAppeared";
+static NSString * const API_KEY = @"apiKey";
+static NSString * const DELAY_LOAD = @"TaplyticsOptionDelayLoad";
+static NSString * const SHOW_LAUNCH_IMAGE = @"TaplyticsOptionShowLaunchImage";
+static NSString * const SHOW_LAUNCH_IMAGE_TYPE = @"TaplyticsOptionShowLaunchImageType";
 
 + (NSNumber *)kitCode {
     return @129;
@@ -126,7 +128,7 @@ static const NSString * EventViewAppeared = @"viewAppeared";
 }
 
 - (void)setDelayLoadOption:(NSMutableDictionary *)dic {
-    NSString *delayLoadValue = [self getValueFromConfigurationOptions:@"TaplyticsOptionDelayLoad"];
+    NSString *delayLoadValue = [self getValueFromConfigurationOptions:DELAY_LOAD];
     if (delayLoadValue) {
         NSNumber *delay = @([delayLoadValue intValue]);
         [dic setObject:delay forKey:TaplyticsOptionDelayLoad];
@@ -134,7 +136,7 @@ static const NSString * EventViewAppeared = @"viewAppeared";
 }
 
 - (void)setShowLaunchImage:(NSMutableDictionary *)dic {
-    NSString *showLaunchImageValue = [self getValueFromConfigurationOptions:@"TaplyticsOptionShowLaunchImage"];
+    NSString *showLaunchImageValue = [self getValueFromConfigurationOptions:SHOW_LAUNCH_IMAGE];
     if (showLaunchImageValue) {
         NSNumber *showLaunchImage = @([showLaunchImageValue isEqualToString:@"True"]);
         [dic setObject:showLaunchImage forKey:TaplyticsOptionShowLaunchImage];
@@ -142,7 +144,7 @@ static const NSString * EventViewAppeared = @"viewAppeared";
 }
 
 - (void)setLaunchImageType:(NSMutableDictionary *)dic {
-    NSString *launchImageType = [self getValueFromConfigurationOptions:@"TaplyticsOptionShowLaunchImageType"];
+    NSString *launchImageType = [self getValueFromConfigurationOptions:SHOW_LAUNCH_IMAGE_TYPE];
     if ([launchImageType isEqualToString:@"True"]) {
         [dic setObject:@"xib" forKey:TaplyticsOptionLaunchImageType];
     }
