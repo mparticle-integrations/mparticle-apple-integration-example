@@ -33,6 +33,8 @@ static NSString * const DELAY_LOAD = @"TaplyticsOptionDelayLoad";
 static NSString * const SHOW_LAUNCH_IMAGE = @"TaplyticsOptionShowLaunchImage";
 static NSString * const SHOW_LAUNCH_IMAGE_TYPE = @"TaplyticsOptionShowLaunchImageType";
 
+#pragma mark Static Methods
+
 + (NSNumber *)kitCode {
     return @129;
 }
@@ -85,6 +87,11 @@ static NSString * const SHOW_LAUNCH_IMAGE_TYPE = @"TaplyticsOptionShowLaunchImag
     
     if (!self || !apiKey) {
         return [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeRequirementsNotMet];
+    }
+    
+    if (taplyticsOptions == nil) {
+        taplyticsOptions = [NSDictionary dictionary];
+        
     }
     
     _configuration = configuration;
@@ -234,7 +241,7 @@ static NSString * const SHOW_LAUNCH_IMAGE_TYPE = @"TaplyticsOptionShowLaunchImag
 
 - (MPKitExecStatus *)logScreen:(MPEvent *)event {
     NSString * screenName = event.name;
-    [Taplytics logEvent:EventViewAppeared value:screenName metaData:nil];
+    [Taplytics logEvent:screenName];
     
     return [self createStatus:MPKitReturnCodeSuccess];
 }
