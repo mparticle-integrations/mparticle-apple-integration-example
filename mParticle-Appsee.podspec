@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "mParticle-Appsee"
-    s.version          = "2.4.1"
+    s.version          = "7.5.6"
     s.summary          = "Appsee integration for mParticle"
 
     s.description      = <<-DESC
@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
     s.source           = { :git => "https://github.com/mparticle-integrations/mparticle-apple-integration-appsee.git", :tag => s.version.to_s }
     s.social_media_url = "https://twitter.com/mparticles"
 
-    s.ios.deployment_target = "6.0"
+    s.ios.deployment_target = "8.0"
     s.ios.source_files      = 'mParticle-Appsee/*.{h,m,mm}'
-    s.ios.dependency 'mParticle-Apple-SDK/mParticle'
+    s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 7.5.0'
     s.ios.dependency 'Appsee', '>= 2.4.1'
 end
