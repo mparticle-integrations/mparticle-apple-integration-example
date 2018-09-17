@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
     s.summary          = "Taplytics integration for mParticle"
 
     s.description      = <<-DESC
-                       This is the CompanyName integration for mParticle.
+                       This is the Taplytics integration for mParticle.
                        DESC
 
     s.homepage         = "https://www.mparticle.com"
@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = "8.0"
     s.ios.source_files      = 'mParticle-Taplytics/*.{h,m,mm}'
     s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 7'
-    s.ios.dependency 'Taplytics'
+    s.ios.dependency 'Taplytics', '>= 2.31.0'
 end

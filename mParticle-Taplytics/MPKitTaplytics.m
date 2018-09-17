@@ -106,7 +106,7 @@ static NSString * const SHOW_LAUNCH_IMAGE_TYPE = @"TaplyticsOptionShowLaunchImag
     
     dispatch_once(&kitPredicate, ^{
         
-        NSString * apiKey = _configuration[API_KEY];
+        NSString * apiKey = self->_configuration[API_KEY];
         
         if ([options count] == 0) {
             [Taplytics startTaplyticsAPIKey:apiKey];
@@ -114,7 +114,7 @@ static NSString * const SHOW_LAUNCH_IMAGE_TYPE = @"TaplyticsOptionShowLaunchImag
             [Taplytics startTaplyticsAPIKey:apiKey options:options];
         }
         
-        _started = YES;
+        self->_started = YES;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
