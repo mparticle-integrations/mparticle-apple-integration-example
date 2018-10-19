@@ -1,65 +1,45 @@
-//
-//  MPKitCompanyName.m
-//
-//  Copyright 2016 mParticle, Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//
-
-#import "MPKitCompanyName.h"
+#import "MPKitExample.h"
 
 /* Import your header file here
 */
-//#if defined(__has_include) && __has_include(<CompanyName/CompanyName.h>)
-//#import <CompanyName/CompanyName.h>
+//#if defined(__has_include) && __has_include(<Example/Example.h>)
+//#import <Example/Example.h>
 //#else
-//#import "CompanyName.h"
+//#import "Example.h"
 //#endif
 
-// This is temporary to allow compilation (will be provided by core SDK)
-NSUInteger MPKitInstanceCompanyName = 999;
-
-@implementation MPKitCompanyName
+@implementation MPKitExample
 
 /*
     mParticle will supply a unique kit code for you. Please contact our team
 */
 + (NSNumber *)kitCode {
-    return @999;
+    return @123;
 }
 
 + (void)load {
-    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"CompanyName" className:@"MPKitCompanyName" startImmediately:YES];
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"Example" className:@"MPKitExample"];
     [MParticle registerExtension:kitRegister];
+}
+
+- (MPKitExecStatus *)execStatus:(MPKitReturnCode)returnCode {
+    return [[MPKitExecStatus alloc] initWithSDKCode:self.class.kitCode returnCode:returnCode];
 }
 
 #pragma mark - MPKitInstanceProtocol methods
 
 #pragma mark Kit instance and lifecycle
-- (nonnull instancetype)initWithConfiguration:(nonnull NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
-    self = [super init];
-    NSString *appKey = configuration[@"<dictionary key to retrieve API Key>"];
-    if (!self || !appKey) {
-        return nil;
+- (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
+    NSString *apiKey = configuration[@"<dictionary key to retrieve API Key>"];
+    if (!apiKey) {
+        return [self execStatus:MPKitReturnCodeRequirementsNotMet];
     }
 
     _configuration = configuration;
 
-    if (startImmediately) {
-        [self start];
-    }
+    [self start];
 
-    return self;
+    return [self execStatus:MPKitReturnCodeSuccess];
 }
 
 - (void)start {
@@ -67,10 +47,10 @@ NSUInteger MPKitInstanceCompanyName = 999;
 
     dispatch_once(&kitPredicate, ^{
         /*
-            Start your SDK here. The configuration dictionary can be retrieved from self.configuration
+            Start your SDK here. The configuration dictionary can be retrieved from self->_configuration
          */
 
-        _started = YES;
+        self->_started = YES;
 
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
@@ -102,19 +82,6 @@ NSUInteger MPKitInstanceCompanyName = 999;
 
 #pragma mark Application
 /*
-    Implement this method if your SDK retrieves deep-linking information from a remote server and returns it to the host app
-*/
-// - (MPKitExecStatus *)checkForDeferredDeepLinkWithCompletionHandler:(void(^)(NSDictionary *linkInfo, NSError *error))completionHandler {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
-
-/*
     Implement this method if your SDK handles a user interacting with a remote notification action
 */
 // - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
@@ -123,8 +90,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
+//     return [self execStatus:MPKitReturnCodeSuccess];
 // }
 
 /*
@@ -136,8 +102,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
+//     return [self execStatus:MPKitReturnCodeSuccess];
 // }
 
 /*
@@ -149,8 +114,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
+//     return [self execStatus:MPKitReturnCodeSuccess];
 // }
 
 /*
@@ -162,8 +126,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
+//     return [self execStatus:MPKitReturnCodeSuccess];
 // }
 
 /*
@@ -175,8 +138,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
+//     return [self execStatus:MPKitReturnCodeSuccess];
 // }
 
 /*
@@ -188,63 +150,106 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
+//     return [self execStatus:MPKitReturnCodeSuccess];
 // }
 
-#pragma mark User attributes and identities
-/*
-    Implement this method if your SDK sets user attributes. The core mParticle SDK also sets the userAttributes property.
-*/
-// - (MPKitExecStatus *)setUserAttribute:(NSString *)key value:(NSString *)value {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
-
+#pragma mark User attributes
 /*
     Implement this method if your SDK allows for incrementing numeric user attributes.
 */
-// - (MPKitExecStatus *)incrementUserAttribute:(NSString *)key byValue:(NSNumber *)value {
+//- (MPKitExecStatus *)onIncrementUserAttribute:(FilteredMParticleUser *)user {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+//     return [self execStatus:MPKitReturnCodeSuccess];
+//}
 
 /*
     Implement this method if your SDK resets user attributes.
 */
-// - (MPKitExecStatus *)removeUserAttribute:(NSString *)key {
+//- (MPKitExecStatus *)onRemoveUserAttribute:(FilteredMParticleUser *)user {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
-// }
+//     return [self execStatus:MPKitReturnCodeSuccess];
+//}
 
 /*
-    Implement this method if your SDK sets user identities.
+    Implement this method if your SDK sets user attributes.
 */
-// - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
+//- (MPKitExecStatus *)onSetUserAttribute:(FilteredMParticleUser *)user {
 //     /*  Your code goes here.
-//         If the execution is not successful, or the identity type is not supported, please use a code other than MPKitReturnCodeSuccess for the execution status.
+//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
 //         Please see MPKitExecStatus.h for all exec status codes
-//         Please see MPEnums.h > MPUserIdentity for all supported user identities
 //      */
 //
-//      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//      return execStatus;
-// }
+//     return [self execStatus:MPKitReturnCodeSuccess];
+//}
+
+/*
+    Implement this method if your SDK supports setting value-less attributes
+*/
+//- (MPKitExecStatus *)onSetUserTag:(FilteredMParticleUser *)user {
+//     /*  Your code goes here.
+//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+//         Please see MPKitExecStatus.h for all exec status codes
+//      */
+//
+//     return [self execStatus:MPKitReturnCodeSuccess];
+//}
+
+#pragma mark Identity
+/*
+    Implement this method if your SDK should be notified any time the mParticle ID (MPID) changes. This will occur on initial install of the app, and potentially after a login or logout.
+*/
+//- (MPKitExecStatus *)onIdentifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+//     /*  Your code goes here.
+//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+//         Please see MPKitExecStatus.h for all exec status codes
+//      */
+//
+//     return [self execStatus:MPKitReturnCodeSuccess];
+//}
+
+/*
+    Implement this method if your SDK should be notified when the user logs in
+*/
+//- (MPKitExecStatus *)onLoginComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+//     /*  Your code goes here.
+//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+//         Please see MPKitExecStatus.h for all exec status codes
+//      */
+//
+//     return [self execStatus:MPKitReturnCodeSuccess];
+//}
+
+/*
+    Implement this method if your SDK should be notified when the user logs out
+*/
+//- (MPKitExecStatus *)onLogoutComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+//     /*  Your code goes here.
+//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+//         Please see MPKitExecStatus.h for all exec status codes
+//      */
+//
+//     return [self execStatus:MPKitReturnCodeSuccess];
+//}
+
+/*
+    Implement this method if your SDK should be notified when user identities change
+*/
+//- (MPKitExecStatus *)onModifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+//     /*  Your code goes here.
+//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+//         Please see MPKitExecStatus.h for all exec status codes
+//      */
+//
+//     return [self execStatus:MPKitReturnCodeSuccess];
+//}
 
 #pragma mark e-Commerce
 /*
@@ -254,7 +259,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
     Please see MPCommerceEvent.h > MPCommerceEventAction for complete list
 */
 // - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess forwardCount:0];
+//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess forwardCount:0];
 //
 //     // In this example, this SDK only supports the 'Purchase' commerce event action
 //     if (commerceEvent.action == MPCommerceEventActionPurchase) {
@@ -285,8 +290,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
+//     return [self execStatus:MPKitReturnCodeSuccess];
 // }
 
 /*
@@ -299,8 +303,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCrittercism) returnCode:MPKitReturnCodeSuccess];
-//     return execStatus;
+//     return [self execStatus:MPKitReturnCodeSuccess];
 // }
 
 #pragma mark Assorted
@@ -313,8 +316,7 @@ NSUInteger MPKitInstanceCompanyName = 999;
 //         Please see MPKitExecStatus.h for all exec status codes
 //      */
 //
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceCompanyName) returnCode:returnCode];
-//     return execStatus;
+//     return [self execStatus:MPKitReturnCodeSuccess];
 // }
 
 @end

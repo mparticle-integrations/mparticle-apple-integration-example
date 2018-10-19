@@ -1,2 +1,2 @@
-#github "CompanyName/CompanyName" == 9.9.9
-github "mparticle/mparticle-apple-sdk" ~> 6.10.0
+github "Example/Example" ~> 1.2.3
+github "mparticle/mparticle-apple-sdk" ~> 7.7.0
