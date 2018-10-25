@@ -1,0 +1,171 @@
+* Mon August 27, 2018 - 6.38.0
+- Added SDK crash reporting feature.
+- Added APIs to enable/disable the SDK crash reporting.
+- Additional default notification actions added.
+
+* Fri June 1, 2018 - 6.37.0
+- Messages are now pre-fetched and served from SDK when requested by application. For details: https://docs.oracle.com/cloud/latest/marketingcs_gs/OMCFB/ios/
+- Fixed the crash when application failed to create NotificationAction in registration.
+- GDPR compliance changes.
+- SDK will NOT reset engagement-context internally. Application will need to reset engagement-context to stop attributing the conversion to last received push/email.
+- New APIs added to 1) Retrieve the engagement context 2) Reset engagement context.
+- New conversion type `purchase` supported.
+
+
+* Mon March 12, 2018 - 6.35.0
+- Added the APIs for interactive notifications.
+- Added universal link resolver, and provided APIs for application to be notified with resolved information.
+- Added Deeplink Tracking support.
+
+
+* Tue January 09, 2018 - 6.33.1
+- Fixed bug where stopUpdatingLocationForPush did not stop location tracking.
+
+* Mon September 11, 2017 - 6.33.0
+- New log levels with improved console logging for different log levels.
+- No conflict/error with Reachability class, if Reachability used in application.
+- Events batching added for custom events, which are tracked by calling `trackEvent:`.
+- Improved response/error reporting for `fetchMessagesForMessageCenter:`.
+- Separate Opt-in for Push provided: http://docs.oracle.com/cloud/latest/marketingcs_gs/OMCFB/ios/step-by-step/
+
+* Fri June 16, 2017 - 6.32.1
+- Thread safety issue addressed.
+- Fix to keep the same DeviceID when SDK upgraded from version 6.29.1 or lower.
+
+* Fri April 28, 2017 - 6.32.0
+- NOTE:Please read through the Release Notes (https://github.com/pushio/PushIOManager_iOS#release-notes) for upgrading to this version of the SDK.
+- Support for Responsys Interact Message Center.
+- UserNotifications framework support.
+- Support for media (image, audio, video) push.
+- New APIs available for different operations. i.e.: registration etc.
+
+
+* Fri April 07, 2017 - 6.29.2
+- Change to Device ID persistence.
+
+
+* Fri September 16, 2016 - 6.29.1
+- iOS 10 fix for duplicate launch report.
+
+* Fri September 2, 2016 - 6.29.0
+- Support for Responsys Interact 6.29 Push.
+- Compatible with iOS 10.
+
+* Fri December 11, 2015 - 2.13.4
+- Precompiled header cache changes.
+
+* Thu November 5, 2015 - 2.13.3
+- Support for armv7, armv7s, i386, x86_64, arm64 architectures.
+
+* Fri October 30, 2015 - 2.13.2
+- Changes to avoid Full Bitcode enable warning.
+
+* Mon October 19, 2015 - 2.13.1
+- Bitcode enabled.
+
+* Thu August 6, 2015 - 2.13.0
+- Added Notification Preferences.
+- Added In-App Messaging.
+- Various bugfixes and improvements.
+
+* Wed October 1, 2014 - 2.10.9
+- Fixed duplicte launch engagement when didReceiveRemoteNotification:fetchCompletionHandler: present.
+- Removed UIPasteboard use.
+- Prefixed Location error enum to avoid conflicts.
+- General cleanup.
+
+* Wed September 24, 2014 - 2.10.8
+- Removed iOS5 compatible 32-bit framework (no longer supported).
+- Re-added Armv7s architecture for Xcode5 archive support.
+- Fixed umbrella header warnings.
+- Improvements to handleActionWithIdentifier and didReceiveRemoteNotification, handles compleiton handler after engagements fully sent.
+
+* Sun September 21, 2014 - 2.10.7
+  Fixed linker error when using Xcode5 with PushIOManager library.
+
+* Thu September 18, 2014 - 2.10.6
+- Added internal location manager code to handle new iOS8 location permissions.
+- Added passthrough call for iOS8 custom push actions.
+- Added convenience registration methods to simplfy push registration across both iOS7 and iOS8.
+- Upgraded framework to support use as Swift module named "PushIOManager".
+
+* Mon July 28, 2014 - 2.10.5
+- Improved location services support
+
+* Mon March 10, 2014 - 2.10.4
+- Removed references to advertisingIdentifier selector.
+
+* Thu January 13, 2014 - 2.10.3
+- Fixed bug where unregistering and immediatley re-registering would not register again.
+
+* Tue December 10, 2013 - 2.10.2
+- Added 64-bit simualtor binary to 64-bit version of framework.
+- Fixed use of pasteboard output for debugging to be iOS7 compatible.
+- Added initial helper calls for iBeacon regions.
+
+* Thu October 3, 2013 - 2.10.1
+- Calls from backgrounded app to adjust categories activate background registration.
+
+* Mon September 30, 2013 - 2.10.0
+- Default version of framework is now 64 bit compatible, see
+	iOS5CompatibleFramework directory for iOS5 support.
+- Added UserID setting to PushIO manager for reference in targeting pushes.
+- Added isCurrentSessionAnEngagement call to PushIOManager.
+- Added installation time metadata to push registration.
+
+* Wed August 7, 2013 - 2.9.2
+- Logging cleanup for ACTIVITY level (default).
+- Can monitor more than system maximum number of regions.
+
+* Tue July 30, 2013 - 2.9.1
+- Metadata improvements.
+- Misc. stability fixes.
+
+* Mon July 15, 2013 - 2.9.0
+- Stability fix for background tasks.
+- Update to Location category to combine home and current location.
+- Changes to Location handling to provide default limits on location registration.
+
+* Fri July 5, 2013 - 2.0.13
+- Stability fix for case where -ObjC and -all_load linker flags are omitted.
+
+* Fri June 28, 2013 - 2.0.12
+- Improved handling of application resume when background registrations are active.
+
+* Tue June 18, 2013 - 2.0.11
+- Added call to unregsiter array of categories.
+- Improved location handling code.
+- Added monitored regions to location handling category.
+- Added ability to track home location with location updates.
+
+* Thu April 10, 2013 - 2.0.10
+- Minor wording changes in header files. Additional debug support.
+
+* Thu March 14, 2013 - 2.0.9
+- Support added for Development API keys and loading pushio_manager_debug.json.
+
+* Thu March 7, 2013 - 2.0.8
+- Blocks registration when using debug builds with ad-hoc pushio_manager.json.
+- Warning issued when running a build without push configured.
+- Message displayed when push configuration appears to be complete.
+- Detects app store builds and disables some debugging elements.
+
+* Tue February 19, 2013 - 2.0.7
+- Suspending app now finishes any pending registrations or engagements
+	in background.
+- Limited retries when initial registration fails.
+- Added access to last engagement ID.
+
+* Wed November 28, 2012 - 2.0.5
+- Improved engagement tracking
+- More robust registration process
+- Enhancements for PushIODashboard integration
+
+* Mon October 11, 2012 - 2.0.4
+- Improved tracker implementation
+
+* Mon October 8, 2012 - 2.0.3
+- Fix a bug in the unregisterFromPushIO method
+- Improved engagement transmission
+- Initial support for trackers
+- Added a ChangeLog

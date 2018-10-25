@@ -1,0 +1,6 @@
+framework module PIOMediaAttachmentExtension {
+  umbrella header "PIOMediaAttachmentExtension.h"
+
+  export *
+  module * { export * }
+}
