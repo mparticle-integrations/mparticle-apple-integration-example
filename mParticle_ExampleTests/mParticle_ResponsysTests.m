@@ -1,11 +1,11 @@
 #import <XCTest/XCTest.h>
-#import "MPKitExample.h"
+#import "MPKitResponsys.h"
 
-@interface mParticle_ExampleTests : XCTestCase
+@interface mParticle_ResponsysTests : XCTestCase
 
 @end
 
-@implementation mParticle_ExampleTests
+@implementation mParticle_ResponsysTests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -16,12 +16,12 @@
 }
 
 - (void)testModuleID {
-    XCTAssertEqualObjects([MPKitExample kitCode], @123);
+    XCTAssertEqualObjects([MPKitResponsys kitCode], @102);
 }
 
 - (void)testStarted {
-    MPKitExample *exampleKit = [[MPKitExample alloc] init];
-    [exampleKit didFinishLaunchingWithConfiguration:@{@"apiKey":@"12345"}];
+    MPKitResponsys *exampleKit = [[MPKitResponsys alloc] init];
+    [exampleKit didFinishLaunchingWithConfiguration:@{@"apiKey":@"12345", @"accountToken":@"12345"}];
     XCTAssertTrue(exampleKit.started);
 }
 
