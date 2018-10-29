@@ -13,6 +13,7 @@
 		DBB01A6B1DC1491D00A7B188 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
 		FF0BB63E217A84E800B0556C /* mParticle_ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0BB63D217A84E800B0556C /* mParticle_ExampleTests.m */; };
 		FF0BB640217A84E800B0556C /* mParticle_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A5B1DC1478A00A7B188 /* mParticle_Example.framework */; };
+		FF13226221878D9C002AA653 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF0BB640217A84E800B0556C /* mParticle_Example.framework in Frameworks */,
+				FF13226221878D9C002AA653 /* mParticle_Apple_SDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +66,7 @@
 				DBB01A5D1DC1478A00A7B188 /* mParticle-Example */,
 				FF0BB63C217A84E800B0556C /* mParticle_ExampleTests */,
 				DBB01A5C1DC1478A00A7B188 /* Products */,
+				FF13226121878D9C002AA653 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,6 +97,13 @@
 				FF0BB63F217A84E800B0556C /* Info.plist */,
 			);
 			path = mParticle_ExampleTests;
+			sourceTree = "<group>";
+		};
+		FF13226121878D9C002AA653 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,10 +397,14 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = mParticle_ExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-ExampleTests";
@@ -417,10 +431,14 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = mParticle_ExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-ExampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

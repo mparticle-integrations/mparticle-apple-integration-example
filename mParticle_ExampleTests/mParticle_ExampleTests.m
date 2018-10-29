@@ -21,7 +21,7 @@
 
 - (void)testStarted {
     MPKitExample *exampleKit = [[MPKitExample alloc] init];
-    [exampleKit didFinishLaunchingWithConfiguration:@{@"apiKey":@"12345"}];
+    [exampleKit didFinishLaunchingWithConfiguration:@{@"<dictionary key to retrieve API Key>":@"12345"}];
     XCTAssertTrue(exampleKit.started);
 }
 
