@@ -41,13 +41,14 @@
 
 NSString * const PIOConfigurationAPIKey = @"apiKey";
 NSString * const PIOConfigurationAccountToken = @"accountToken";
-NSString * const ResponsysEventTypeIAMPremium = @"ResponsysEventTypeIAMPremium";
-NSString * const ResponsysEventTypeIAMSocial = @"ResponsysEventTypeIAMSocial";
-NSString * const ResponsysEventTypeIAMPurchase = @"ResponsysEventTypeIAMPurchase";
-NSString * const ResponsysEventTypeIAMOther = @"ResponsysEventTypeIAMOther";
+NSString * const PIOConfigurationConversionURL = @"conversionUrl";
+NSString * const PIOConfigurationRIAppID = @"riAppId";
 
-NSString * const ResponsysEventTypePreference = @"ResponsysEventTypePreference";
-NSString * const ResponsysEvent = @"ResponsysEvent";
+NSString * const CUSTOM_FLAG_IAM = @"Responsys.Custom.iam";
+NSString * const ENGAGEMENT_METRIC_PREMIUM_CONTENT =  @"ResponsysEngagementTypePremium";
+NSString * const ENGAGEMENT_METRIC_INAPP_PURCHASE = @"ResponsysEngagementTypePurchase";
+NSString * const ENGAGEMENT_METRIC_OTHER = @"ResponsysEngagementTypeOther";
+NSString * const ENGAGEMENT_METRIC_SOCIAL = @"ResponsysEngagementTypeSocial";
 
 @interface MPKitResponsys(){
     PushIOManager *_pioManager;
@@ -66,12 +67,17 @@ NSString * const ResponsysEvent = @"ResponsysEvent";
     self = [super init];
     NSString *apiKey = nil;
     NSString *accountToken = nil;
+    NSString *conversionURL = nil;
+    NSString *riAppID = nil;
+
     if (self) {
         apiKey = configuration[PIOConfigurationAPIKey];
         accountToken = configuration[PIOConfigurationAccountToken];
+        conversionURL = configuration[PIOConfigurationConversionURL];
+        riAppID = configuration[PIOConfigurationRIAppID];
     }
     
-    if ((NSNull *)apiKey == [NSNull null] || (NSNull *)accountToken == [NSNull null])
+    if ((NSNull *)apiKey == [NSNull null] || (NSNull *)accountToken == [NSNull null] || (NSNull *)conversionURL == [NSNull null] || (NSNull *)riAppID == [NSNull null])
     {
         return nil;
     } else {
@@ -93,11 +99,15 @@ NSString * const ResponsysEvent = @"ResponsysEvent";
     
     dispatch_once(&kitPredicate, ^{
         self->_started = YES;
-    NSString *apiKey = self.configuration[PIOConfigurationAPIKey];
-    NSString *accountToken = self.configuration[PIOConfigurationAccountToken];
+        NSString *apiKey = self.configuration[PIOConfigurationAPIKey];
+        NSString *accountToken = self.configuration[PIOConfigurationAccountToken];
+        NSString *coversionURLString = self.configuration[PIOConfigurationConversionURL];
+        NSString *riAppID = self.configuration[PIOConfigurationRIAppID];
         NSError *error = nil;
         BOOL configured = [[self pushIOManager] configureWithAPIKey:apiKey accountToken:accountToken error:&error];
         if (configured) {
+            [[self pushIOManager] setConversionURL:[NSURL URLWithString:coversionURLString]];
+            [[self pushIOManager] setRIAppID: riAppID];
             [[self pushIOManager] setLogLevel:PIOLogLevelVerbose];
             [[self pushIOManager] registerForAllRemoteNotificationTypes:^(NSError *error, NSString *response) {
                 //Error populated if failed to register.
@@ -163,16 +173,49 @@ NSString * const ResponsysEvent = @"ResponsysEvent";
 }
 
 - (MPKitExecStatus *)logEvent:(MPEvent *)mpEvent {
+    NSDictionary *customFlags = mpEvent.customFlags;
     NSString *eventName = mpEvent.name;
-
-    if(nil != eventName ){
-        NSArray *inAppEvents = @[ResponsysEventTypeIAMPremium, ResponsysEventTypeIAMSocial, ResponsysEventTypeIAMPurchase, ResponsysEventTypeIAMOther];
-        if([inAppEvents containsObject:eventName]){
-            [self trackEngagementMetric: eventName];
-        }else if ([eventName isEqualToString:ResponsysEventTypePreference]){
-            NSDictionary *eventInfo = [mpEvent.info copy];
-            [self savePreference: eventInfo];
-        }
+    if (nil != customFlags && [[customFlags allKeys] containsObject:CUSTOM_FLAG_IAM]) {
+        [[self pushIOManager] trackEvent:eventName];
+    }
+    MPEventType eventType = mpEvent.type;
+    NSDictionary *eventInfo = mpEvent.info;
+    switch (eventType) {
+        case MPEventTypeSearch:
+            [[self pushIOManager] trackEvent:@"$Searched"];
+            break;
+        case MPEventTypeSocial:
+            if (eventName.length > 0 && [eventName.lowercaseString isEqualToString:ENGAGEMENT_METRIC_SOCIAL.lowercaseString]) {
+                [[self pushIOManager] trackEngagementMetric:PUSHIO_ENGAGEMENT_METRIC_SOCIAL];
+            }
+            break;
+        case MPEventTypeUserPreference:
+            if (nil != eventInfo) {
+                NSError *error = nil;
+                for (NSString *key in eventInfo) {
+                    [[self pushIOManager] declarePreference:key label:key type:PIOPreferenceTypeString error:&error];
+                    [[self pushIOManager] setStringPreference:eventInfo[key] forKey:key];
+                }
+            }
+            break;
+        case MPEventTypeTransaction:
+            if (nil != eventName && eventName.length) {
+                if ([eventName.lowercaseString isEqualToString:ENGAGEMENT_METRIC_INAPP_PURCHASE.lowercaseString]) {
+                    [[self pushIOManager] trackEngagementMetric:PUSHIO_ENGAGEMENT_METRIC_INAPP_PURCHASE];
+                } else if([eventName.lowercaseString isEqualToString:ENGAGEMENT_METRIC_PREMIUM_CONTENT]){
+                    [[self pushIOManager] trackEngagementMetric:PUSHIO_ENGAGEMENT_METRIC_PREMIUM_CONTENT];
+                }
+            }
+            break;
+        case MPEventTypeOther:
+            if (nil != eventName && eventName.length) {
+                if ([eventName.lowercaseString isEqualToString:ENGAGEMENT_METRIC_OTHER.lowercaseString]) {
+                    [[self pushIOManager] trackEngagementMetric:PUSHIO_ENGAGEMENT_METRIC_OTHER];
+                }
+            }
+            break;
+        default:
+            break;
     }
     return [self execStatus:MPKitReturnCodeSuccess];
 }
@@ -198,11 +241,24 @@ NSString * const ResponsysEvent = @"ResponsysEvent";
         default:
             break;
     }
-    if(nil != commerceEventAction){
-        [self trackResponsysEvent: commerceEventAction products:commerceEvent.products];
+    NSArray *products = commerceEvent.products;
+    if(nil != commerceEventAction && products.count > 0){
+        for (MPProduct *product in products) {
+            NSString *pCategory = product.category;
+            NSString *pIdentifier = product.sku;
+            if (pCategory.length && pIdentifier.length) {
+                NSDictionary *productProperties = @{@"Pid": pIdentifier,@"Pc":pCategory};
+                if(nil != productProperties){
+                    [[self pushIOManager] trackEvent:commerceEventAction properties:productProperties];
+                }
+            }
+            
+            if (commerceEvent.action == MPCommerceEventActionPurchase) {
+                [[self pushIOManager] trackEngagementMetric:PUSHIO_ENGAGEMENT_METRIC_PURCHASE];
+            }
+        }
     }
     return [self execStatus:MPKitReturnCodeSuccess];
-
 }
 
 
@@ -258,6 +314,20 @@ NSString * const ResponsysEvent = @"ResponsysEvent";
     return [self execStatus:MPKitReturnCodeSuccess];
 }
 
+- (MPKitExecStatus *)onLoginComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request{
+    NSNumber *customerIdentifier = [NSNumber numberWithInteger:MPUserIdentityCustomerId];
+    NSString *userId = user.userIdentities[customerIdentifier];
+    if (nil != userId && userId.length) {
+        [[self pushIOManager] registerUserID:userId];
+    }
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
+
+- (MPKitExecStatus *)onLogoutComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request{
+    [[self pushIOManager] registerUserID:nil];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
+
 - (MPKitExecStatus*) execStatus:(MPKitReturnCode)returnCode {
     return [[MPKitExecStatus alloc] initWithSDKCode:self.class.kitCode returnCode:returnCode];
 }
@@ -272,31 +342,6 @@ NSString * const ResponsysEvent = @"ResponsysEvent";
         [[self pushIOManager] declarePreference:prefKey label:prefKey type:PIOPreferenceTypeString error:&prefError];
         [[self pushIOManager] setStringPreference:prefValue forKey:prefKey];
     }
-}
-
--(void)trackResponsysEvent: (NSString *)eventName products:(NSArray *)products{
-    if (nil != eventName && products.count > 0) {
-        for (MPProduct *product in products) {
-            NSDictionary *productProperties = product.dictionaryRepresentation;
-            if(nil != productProperties){
-                [[self pushIOManager] trackEvent:eventName properties:productProperties];
-            }
-        }
-    }
-}
-
--(void) trackEngagementMetric:(NSString *)engagementMetric{
-    PushIOEngagementMetrics engagementType = PUSHIO_ENGAGEMENT_METRIC_ACTIVE_SESSION;
-    if ([engagementMetric isEqualToString:ResponsysEventTypeIAMPremium]) {
-        engagementType = PUSHIO_ENGAGEMENT_METRIC_PREMIUM_CONTENT;
-    } else if ([engagementMetric isEqualToString:ResponsysEventTypeIAMSocial]) {
-        engagementType = PUSHIO_ENGAGEMENT_METRIC_SOCIAL;
-    } else if ([engagementMetric isEqualToString:ResponsysEventTypeIAMPurchase]) {
-        engagementType = PUSHIO_ENGAGEMENT_METRIC_INAPP_PURCHASE;
-    } else if ([engagementMetric isEqualToString:ResponsysEventTypeIAMOther]) {
-        engagementType = PUSHIO_ENGAGEMENT_METRIC_OTHER;
-    }
-    [[self pushIOManager] trackEngagementMetric:engagementType];
 }
 
 @end

@@ -23,13 +23,11 @@
 #import "mParticle.h"
 #endif
 
-FOUNDATION_EXPORT NSString * _Nonnull const ResponsysEventTypeIAMPremium;
-FOUNDATION_EXPORT NSString * _Nonnull const ResponsysEventTypeIAMSocial;
-FOUNDATION_EXPORT NSString * _Nonnull const ResponsysEventTypeIAMPurchase;
-FOUNDATION_EXPORT NSString * _Nonnull const ResponsysEventTypeIAMOther;
-
-FOUNDATION_EXPORT NSString * _Nonnull const ResponsysEventTypePreference;
-FOUNDATION_EXPORT NSString * _Nonnull const ResponsysEvent;
+FOUNDATION_EXPORT NSString * _Nonnull const CUSTOM_FLAG_IAM;
+FOUNDATION_EXPORT NSString * _Nonnull const ENGAGEMENT_METRIC_PREMIUM_CONTENT;
+FOUNDATION_EXPORT NSString * _Nonnull const ENGAGEMENT_METRIC_INAPP_PURCHASE;
+FOUNDATION_EXPORT NSString * _Nonnull const ENGAGEMENT_METRIC_OTHER;
+FOUNDATION_EXPORT NSString * _Nonnull const ENGAGEMENT_METRIC_SOCIAL;
 
 @interface MPKitResponsys : NSObject <MPKitProtocol>
 
