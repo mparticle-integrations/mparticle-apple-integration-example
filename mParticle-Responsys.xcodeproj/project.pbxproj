@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		283135C0218C99AD00F5D73A /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
+		28313604218CAF8B00F5D73A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28313603218CAF8B00F5D73A /* AppDelegate.m */; };
+		28313607218CAF8B00F5D73A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28313606218CAF8B00F5D73A /* ViewController.m */; };
+		2831360A218CAF8B00F5D73A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28313608218CAF8B00F5D73A /* Main.storyboard */; };
+		2831360C218CAF8C00F5D73A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2831360B218CAF8C00F5D73A /* Assets.xcassets */; };
+		2831360F218CAF8C00F5D73A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2831360D218CAF8C00F5D73A /* LaunchScreen.storyboard */; };
+		28313612218CAF8C00F5D73A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28313611218CAF8C00F5D73A /* main.m */; };
+		28313617218CAFC300F5D73A /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
+		2831361E218CB06800F5D73A /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
+		2831361F218CB06800F5D73A /* mParticle_Apple_SDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		71BFAB0B2182832B000D6C4C /* MPKitResponsys.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BFAB092182832B000D6C4C /* MPKitResponsys.m */; };
 		71BFAB0C2182832B000D6C4C /* MPKitResponsys.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BFAB092182832B000D6C4C /* MPKitResponsys.m */; };
 		71BFAB0D2182832B000D6C4C /* MPKitResponsys.h in Headers */ = {isa = PBXBuildFile; fileRef = 71BFAB0A2182832B000D6C4C /* MPKitResponsys.h */; };
@@ -18,6 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2831361C218CB04800F5D73A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBB01A521DC1478A00A7B188 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 283135FF218CAF8B00F5D73A;
+			remoteInfo = "mparticle-Responsys-Host";
+		};
 		FF0BB641217A84E800B0556C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBB01A521DC1478A00A7B188 /* Project object */;
@@ -27,7 +43,32 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		28313620218CB06800F5D73A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2831361F218CB06800F5D73A /* mParticle_Apple_SDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		28313600218CAF8B00F5D73A /* mparticle-Responsys-Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mparticle-Responsys-Host.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		28313602218CAF8B00F5D73A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		28313603218CAF8B00F5D73A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		28313605218CAF8B00F5D73A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		28313606218CAF8B00F5D73A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		28313609218CAF8B00F5D73A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2831360B218CAF8C00F5D73A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2831360E218CAF8C00F5D73A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		28313610218CAF8C00F5D73A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28313611218CAF8C00F5D73A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		28313618218CAFC800F5D73A /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		71BFAB092182832B000D6C4C /* MPKitResponsys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPKitResponsys.m; sourceTree = "<group>"; };
 		71BFAB0A2182832B000D6C4C /* MPKitResponsys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitResponsys.h; sourceTree = "<group>"; };
 		71BFAB172182862B000D6C4C /* PushIOManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushIOManager.framework; path = PushIOManager_iOS/PushIOManager.framework; sourceTree = "<group>"; };
@@ -40,6 +81,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		283135FD218CAF8B00F5D73A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2831361E218CB06800F5D73A /* mParticle_Apple_SDK.framework in Frameworks */,
+				28313617218CAFC300F5D73A /* mParticle_Apple_SDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DBB01A571DC1478A00A7B188 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -61,9 +111,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28313601218CAF8B00F5D73A /* mparticle-Responsys-Host */ = {
+			isa = PBXGroup;
+			children = (
+				28313602218CAF8B00F5D73A /* AppDelegate.h */,
+				28313603218CAF8B00F5D73A /* AppDelegate.m */,
+				28313605218CAF8B00F5D73A /* ViewController.h */,
+				28313606218CAF8B00F5D73A /* ViewController.m */,
+				28313608218CAF8B00F5D73A /* Main.storyboard */,
+				2831360B218CAF8C00F5D73A /* Assets.xcassets */,
+				2831360D218CAF8C00F5D73A /* LaunchScreen.storyboard */,
+				28313610218CAF8C00F5D73A /* Info.plist */,
+				28313611218CAF8C00F5D73A /* main.m */,
+			);
+			path = "mparticle-Responsys-Host";
+			sourceTree = "<group>";
+		};
 		BFC575FD4F33C3AF8BBC97D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				28313618218CAFC800F5D73A /* UserNotifications.framework */,
 				71BFAB172182862B000D6C4C /* PushIOManager.framework */,
 			);
 			name = Frameworks;
@@ -75,6 +142,7 @@
 				DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */,
 				DBB01A5D1DC1478A00A7B188 /* mParticle-Responsys */,
 				FF0BB63C217A84E800B0556C /* mParticle_ResponsysTests */,
+				28313601218CAF8B00F5D73A /* mparticle-Responsys-Host */,
 				DBB01A5C1DC1478A00A7B188 /* Products */,
 				BFC575FD4F33C3AF8BBC97D4 /* Frameworks */,
 			);
@@ -85,6 +153,7 @@
 			children = (
 				DBB01A5B1DC1478A00A7B188 /* mParticle_Responsys.framework */,
 				FF0BB63B217A84E800B0556C /* mParticle_ResponsysTests.xctest */,
+				28313600218CAF8B00F5D73A /* mparticle-Responsys-Host.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,6 +191,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		283135FF218CAF8B00F5D73A /* mparticle-Responsys-Host */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28313615218CAF8C00F5D73A /* Build configuration list for PBXNativeTarget "mparticle-Responsys-Host" */;
+			buildPhases = (
+				283135FC218CAF8B00F5D73A /* Sources */,
+				283135FD218CAF8B00F5D73A /* Frameworks */,
+				283135FE218CAF8B00F5D73A /* Resources */,
+				28313620218CB06800F5D73A /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "mparticle-Responsys-Host";
+			productName = "mparticle-Responsys-Host";
+			productReference = 28313600218CAF8B00F5D73A /* mparticle-Responsys-Host.app */;
+			productType = "com.apple.product-type.application";
+		};
 		DBB01A5A1DC1478A00A7B188 /* mParticle-Responsys */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBB01A631DC1478A00A7B188 /* Build configuration list for PBXNativeTarget "mParticle-Responsys" */;
@@ -152,6 +239,7 @@
 			);
 			dependencies = (
 				FF0BB642217A84E800B0556C /* PBXTargetDependency */,
+				2831361D218CB04800F5D73A /* PBXTargetDependency */,
 			);
 			name = mParticle_ResponsysTests;
 			productName = mParticle_ExampleTests;
@@ -167,6 +255,10 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = mParticle;
 				TargetAttributes = {
+					283135FF218CAF8B00F5D73A = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
+					};
 					DBB01A5A1DC1478A00A7B188 = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Automatic;
@@ -174,6 +266,7 @@
 					FF0BB63A217A84E800B0556C = {
 						CreatedOnToolsVersion = 10.0;
 						ProvisioningStyle = Manual;
+						TestTargetID = 283135FF218CAF8B00F5D73A;
 					};
 				};
 			};
@@ -183,6 +276,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = DBB01A511DC1478A00A7B188;
 			productRefGroup = DBB01A5C1DC1478A00A7B188 /* Products */;
@@ -191,11 +285,22 @@
 			targets = (
 				DBB01A5A1DC1478A00A7B188 /* mParticle-Responsys */,
 				FF0BB63A217A84E800B0556C /* mParticle_ResponsysTests */,
+				283135FF218CAF8B00F5D73A /* mparticle-Responsys-Host */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		283135FE218CAF8B00F5D73A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2831360F218CAF8C00F5D73A /* LaunchScreen.storyboard in Resources */,
+				2831360C218CAF8C00F5D73A /* Assets.xcassets in Resources */,
+				2831360A218CAF8B00F5D73A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DBB01A591DC1478A00A7B188 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -213,6 +318,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		283135FC218CAF8B00F5D73A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28313607218CAF8B00F5D73A /* ViewController.m in Sources */,
+				28313612218CAF8C00F5D73A /* main.m in Sources */,
+				28313604218CAF8B00F5D73A /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DBB01A561DC1478A00A7B188 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -233,6 +348,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2831361D218CB04800F5D73A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 283135FF218CAF8B00F5D73A /* mparticle-Responsys-Host */;
+			targetProxy = 2831361C218CB04800F5D73A /* PBXContainerItemProxy */;
+		};
 		FF0BB642217A84E800B0556C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DBB01A5A1DC1478A00A7B188 /* mParticle-Responsys */;
@@ -240,7 +360,95 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		28313608218CAF8B00F5D73A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28313609218CAF8B00F5D73A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2831360D218CAF8C00F5D73A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2831360E218CAF8C00F5D73A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		28313613218CAF8C00F5D73A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "mparticle-Responsys-Host/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "mparticle-Responsys.Host.mparticle-Responsys-Host";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		28313614218CAF8C00F5D73A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "mparticle-Responsys-Host/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "mparticle-Responsys.Host.mparticle-Responsys-Host";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		DBB01A611DC1478A00A7B188 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -420,6 +628,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mparticle-Responsys-Host.app/mparticle-Responsys-Host";
 			};
 			name = Debug;
 		};
@@ -457,12 +666,22 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mparticle-Responsys-Host.app/mparticle-Responsys-Host";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		28313615218CAF8C00F5D73A /* Build configuration list for PBXNativeTarget "mparticle-Responsys-Host" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28313613218CAF8C00F5D73A /* Debug */,
+				28313614218CAF8C00F5D73A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-Responsys" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
