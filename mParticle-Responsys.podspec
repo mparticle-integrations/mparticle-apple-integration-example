@@ -16,6 +16,6 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = "9.0"
     s.ios.source_files      = 'mParticle-Responsys/*.{h,m}'
     s.ios.dependency 'mParticle-Apple-SDK', '~> 7.5.0'
-#s.ios.dependency 'Example', '~> 1.2'
+    #s.ios.dependency 'Example', '~> 1.2'
     s.ios.vendored_frameworks = 'PushIOManager_iOS/PushIOManager.framework'
 end
