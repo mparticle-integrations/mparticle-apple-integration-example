@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		283135C0218C99AD00F5D73A /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
 		71BFAB0B2182832B000D6C4C /* MPKitResponsys.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BFAB092182832B000D6C4C /* MPKitResponsys.m */; };
 		71BFAB0C2182832B000D6C4C /* MPKitResponsys.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BFAB092182832B000D6C4C /* MPKitResponsys.m */; };
 		71BFAB0D2182832B000D6C4C /* MPKitResponsys.h in Headers */ = {isa = PBXBuildFile; fileRef = 71BFAB0A2182832B000D6C4C /* MPKitResponsys.h */; };
-		71BFAB182182862C000D6C4C /* PushIOManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71BFAB172182862B000D6C4C /* PushIOManager.framework */; };
 		71BFAB1921828855000D6C4C /* PushIOManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71BFAB172182862B000D6C4C /* PushIOManager.framework */; };
 		DBB01A6B1DC1491D00A7B188 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
 		FF0BB63E217A84E800B0556C /* mParticle_ResponsysTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0BB63D217A84E800B0556C /* mParticle_ResponsysTests.m */; };
@@ -53,7 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71BFAB182182862C000D6C4C /* PushIOManager.framework in Frameworks */,
+				283135C0218C99AD00F5D73A /* mParticle_Apple_SDK.framework in Frameworks */,
 				FF0BB640217A84E800B0556C /* mParticle_Responsys.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,13 +106,6 @@
 				FF0BB63F217A84E800B0556C /* Info.plist */,
 			);
 			path = mParticle_ResponsysTests;
-			sourceTree = "<group>";
-		};
-		FF13226121878D9C002AA653 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,6 +354,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-Responsys";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -384,6 +378,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-Responsys";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -412,6 +407,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PushIOManager_iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = mParticle_ResponsysTests/Info.plist;
@@ -419,6 +415,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-ResponsysTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -448,12 +445,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PushIOManager_iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = mParticle_ResponsysTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-ResponsysTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
