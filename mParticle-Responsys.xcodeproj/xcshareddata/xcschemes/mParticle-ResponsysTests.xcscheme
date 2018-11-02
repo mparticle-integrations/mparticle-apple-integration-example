@@ -17,9 +17,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FF0BB63A217A84E800B0556C"
-               BuildableName = "mParticle_ExampleTests.xctest"
-               BlueprintName = "mParticle_ExampleTests"
-               ReferencedContainer = "container:mParticle-Example.xcodeproj">
+               BuildableName = "mParticle_ResponsysTests.xctest"
+               BlueprintName = "mParticle_ResponsysTests"
+               ReferencedContainer = "container:mParticle-Responsys.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
-    s.name             = "mParticle-Example"
+    s.name             = "mParticle-Responsys"
     s.version          = "7.7.3"
-    s.summary          = "Example integration for mParticle"
+    s.summary          = "Responsys integration for mParticle"
 
     s.description      = <<-DESC
-                       This is the Example integration for mParticle.
+                       This is the Responsys integration for mParticle.
                        DESC
 
     s.homepage         = "https://www.mparticle.com"
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
     s.social_media_url = "https://twitter.com/mparticles"
 
     s.ios.deployment_target = "9.0"
-    s.ios.source_files      = 'mParticle-Example/*.{h,m}'
+    s.ios.source_files      = 'mParticle-Responsys/*.{h,m}'
     s.ios.dependency 'mParticle-Apple-SDK', '~> 7.5.0'
 #s.ios.dependency 'Example', '~> 1.2'
     s.ios.vendored_frameworks = 'PushIOManager_iOS/PushIOManager.framework'

@@ -1,10 +1,10 @@
 use_frameworks!
 platform :ios, '9.0'
 
-target 'mParticle-Example' do
-    pod 'mParticle-Example', :path => '.'
+target 'mParticle-Responsys' do
+    pod 'mParticle-Responsys', :path => '.'
 end
 
-target 'mParticle_ExampleTests' do
-    pod 'mParticle-Example', :path => '.'
+target 'mParticle_ResponsysTests' do
+    pod 'mParticle-Responsys', :path => '.'
 end

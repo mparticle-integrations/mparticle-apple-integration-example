@@ -27,9 +27,9 @@
 
 @implementation AppDelegate
 
-NSString* const appKey = @"3d34e61b0e1cda42a522da00e80bc1a3";
-NSString* const appSecret = @"2vIhFZSJS7a3a0Atyb6YOAwE75IrR3NTgMVnGgBojC2jSRMPpUW1uQyRd5Ik5Ojg";
-NSString* const emailAddress = @"upendra.tripathi@oracle.com";
+NSString* const appKey = @"app_key";
+NSString* const appSecret = @"app_secret";
+NSString* const emailAddress = @"user_email";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     MParticleOptions *mParticleOptions = [MParticleOptions optionsWithKey:appKey
@@ -77,10 +77,10 @@ NSString* const emailAddress = @"upendra.tripathi@oracle.com";
 
 
 -(void) trackInAppMessageEvent{
-    MPEvent *premiumEvent = [[MPEvent alloc] initWithName:ResponsysEventTypeIAMPremium type:MPEventTypeTransaction];
-    MPEvent *socialEvent = [[MPEvent alloc] initWithName:ResponsysEventTypeIAMSocial type:MPEventTypeSocial];
-    MPEvent *iapEvent = [[MPEvent alloc] initWithName:ResponsysEventTypeIAMPurchase type:MPEventTypeTransaction];
-    MPEvent *otherEvent = [[MPEvent alloc] initWithName:ResponsysEventTypeIAMOther type:MPEventTypeOther];
+    MPEvent *premiumEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_PREMIUM_CONTENT type:MPEventTypeTransaction];
+    MPEvent *socialEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_SOCIAL type:MPEventTypeSocial];
+    MPEvent *iapEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_INAPP_PURCHASE type:MPEventTypeTransaction];
+    MPEvent *otherEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_OTHER type:MPEventTypeOther];
     [[MParticle sharedInstance] logEvent:premiumEvent];
     [[MParticle sharedInstance] logEvent:socialEvent];
     [[MParticle sharedInstance] logEvent:iapEvent];
@@ -89,7 +89,7 @@ NSString* const emailAddress = @"upendra.tripathi@oracle.com";
 
 -(void) setUserPreferences{
     NSDictionary *preferences = @{@"Sports":@"Cricket",@"News":@"Tech"};
-    MPEvent *preferenceEvent = [[MPEvent alloc] initWithName:ResponsysEventTypePreference type:MPEventTypeOther];
+    MPEvent *preferenceEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_OTHER type:MPEventTypeOther];
     preferenceEvent.info = preferences;
     [[MParticle sharedInstance] logEvent:preferenceEvent];
 }

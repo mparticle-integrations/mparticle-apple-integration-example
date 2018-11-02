@@ -18,20 +18,6 @@
 
 
 #import "MPKitResponsys.h"
-#import "MPEvent.h"
-#import "MPProduct.h"
-#import "MPProduct+Dictionary.h"
-#import "MPCommerceEvent.h"
-#import "MPCommerceEvent+Dictionary.h"
-#import "MPCommerceEventInstruction.h"
-#import "MPTransactionAttributes.h"
-#import "MPTransactionAttributes+Dictionary.h"
-#import "MPIHasher.h"
-#import "mParticle.h"
-#import "MPKitRegister.h"
-#import "NSDictionary+MPCaseInsensitive.h"
-#import "MPDateFormatter.h"
-#import "MPEnums.h"
 #import <PushIOManager/PushIOManager.h>
 
 #if TARGET_OS_IOS == 1 && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
@@ -108,7 +94,7 @@ NSString * const ENGAGEMENT_METRIC_SOCIAL = @"ResponsysEngagementTypeSocial";
         if (configured) {
             [[self pushIOManager] setConversionURL:[NSURL URLWithString:coversionURLString]];
             [[self pushIOManager] setRIAppID: riAppID];
-            [[self pushIOManager] setLogLevel:PIOLogLevelVerbose];
+            [[self pushIOManager] setLogLevel:(([MParticle sharedInstance].environment == MPEnvironmentDevelopment) ? PIOLogLevelVerbose : PIOLogLevelError)];
             [[self pushIOManager] registerForAllRemoteNotificationTypes:^(NSError *error, NSString *response) {
                 //Error populated if failed to register.
             }];
@@ -125,11 +111,6 @@ NSString * const ENGAGEMENT_METRIC_SOCIAL = @"ResponsysEngagementTypeSocial";
 - (id const)providerKitInstance {
     return [self started] ? [self pushIOManager] : nil;
 }
-
-- (id const)kitInstance {
-    return self.started ? [self pushIOManager] : nil;
-}
-
 
 -(PushIOManager *)pushIOManager{
     if (nil == _pioManager) {
@@ -151,12 +132,8 @@ NSString * const ENGAGEMENT_METRIC_SOCIAL = @"ResponsysEngagementTypeSocial";
 #pragma mark - MPKitInstanceProtocol Methods
 
 - (MPKitExecStatus*_Nonnull)setKitAttribute:(nonnull NSString *)key value:(nullable id)value {
-    [self.kitApi logError:@"Unrecognized key attibute '%@'.", key];
+    [self.kitApi logError:@"Unrecognized key attribute '%@'.", key];
     return [self execStatus:MPKitReturnCodeUnavailable];
-}
-
-- (MPKitExecStatus*_Nonnull)setOptOut:(BOOL)optOut {
-    return [self execStatus:MPKitReturnCodeSuccess];
 }
 
 - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString
@@ -166,10 +143,6 @@ NSString * const ENGAGEMENT_METRIC_SOCIAL = @"ResponsysEngagementTypeSocial";
     } else {
         return [self execStatus:MPKitReturnCodeRequirementsNotMet];
     }
-}
-
-- (MPKitExecStatus*_Nonnull)logout {
-    return [self execStatus:MPKitReturnCodeSuccess];
 }
 
 - (MPKitExecStatus *)logEvent:(MPEvent *)mpEvent {
@@ -261,21 +234,8 @@ NSString * const ENGAGEMENT_METRIC_SOCIAL = @"ResponsysEngagementTypeSocial";
     return [self execStatus:MPKitReturnCodeSuccess];
 }
 
-
-- (MPKitExecStatus *)logScreen:(MPEvent *)mpEvent {
-    return [self execStatus:MPKitReturnCodeSuccess];
-}
-
 - (nonnull MPKitExecStatus *)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler{
     [[self pushIOManager] continueUserActivity:userActivity restorationHandler:restorationHandler];
-    return [self execStatus:MPKitReturnCodeSuccess];
-}
-
-- (nonnull MPKitExecStatus *)didUpdateUserActivity:(nonnull NSUserActivity *)userActivity{
-    return [self execStatus:MPKitReturnCodeSuccess];
-}
-
-- (nonnull MPKitExecStatus *)didBecomeActive{
     return [self execStatus:MPKitReturnCodeSuccess];
 }
 
