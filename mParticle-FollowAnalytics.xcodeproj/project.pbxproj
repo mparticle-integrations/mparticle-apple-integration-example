@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DBB01A601DC1478A00A7B188 /* mParticle_Example.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB01A5E1DC1478A00A7B188 /* mParticle_Example.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DBB01A681DC1480700A7B188 /* MPKitExample.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB01A661DC1480700A7B188 /* MPKitExample.h */; };
-		DBB01A691DC1480700A7B188 /* MPKitExample.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB01A671DC1480700A7B188 /* MPKitExample.m */; };
+		DBB01A601DC1478A00A7B188 /* mParticle_FollowAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB01A5E1DC1478A00A7B188 /* mParticle_FollowAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DBB01A681DC1480700A7B188 /* MPKitFollowAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB01A661DC1480700A7B188 /* MPKitFollowAnalytics.h */; };
+		DBB01A691DC1480700A7B188 /* MPKitFollowAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB01A671DC1480700A7B188 /* MPKitFollowAnalytics.m */; };
 		DBB01A6B1DC1491D00A7B188 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
-		FF0BB63E217A84E800B0556C /* mParticle_ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0BB63D217A84E800B0556C /* mParticle_ExampleTests.m */; };
+		FF0BB63E217A84E800B0556C /* mParticle_FollowAnalyticsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0BB63D217A84E800B0556C /* mParticle_FollowAnalyticsTests.m */; };
 		FF0BB640217A84E800B0556C /* mParticle_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A5B1DC1478A00A7B188 /* mParticle_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,13 +27,13 @@
 
 /* Begin PBXFileReference section */
 		DBB01A5B1DC1478A00A7B188 /* mParticle_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mParticle_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DBB01A5E1DC1478A00A7B188 /* mParticle_Example.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mParticle_Example.h; sourceTree = "<group>"; };
+		DBB01A5E1DC1478A00A7B188 /* mParticle_FollowAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mParticle_FollowAnalytics.h; sourceTree = "<group>"; };
 		DBB01A5F1DC1478A00A7B188 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DBB01A661DC1480700A7B188 /* MPKitExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitExample.h; sourceTree = "<group>"; };
-		DBB01A671DC1480700A7B188 /* MPKitExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPKitExample.m; sourceTree = "<group>"; };
+		DBB01A661DC1480700A7B188 /* MPKitFollowAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitFollowAnalytics.h; sourceTree = "<group>"; };
+		DBB01A671DC1480700A7B188 /* MPKitFollowAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPKitFollowAnalytics.m; sourceTree = "<group>"; };
 		DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = mParticle_Apple_SDK.framework; path = Carthage/Build/iOS/mParticle_Apple_SDK.framework; sourceTree = "<group>"; };
 		FF0BB63B217A84E800B0556C /* mParticle_ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mParticle_ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF0BB63D217A84E800B0556C /* mParticle_ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mParticle_ExampleTests.m; sourceTree = "<group>"; };
+		FF0BB63D217A84E800B0556C /* mParticle_FollowAnalyticsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mParticle_FollowAnalyticsTests.m; sourceTree = "<group>"; };
 		FF0BB63F217A84E800B0556C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,8 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */,
-				DBB01A5D1DC1478A00A7B188 /* mParticle-Example */,
-				FF0BB63C217A84E800B0556C /* mParticle_ExampleTests */,
+				DBB01A5D1DC1478A00A7B188 /* mParticle-FollowAnalytics */,
+				FF0BB63C217A84E800B0556C /* mParticle_FollowAnalyticsTests */,
 				DBB01A5C1DC1478A00A7B188 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -76,24 +76,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DBB01A5D1DC1478A00A7B188 /* mParticle-Example */ = {
+		DBB01A5D1DC1478A00A7B188 /* mParticle-FollowAnalytics */ = {
 			isa = PBXGroup;
 			children = (
-				DBB01A661DC1480700A7B188 /* MPKitExample.h */,
-				DBB01A671DC1480700A7B188 /* MPKitExample.m */,
-				DBB01A5E1DC1478A00A7B188 /* mParticle_Example.h */,
+				DBB01A661DC1480700A7B188 /* MPKitFollowAnalytics.h */,
+				DBB01A671DC1480700A7B188 /* MPKitFollowAnalytics.m */,
+				DBB01A5E1DC1478A00A7B188 /* mParticle_FollowAnalytics.h */,
 				DBB01A5F1DC1478A00A7B188 /* Info.plist */,
 			);
-			path = "mParticle-Example";
+			path = "mParticle-FollowAnalytics";
 			sourceTree = "<group>";
 		};
-		FF0BB63C217A84E800B0556C /* mParticle_ExampleTests */ = {
+		FF0BB63C217A84E800B0556C /* mParticle_FollowAnalyticsTests */ = {
 			isa = PBXGroup;
 			children = (
-				FF0BB63D217A84E800B0556C /* mParticle_ExampleTests.m */,
+				FF0BB63D217A84E800B0556C /* mParticle_FollowAnalyticsTests.m */,
 				FF0BB63F217A84E800B0556C /* Info.plist */,
 			);
-			path = mParticle_ExampleTests;
+			path = mParticle_FollowAnalyticsTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,8 +103,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBB01A601DC1478A00A7B188 /* mParticle_Example.h in Headers */,
-				DBB01A681DC1480700A7B188 /* MPKitExample.h in Headers */,
+				DBB01A601DC1478A00A7B188 /* mParticle_FollowAnalytics.h in Headers */,
+				DBB01A681DC1480700A7B188 /* MPKitFollowAnalytics.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +166,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-Example" */;
+			buildConfigurationList = DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-FollowAnalytics" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -206,7 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBB01A691DC1480700A7B188 /* MPKitExample.m in Sources */,
+				DBB01A691DC1480700A7B188 /* MPKitFollowAnalytics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,7 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF0BB63E217A84E800B0556C /* mParticle_ExampleTests.m in Sources */,
+				FF0BB63E217A84E800B0556C /* mParticle_FollowAnalyticsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,7 +431,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-Example" */ = {
+		DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-FollowAnalytics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DBB01A611DC1478A00A7B188 /* Debug */,
