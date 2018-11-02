@@ -14,12 +14,12 @@
 		2831360C218CAF8C00F5D73A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2831360B218CAF8C00F5D73A /* Assets.xcassets */; };
 		2831360F218CAF8C00F5D73A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2831360D218CAF8C00F5D73A /* LaunchScreen.storyboard */; };
 		28313612218CAF8C00F5D73A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28313611218CAF8C00F5D73A /* main.m */; };
-		28313617218CAFC300F5D73A /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
 		2831361E218CB06800F5D73A /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
 		2831361F218CB06800F5D73A /* mParticle_Apple_SDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		283B7B28218CC14400434715 /* mParticle_Responsys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A5B1DC1478A00A7B188 /* mParticle_Responsys.framework */; };
 		71BFAB0B2182832B000D6C4C /* MPKitResponsys.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BFAB092182832B000D6C4C /* MPKitResponsys.m */; };
 		71BFAB0C2182832B000D6C4C /* MPKitResponsys.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BFAB092182832B000D6C4C /* MPKitResponsys.m */; };
-		71BFAB0D2182832B000D6C4C /* MPKitResponsys.h in Headers */ = {isa = PBXBuildFile; fileRef = 71BFAB0A2182832B000D6C4C /* MPKitResponsys.h */; };
+		71BFAB0D2182832B000D6C4C /* MPKitResponsys.h in Headers */ = {isa = PBXBuildFile; fileRef = 71BFAB0A2182832B000D6C4C /* MPKitResponsys.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71BFAB1921828855000D6C4C /* PushIOManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71BFAB172182862B000D6C4C /* PushIOManager.framework */; };
 		DBB01A6B1DC1491D00A7B188 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
 		FF0BB63E217A84E800B0556C /* mParticle_ResponsysTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0BB63D217A84E800B0556C /* mParticle_ResponsysTests.m */; };
@@ -33,6 +33,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 283135FF218CAF8B00F5D73A;
 			remoteInfo = "mparticle-Responsys-Host";
+		};
+		283B7B29218CC1B700434715 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBB01A521DC1478A00A7B188 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBB01A5A1DC1478A00A7B188;
+			remoteInfo = "mParticle-Responsys";
 		};
 		FF0BB641217A84E800B0556C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -85,8 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				283B7B28218CC14400434715 /* mParticle_Responsys.framework in Frameworks */,
 				2831361E218CB06800F5D73A /* mParticle_Apple_SDK.framework in Frameworks */,
-				28313617218CAFC300F5D73A /* mParticle_Apple_SDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +210,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				283B7B2A218CC1B700434715 /* PBXTargetDependency */,
 			);
 			name = "mparticle-Responsys-Host";
 			productName = "mparticle-Responsys-Host";
@@ -352,6 +360,11 @@
 			isa = PBXTargetDependency;
 			target = 283135FF218CAF8B00F5D73A /* mparticle-Responsys-Host */;
 			targetProxy = 2831361C218CB04800F5D73A /* PBXContainerItemProxy */;
+		};
+		283B7B2A218CC1B700434715 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBB01A5A1DC1478A00A7B188 /* mParticle-Responsys */;
+			targetProxy = 283B7B29218CC1B700434715 /* PBXContainerItemProxy */;
 		};
 		FF0BB642217A84E800B0556C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

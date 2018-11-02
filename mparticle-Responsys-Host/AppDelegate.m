@@ -1,12 +1,25 @@
 //
 //  AppDelegate.m
-//  mparticle-Responsys-Host
+//  mParticle-Responsys
 //
-//  Created by Sahil Wasan on 02/11/18.
-//  Copyright © 2018 mParticle. All rights reserved.
+//  Copyright 2018 mParticle, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 #import "AppDelegate.h"
+#import <mParticle_Apple_SDK/mParticle.h>
+#import <mParticle_Responsys/MPKitResponsys.h>
 
 @interface AppDelegate ()
 
@@ -14,9 +27,21 @@
 
 @implementation AppDelegate
 
+NSString* const appKey = @"app_key";
+NSString* const appSecret = @"app_secret";
+NSString* const emailAddress = @"user_email";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    MParticleOptions *mParticleOptions = [MParticleOptions optionsWithKey:appKey
+                                                                   secret:appSecret];
+    
+    MPIdentityApiRequest *request = [MPIdentityApiRequest requestWithEmptyUser];
+    request.email = emailAddress;
+    mParticleOptions.identifyRequest = request;
+    mParticleOptions.onIdentifyComplete = ^(MPIdentityApiResult * _Nullable apiResult, NSError * _Nullable error) {
+        NSLog(@"Identify complete. userId = %@ error = %@", apiResult.user.userId, error);
+    };
+    [[MParticle sharedInstance] startWithOptions:mParticleOptions];
     return YES;
 }
 
@@ -40,6 +65,9 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [self trackInAppMessageEvent];
+    [self setUserPreferences];
+    [self setCommerceEvent];
 }
 
 
@@ -47,5 +75,40 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+-(void) trackInAppMessageEvent{
+    MPEvent *premiumEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_PREMIUM_CONTENT type:MPEventTypeTransaction];
+    MPEvent *socialEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_SOCIAL type:MPEventTypeSocial];
+    MPEvent *iapEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_INAPP_PURCHASE type:MPEventTypeTransaction];
+    MPEvent *otherEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_OTHER type:MPEventTypeOther];
+    [[MParticle sharedInstance] logEvent:premiumEvent];
+    [[MParticle sharedInstance] logEvent:socialEvent];
+    [[MParticle sharedInstance] logEvent:iapEvent];
+    [[MParticle sharedInstance] logEvent:otherEvent];
+}
+
+-(void) setUserPreferences{
+    NSDictionary *preferences = @{@"Sports":@"Cricket",@"News":@"Tech"};
+    MPEvent *preferenceEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_OTHER type:MPEventTypeOther];
+    preferenceEvent.info = preferences;
+    [[MParticle sharedInstance] logEvent:preferenceEvent];
+}
+
+-(void) setCommerceEvent{
+    MPProduct *product = [[MPProduct alloc] init];
+    product.brand = @"Sample brand";
+    product.category = @"Sample Category";
+    product.couponCode = @"Sample CouponCode";
+    product.name = @"Sample Name";
+    product.price = @100;
+    product.sku = @"Sample SKU";
+    product.variant = @"Sample Variant";
+    product.quantity = @10;
+    MPTransactionAttributes *attributes = [[MPTransactionAttributes alloc] init];
+    attributes.transactionId = @"Sample-Transaction-Identifier";
+    MPCommerceEvent *commerceEvent = [[MPCommerceEvent alloc] initWithAction:MPCommerceEventActionPurchase product:product];
+    commerceEvent.transactionAttributes = attributes;
+    [[MParticle sharedInstance] logCommerceEvent:commerceEvent];
+}
 
 @end
