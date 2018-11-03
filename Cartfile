@@ -1,2 +1,2 @@
-#github "Example/Example" ~> 1.2.3
+github "clevertap/clevertap-ios-sdk" ~> 3.3.0
 github "mparticle/mparticle-apple-sdk" ~> 7.7.0

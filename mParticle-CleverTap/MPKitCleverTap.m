@@ -1,14 +1,13 @@
-#import "MPKitExample.h"
+#import "MPKitCleverTap.h"
 
-/* Import your header file here
-*/
-//#if defined(__has_include) && __has_include(<Example/Example.h>)
-//#import <Example/Example.h>
-//#else
-//#import "Example.h"
-//#endif
 
-@implementation MPKitExample
+#if defined(__has_include) && __has_include(<CleverTapSDK/CleverTap.h>)
+#import <CleverTapSDK/CleverTap.h>
+#else
+#import "CleverTap.h"
+#endif
+
+@implementation MPKitCleverTap
 
 /*
     mParticle will supply a unique kit code for you. Please contact our team
@@ -18,7 +17,7 @@
 }
 
 + (void)load {
-    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"Example" className:@"MPKitExample"];
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"CleverTap" className:@"MPKitCleverTap"];
     [MParticle registerExtension:kitRegister];
 }
 

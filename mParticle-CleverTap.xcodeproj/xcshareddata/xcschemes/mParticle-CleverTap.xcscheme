@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "1010"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DBB01A5A1DC1478A00A7B188"
-               BuildableName = "mParticle_Example.framework"
-               BlueprintName = "mParticle-Example"
-               ReferencedContainer = "container:mParticle-Example.xcodeproj">
+               BuildableName = "mParticle_CleverTap.framework"
+               BlueprintName = "mParticle-CleverTap"
+               ReferencedContainer = "container:mParticle-CleverTap.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DBB01A5A1DC1478A00A7B188"
-            BuildableName = "mParticle_Example.framework"
-            BlueprintName = "mParticle-Example"
-            ReferencedContainer = "container:mParticle-Example.xcodeproj">
+            BuildableName = "mParticle_CleverTap.framework"
+            BlueprintName = "mParticle-CleverTap"
+            ReferencedContainer = "container:mParticle-CleverTap.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DBB01A5A1DC1478A00A7B188"
-            BuildableName = "mParticle_Example.framework"
-            BlueprintName = "mParticle-Example"
-            ReferencedContainer = "container:mParticle-Example.xcodeproj">
+            BuildableName = "mParticle_CleverTap.framework"
+            BlueprintName = "mParticle-CleverTap"
+            ReferencedContainer = "container:mParticle-CleverTap.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
