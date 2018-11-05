@@ -77,10 +77,10 @@ NSString* const emailAddress = @"user_email";
 
 
 -(void) trackInAppMessageEvent{
-    MPEvent *premiumEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_PREMIUM_CONTENT type:MPEventTypeTransaction];
-    MPEvent *socialEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_SOCIAL type:MPEventTypeSocial];
-    MPEvent *iapEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_INAPP_PURCHASE type:MPEventTypeTransaction];
-    MPEvent *otherEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_OTHER type:MPEventTypeOther];
+    MPEvent *premiumEvent = [[MPEvent alloc] initWithName:@"Premium Event" type:MPEventTypeTransaction];
+    MPEvent *socialEvent = [[MPEvent alloc] initWithName:@"Social Event" type:MPEventTypeSocial];
+    MPEvent *iapEvent = [[MPEvent alloc] initWithName:@"IAP" type:MPEventTypeTransaction];
+    MPEvent *otherEvent = [[MPEvent alloc] initWithName:@"Event" type:MPEventTypeOther];
     [[MParticle sharedInstance] logEvent:premiumEvent];
     [[MParticle sharedInstance] logEvent:socialEvent];
     [[MParticle sharedInstance] logEvent:iapEvent];
@@ -89,7 +89,7 @@ NSString* const emailAddress = @"user_email";
 
 -(void) setUserPreferences{
     NSDictionary *preferences = @{@"Sports":@"Cricket",@"News":@"Tech"};
-    MPEvent *preferenceEvent = [[MPEvent alloc] initWithName:ENGAGEMENT_METRIC_OTHER type:MPEventTypeOther];
+    MPEvent *preferenceEvent = [[MPEvent alloc] initWithName:@"Prefrence Event" type:MPEventTypeOther];
     preferenceEvent.info = preferences;
     [[MParticle sharedInstance] logEvent:preferenceEvent];
 }

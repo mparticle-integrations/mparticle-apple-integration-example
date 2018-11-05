@@ -31,10 +31,7 @@ NSString * const PIOConfigurationConversionURL = @"conversionUrl";
 NSString * const PIOConfigurationRIAppID = @"riAppId";
 
 NSString * const CUSTOM_FLAG_IAM = @"Responsys.Custom.iam";
-NSString * const ENGAGEMENT_METRIC_PREMIUM_CONTENT =  @"ResponsysEngagementTypePremium";
-NSString * const ENGAGEMENT_METRIC_INAPP_PURCHASE = @"ResponsysEngagementTypePurchase";
-NSString * const ENGAGEMENT_METRIC_OTHER = @"ResponsysEngagementTypeOther";
-NSString * const ENGAGEMENT_METRIC_SOCIAL = @"ResponsysEngagementTypeSocial";
+NSString * const CUSTOM_FLAG_ENGAGEMENT = @"Responsys.Custom.e";
 
 @interface MPKitResponsys(){
     PushIOManager *_pioManager;
@@ -148,19 +145,25 @@ NSString * const ENGAGEMENT_METRIC_SOCIAL = @"ResponsysEngagementTypeSocial";
 - (MPKitExecStatus *)logEvent:(MPEvent *)mpEvent {
     NSDictionary *customFlags = mpEvent.customFlags;
     NSString *eventName = mpEvent.name;
-    if (nil != customFlags && [[customFlags allKeys] containsObject:CUSTOM_FLAG_IAM]) {
-        [[self pushIOManager] trackEvent:eventName];
+    if (nil != customFlags) {
+        if(nil != customFlags[CUSTOM_FLAG_IAM]) {
+            [[self pushIOManager] trackEvent:eventName];
+        }
+        
+        NSArray<NSString *> *values = customFlags[CUSTOM_FLAG_ENGAGEMENT];
+        if(nil != values && values.count) {
+            NSString *engagementType = values[0];
+            if([engagementType intValue]) {
+                [[self pushIOManager] trackEngagementMetric:[engagementType intValue]];
+            }
+        }
     }
+    
     MPEventType eventType = mpEvent.type;
     NSDictionary *eventInfo = mpEvent.info;
     switch (eventType) {
         case MPEventTypeSearch:
             [[self pushIOManager] trackEvent:@"$Searched"];
-            break;
-        case MPEventTypeSocial:
-            if (eventName.length > 0 && [eventName.lowercaseString isEqualToString:ENGAGEMENT_METRIC_SOCIAL.lowercaseString]) {
-                [[self pushIOManager] trackEngagementMetric:PUSHIO_ENGAGEMENT_METRIC_SOCIAL];
-            }
             break;
         case MPEventTypeUserPreference:
             if (nil != eventInfo) {
@@ -168,22 +171,6 @@ NSString * const ENGAGEMENT_METRIC_SOCIAL = @"ResponsysEngagementTypeSocial";
                 for (NSString *key in eventInfo) {
                     [[self pushIOManager] declarePreference:key label:key type:PIOPreferenceTypeString error:&error];
                     [[self pushIOManager] setStringPreference:eventInfo[key] forKey:key];
-                }
-            }
-            break;
-        case MPEventTypeTransaction:
-            if (nil != eventName && eventName.length) {
-                if ([eventName.lowercaseString isEqualToString:ENGAGEMENT_METRIC_INAPP_PURCHASE.lowercaseString]) {
-                    [[self pushIOManager] trackEngagementMetric:PUSHIO_ENGAGEMENT_METRIC_INAPP_PURCHASE];
-                } else if([eventName.lowercaseString isEqualToString:ENGAGEMENT_METRIC_PREMIUM_CONTENT]){
-                    [[self pushIOManager] trackEngagementMetric:PUSHIO_ENGAGEMENT_METRIC_PREMIUM_CONTENT];
-                }
-            }
-            break;
-        case MPEventTypeOther:
-            if (nil != eventName && eventName.length) {
-                if ([eventName.lowercaseString isEqualToString:ENGAGEMENT_METRIC_OTHER.lowercaseString]) {
-                    [[self pushIOManager] trackEngagementMetric:PUSHIO_ENGAGEMENT_METRIC_OTHER];
                 }
             }
             break;
