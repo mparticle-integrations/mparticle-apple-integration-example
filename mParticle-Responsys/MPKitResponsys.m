@@ -92,9 +92,6 @@ NSString * const CUSTOM_FLAG_ENGAGEMENT = @"Responsys.Custom.e";
             [[self pushIOManager] setConversionURL:[NSURL URLWithString:coversionURLString]];
             [[self pushIOManager] setRIAppID: riAppID];
             [[self pushIOManager] setLogLevel:(([MParticle sharedInstance].environment == MPEnvironmentDevelopment) ? PIOLogLevelVerbose : PIOLogLevelError)];
-            [[self pushIOManager] registerForAllRemoteNotificationTypes:^(NSError *error, NSString *response) {
-                //Error populated if failed to register.
-            }];
         }else{
             //Failed to configure. No retrial needed. Check the APIKey and AccountToken and try again.
         }
