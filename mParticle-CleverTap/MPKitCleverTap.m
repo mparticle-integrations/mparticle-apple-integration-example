@@ -9,11 +9,8 @@
 
 @implementation MPKitCleverTap
 
-/*
-    mParticle will supply a unique kit code for you. Please contact our team
-*/
 + (NSNumber *)kitCode {
-    return @123;
+    return @123; // TODO
 }
 
 + (void)load {
@@ -29,25 +26,24 @@
 
 #pragma mark Kit instance and lifecycle
 - (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
-    NSString *apiKey = configuration[@"<dictionary key to retrieve API Key>"];
-    if (!apiKey) {
+    NSString *accountID = [configuration objectForKey:@"clevertap_account_id"];
+    NSString *accountToken = [configuration objectForKey:@"clevertap_account_token"];
+    if (![accountID isKindOfClass:[NSString class]] || [accountID length] == 0 || ![accountToken isKindOfClass:[NSString class]] || [accountToken length] == 0) {
         return [self execStatus:MPKitReturnCodeRequirementsNotMet];
     }
-
     _configuration = configuration;
-
     [self start];
-
     return [self execStatus:MPKitReturnCodeSuccess];
 }
 
 - (void)start {
     static dispatch_once_t kitPredicate;
-
     dispatch_once(&kitPredicate, ^{
-        /*
-            Start your SDK here. The configuration dictionary can be retrieved from self->_configuration
-         */
+        NSString *accountID = [self->_configuration objectForKey:@"clevertap_account_id"];
+        NSString *accountToken = [self->_configuration objectForKey:@"clevertap_account_token"];
+        NSString *region = [self->_configuration objectForKey:@"region"];
+        [CleverTap setCredentialsWithAccountID:accountID token:accountToken region:region];
+        [[CleverTap sharedInstance] notifyApplicationLaunchedWithOptions:nil];
 
         self->_started = YES;
 
@@ -65,257 +61,201 @@
     if (![self started]) {
         return nil;
     }
-
-    /*
-        If your company SDK instance is available and is applicable (Please return nil if your SDK is based on class methods)
-     */
-    BOOL kitInstanceAvailable = NO;
-    if (kitInstanceAvailable) {
-        /* Return an instance of your company's SDK (if applicable) */
-        return nil;
-    } else {
-        return nil;
-    }
+    return [CleverTap sharedInstance];
 }
 
 
 #pragma mark Application
-/*
-    Implement this method if your SDK handles a user interacting with a remote notification action
-*/
-// - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+#if TARGET_OS_IOS == 1 && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+- (nonnull MPKitExecStatus *)userNotificationCenter:(nonnull UNUserNotificationCenter *)center didReceiveNotificationResponse:(nonnull UNNotificationResponse *)response  API_AVAILABLE(ios(10.0)){
+    [CleverTap handlePushNotification:response.notification.request.content.userInfo openDeepLinksInForeground:YES];
+    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppboy) returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
+}
+#endif
+ - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
+     [[CleverTap sharedInstance] handleNotificationWithData:userInfo];
+     return [self execStatus:MPKitReturnCodeSuccess];
+}
 
-/*
-    Implement this method if your SDK receives and handles remote notifications
-*/
-// - (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+- (nonnull MPKitExecStatus *)handleActionWithIdentifier:(nullable NSString *)identifier
+                                  forRemoteNotification:(nonnull NSDictionary *)userInfo
+                                       withResponseInfo:(nonnull NSDictionary *)responseInfo {
+    [[CleverTap sharedInstance] handleNotificationWithData:userInfo];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
 
-/*
-    Implement this method if your SDK registers the device token for remote notifications
-*/
-// - (MPKitExecStatus *)setDeviceToken:(NSData *)deviceToken {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+- (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
+    [[CleverTap sharedInstance] handleNotificationWithData:userInfo];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
 
-/*
-    Implement this method if your SDK handles continueUserActivity method from the App Delegate
-*/
-// - (nonnull MPKitExecStatus *)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+ - (MPKitExecStatus *)setDeviceToken:(NSData *)deviceToken {
+     [[CleverTap sharedInstance] setPushToken:deviceToken];
+     return [self execStatus:MPKitReturnCodeSuccess];
+}
 
-/*
-    Implement this method if your SDK handles the iOS 9 and above App Delegate method to open URL with options
-*/
-// - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url options:(nullable NSDictionary<NSString *, id> *)options {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+- (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url options:(nullable NSDictionary<NSString *, id> *)options {
+     [[CleverTap sharedInstance] handleOpenURL:url sourceApplication:nil];
+     return [self execStatus:MPKitReturnCodeSuccess];
+}
 
-/*
-    Implement this method if your SDK handles the iOS 8 and below App Delegate method open URL
-*/
-// - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nullable id)annotation {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+- (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nullable id)annotation {
+    [[CleverTap sharedInstance] handleOpenURL:url sourceApplication:nil];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
+
+#pragma mark Location tracking
+#if TARGET_OS_IOS == 1
+- (nonnull MPKitExecStatus *)setLocation:(nonnull CLLocation *)location {
+    [CleverTap setLocation:location.coordinate];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
+#endif
 
 #pragma mark User attributes
-/*
-    Implement this method if your SDK allows for incrementing numeric user attributes.
-*/
-//- (MPKitExecStatus *)onIncrementUserAttribute:(FilteredMParticleUser *)user {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (nonnull MPKitExecStatus *)removeUserAttribute:(nonnull NSString *)key {
+    [[CleverTap sharedInstance] profileRemoveValueForKey:key];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
 
-/*
-    Implement this method if your SDK resets user attributes.
-*/
-//- (MPKitExecStatus *)onRemoveUserAttribute:(FilteredMParticleUser *)user {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (nonnull MPKitExecStatus *)setUserAttribute:(nonnull NSString *)key value:(nonnull id)value {
+    if ([value isKindOfClass:[NSDictionary class]]) {
+        return [self execStatus:MPKitReturnCodeRequirementsNotMet];
+    }
+    
+    NSMutableDictionary *profile = [NSMutableDictionary new];
+    
+    if ([key isEqualToString:@"name"]) {
+        profile[@"Name"] = value;
+    } else if ([key isEqualToString:mParticleUserAttributeMobileNumber] || [key isEqualToString:@"$MPUserMobile"] || [key isEqualToString:@"phone"]) {
+        profile[@"Phone"] =  [NSString stringWithFormat:@"%@", value];
+        profile[key] = value;
+    } else if ([key isEqualToString:mParticleUserAttributeGender]) {
+        profile[@"Gender"] = [value isEqualToString:mParticleGenderMale] ? @"M" : @"F";
+    } else if ([key isEqualToString:@"birthday"] && [value isKindOfClass:[NSString class]]) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+        [dateFormatter setLocale:enUSPOSIXLocale];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+        profile[@"DOB"] = [dateFormatter dateFromString:value];
+    } else {
+        profile[key] = value;
+    }
+    
+    if ([profile count] <= 0) {
+        return [self execStatus:MPKitReturnCodeRequirementsNotMet];
+    }
+    
+    [[CleverTap sharedInstance] profilePush:profile];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
 
-/*
-    Implement this method if your SDK sets user attributes.
-*/
-//- (MPKitExecStatus *)onSetUserAttribute:(FilteredMParticleUser *)user {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (nonnull MPKitExecStatus *)setUserAttribute:(nonnull NSString *)key values:(nonnull NSArray *)values {
+    [[CleverTap sharedInstance] profileAddMultiValues:values forKey:key];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
 
-/*
-    Implement this method if your SDK supports setting value-less attributes
-*/
-//- (MPKitExecStatus *)onSetUserTag:(FilteredMParticleUser *)user {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (nonnull MPKitExecStatus *)setUserIdentity:(nullable NSString *)identityString identityType:(MPUserIdentity)identityType {
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
 
-#pragma mark Identity
-/*
-    Implement this method if your SDK should be notified any time the mParticle ID (MPID) changes. This will occur on initial install of the app, and potentially after a login or logout.
-*/
-//- (MPKitExecStatus *)onIdentifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (nonnull MPKitExecStatus *)onLoginComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+    return [self updateUser:user request:request isLogin:YES];
+}
 
-/*
-    Implement this method if your SDK should be notified when the user logs in
-*/
-//- (MPKitExecStatus *)onLoginComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (nonnull MPKitExecStatus *)onIdentifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+     return [self updateUser:user request:request isLogin:NO];
+}
 
-/*
-    Implement this method if your SDK should be notified when the user logs out
-*/
-//- (MPKitExecStatus *)onLogoutComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (nonnull MPKitExecStatus *)onModifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+    return [self updateUser:user request:request isLogin:NO];
+}
 
-/*
-    Implement this method if your SDK should be notified when user identities change
-*/
-//- (MPKitExecStatus *)onModifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (nonnull MPKitExecStatus *)updateUser:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request isLogin:(Boolean)isLogin {
+    
+    NSMutableDictionary *userIDsCopy = (request.userIdentities != nil) ? [request.userIdentities copy] : [NSDictionary new];
+    NSMutableDictionary *profile = [NSMutableDictionary new];
+    
+    if (userIDsCopy[@(MPUserIdentityCustomerId)]) {
+        profile[@"Identity"] = userIDsCopy[@(MPUserIdentityCustomerId)];
+    }
+    if (userIDsCopy[@(MPUserIdentityEmail)]) {
+        profile[@"Email"] = userIDsCopy[@(MPUserIdentityEmail)];
+    }
+    if (userIDsCopy[@(MPUserIdentityFacebook)]) {
+        profile[@"FBID"] = userIDsCopy[@(MPUserIdentityFacebook)];
+    }
+    if (userIDsCopy[@(MPUserIdentityGoogle)]) {
+        profile[@"GPID"] = userIDsCopy[@(MPUserIdentityGoogle)];
+    }
+    if ([profile count] <= 0) {
+        return [self execStatus:MPKitReturnCodeRequirementsNotMet];
+    }
+    if (isLogin) {
+        [[CleverTap sharedInstance] onUserLogin:profile];
+    } else {
+        [[CleverTap sharedInstance] profilePush:profile];
+    }
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
 
 #pragma mark e-Commerce
-/*
-    Implement this method if your SDK supports commerce events.
-    If your SDK does support commerce event, but does not support all commerce event actions available in the mParticle SDK,
-    expand the received commerce event into regular events and log them accordingly (see sample code below)
-    Please see MPCommerceEvent.h > MPCommerceEventAction for complete list
-*/
-// - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess forwardCount:0];
-//
-//     // In this example, this SDK only supports the 'Purchase' commerce event action
-//     if (commerceEvent.action == MPCommerceEventActionPurchase) {
-//             /* Your code goes here. */
-//
-//             [execStatus incrementForwardCount];
-//         }
-//     } else { // Other commerce events are expanded and logged as regular events
-//         NSArray *expandedInstructions = [commerceEvent expandedInstructions];
-//
-//         for (MPCommerceEventInstruction *commerceEventInstruction in expandedInstructions) {
-//             [self logEvent:commerceEventInstruction.event];
-//             [execStatus incrementForwardCount];
-//         }
-//     }
-//
-//     return execStatus;
-// }
+- (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
+     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess forwardCount:0];
+     if (commerceEvent.action == MPCommerceEventActionPurchase) {
+         NSMutableDictionary *details = [NSMutableDictionary new];
+         NSMutableArray *items = [NSMutableArray new];
+         
+         NSDictionary *transactionAttributes = [commerceEvent.transactionAttributes beautifiedDictionaryRepresentation];
+         if (transactionAttributes) {
+             [details addEntriesFromDictionary:transactionAttributes];
+         }
+         NSDictionary *commerceEventAttributes = [commerceEvent beautifiedAttributes];
+         NSArray *keys = @[kMPExpCECheckoutOptions, kMPExpCECheckoutStep, kMPExpCEProductListName, kMPExpCEProductListSource];
+         
+         for (NSString *key in keys) {
+             if (commerceEventAttributes[key]) {
+                 details[key] = commerceEventAttributes[key];
+             }
+         }
+         
+         NSArray *products = commerceEvent.products;
+         for (MPProduct *product in products) {
+             [items addObject: [product beautifiedAttributes]];
+         }
+    
+         [[CleverTap sharedInstance] recordChargedEventWithDetails:details andItems:items];
+         [execStatus incrementForwardCount];
+     } else {
+         NSArray *expandedInstructions = [commerceEvent expandedInstructions];
+         for (MPCommerceEventInstruction *commerceEventInstruction in expandedInstructions) {
+             [self logEvent:commerceEventInstruction.event];
+             [execStatus incrementForwardCount];
+         }
+     }
+     return execStatus;
+}
 
 #pragma mark Events
-/*
-    Implement this method if your SDK logs user events.
-    Please see MPEvent.h
-*/
-// - (MPKitExecStatus *)logEvent:(MPEvent *)event {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+- (MPKitExecStatus *)logEvent:(MPEvent *)event {
+    [[CleverTap sharedInstance] recordEvent:event.name withProps:event.info];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
 
-/*
-    Implement this method if your SDK logs screen events
-    Please see MPEvent.h
-*/
-// - (MPKitExecStatus *)logScreen:(MPEvent *)event {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+- (MPKitExecStatus *)logScreen:(MPEvent *)event {
+    NSString *screenName = event.name;
+    if (!screenName) {
+         return [self execStatus:MPKitReturnCodeRequirementsNotMet];
+    }
+    [[CleverTap sharedInstance] recordScreenView:screenName];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
 
 #pragma mark Assorted
-/*
-    Implement this method if your SDK implements an opt out mechanism for users.
-*/
-// - (MPKitExecStatus *)setOptOut:(BOOL)optOut {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+- (MPKitExecStatus *)setOptOut:(BOOL)optOut {
+    [[CleverTap sharedInstance] setOptOut:optOut];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
 
 @end
