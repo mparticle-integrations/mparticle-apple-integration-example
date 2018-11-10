@@ -10,7 +10,7 @@
 @implementation MPKitCleverTap
 
 + (NSNumber *)kitCode {
-    return @123; // TODO
+    return @135;
 }
 
 + (void)load {
