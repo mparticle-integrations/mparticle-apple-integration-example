@@ -26,8 +26,8 @@
 
 #pragma mark Kit instance and lifecycle
 - (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
-    NSString *accountID = [configuration objectForKey:@"clevertap_account_id"];
-    NSString *accountToken = [configuration objectForKey:@"clevertap_account_token"];
+    NSString *accountID = [configuration objectForKey:@"AccountID"];
+    NSString *accountToken = [configuration objectForKey:@"AccountToken"];
     if (![accountID isKindOfClass:[NSString class]] || [accountID length] == 0 || ![accountToken isKindOfClass:[NSString class]] || [accountToken length] == 0) {
         return [self execStatus:MPKitReturnCodeRequirementsNotMet];
     }
@@ -39,9 +39,9 @@
 - (void)start {
     static dispatch_once_t kitPredicate;
     dispatch_once(&kitPredicate, ^{
-        NSString *accountID = [self->_configuration objectForKey:@"clevertap_account_id"];
-        NSString *accountToken = [self->_configuration objectForKey:@"clevertap_account_token"];
-        NSString *region = [self->_configuration objectForKey:@"region"];
+        NSString *accountID = [self->_configuration objectForKey:@"AccountID"];
+        NSString *accountToken = [self->_configuration objectForKey:@"AccountToken"];
+        NSString *region = [self->_configuration objectForKey:@"Region"];
         [CleverTap setCredentialsWithAccountID:accountID token:accountToken region:region];
         [[CleverTap sharedInstance] notifyApplicationLaunchedWithOptions:nil];
 
