@@ -7,6 +7,11 @@
 #import "CleverTap.h"
 #endif
 
+NSString *const ctAccountID = @"AccountID";
+NSString *const ctAccountToken = @"AccountToken";
+NSString *const ctRegion = @"Region";
+NSString *const ctCleverTapIdIntegrationKey = @"clevertap_id_integration_setting";
+
 @implementation MPKitCleverTap
 
 + (NSNumber *)kitCode {
@@ -26,8 +31,8 @@
 
 #pragma mark Kit instance and lifecycle
 - (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
-    NSString *accountID = [configuration objectForKey:@"AccountID"];
-    NSString *accountToken = [configuration objectForKey:@"AccountToken"];
+    NSString *accountID = [configuration objectForKey:ctAccountID ];
+    NSString *accountToken = [configuration objectForKey:ctAccountToken];
     if (![accountID isKindOfClass:[NSString class]] || [accountID length] == 0 || ![accountToken isKindOfClass:[NSString class]] || [accountToken length] == 0) {
         return [self execStatus:MPKitReturnCodeRequirementsNotMet];
     }
@@ -39,9 +44,9 @@
 - (void)start {
     static dispatch_once_t kitPredicate;
     dispatch_once(&kitPredicate, ^{
-        NSString *accountID = [self->_configuration objectForKey:@"AccountID"];
-        NSString *accountToken = [self->_configuration objectForKey:@"AccountToken"];
-        NSString *region = [self->_configuration objectForKey:@"Region"];
+        NSString *accountID = [self->_configuration objectForKey:ctAccountID ];
+        NSString *accountToken = [self->_configuration objectForKey:ctAccountToken];
+        NSString *region = [self->_configuration objectForKey:ctRegion];
         [CleverTap setCredentialsWithAccountID:accountID token:accountToken region:region];
         [[CleverTap sharedInstance] notifyApplicationLaunchedWithOptions:nil];
 
@@ -49,11 +54,16 @@
 
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
-
             [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
                                                                 object:nil
                                                               userInfo:userInfo];
         });
+        
+        NSString *cleverTapID = [[CleverTap sharedInstance] profileGetCleverTapID];
+        if (cleverTapID){
+            NSDictionary<NSString *, NSString *> *integrationAttributes = @{ctCleverTapIdIntegrationKey:cleverTapID};
+            [[MParticle sharedInstance] setIntegrationAttributes:integrationAttributes forKit:[[self class] kitCode]];
+        }
     });
 }
 
