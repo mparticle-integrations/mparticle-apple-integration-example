@@ -16,7 +16,7 @@
 }
 
 - (void)testModuleID {
-    XCTAssertEqualObjects([MPKitFollowAnalytics kitCode], @123);
+    XCTAssertEqualObjects([MPKitFollowAnalytics kitCode], 132);
 }
 
 - (void)testStarted {

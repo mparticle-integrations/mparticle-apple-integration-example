@@ -58,7 +58,7 @@
 
     Class klass = NSClassFromString(@"FollowAnalytics");
     if (!klass) {
-        NSLog(@"You must initialize the FollowAnalytics SDK before starting mParticle. Please refer to https://dev.followanalytics.com/sdks/ios/documentation.");
+        NSLog(@"The FollowAnalytics SDK was not detected. Please refer to https://dev.followanalytics.com/sdks/ios/documentation.");
         execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeRequirementsNotMet];
         return execStatus;
     }
@@ -126,14 +126,10 @@
     return execStatus;
 }
 
-- (MPKitExecStatus *)logScreen:(MPEvent *)event {
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceFollowAnalytics) returnCode:MPKitReturnCodeSuccess];
-    return execStatus;
-}
 
 #pragma mark Assorted
  - (MPKitExecStatus *)setOptOut:(BOOL)optOut {
-     [FollowAnalytics setOptInAnalytics:optOut];
+     [FollowAnalytics setOptInAnalytics:!optOut];
      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceFollowAnalytics) returnCode:MPKitReturnCodeSuccess];
      return execStatus;
  }
