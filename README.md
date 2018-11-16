@@ -26,7 +26,7 @@ This repository contains the [FollowAnalytics](https://www.followanalytics.com/)
 
 ### Documentation
 
-[Example integration](https://docs.mparticle.com/integrations/FollowAnalytics/event/)
+[FollowAnalytics Event](https://docs.mparticle.com/integrations/FollowAnalytics/event/)
 
 ### License
 
