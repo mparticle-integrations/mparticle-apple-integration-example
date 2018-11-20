@@ -11,6 +11,8 @@ NSString *const ctAccountID = @"AccountID";
 NSString *const ctAccountToken = @"AccountToken";
 NSString *const ctRegion = @"Region";
 NSString *const ctCleverTapIdIntegrationKey = @"clevertap_id_integration_setting";
+NSString *const kCTTransactionID = @"Transaction Id";
+NSString *const kCTChargedID = @"Charged ID";
 
 @implementation MPKitCleverTap
 
@@ -51,19 +53,18 @@ NSString *const ctCleverTapIdIntegrationKey = @"clevertap_id_integration_setting
         [[CleverTap sharedInstance] notifyApplicationLaunchedWithOptions:nil];
 
         self->_started = YES;
-
+        
+        NSString *cleverTapID = [[CleverTap sharedInstance] profileGetCleverTapID];
+        if (cleverTapID) {
+            NSDictionary<NSString *, NSString *> *integrationAttributes = @{ctCleverTapIdIntegrationKey:cleverTapID};
+            [[MParticle sharedInstance] setIntegrationAttributes:integrationAttributes forKit:[[self class] kitCode]];
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
             [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
                                                                 object:nil
                                                               userInfo:userInfo];
         });
-        
-        NSString *cleverTapID = [[CleverTap sharedInstance] profileGetCleverTapID];
-        if (cleverTapID){
-            NSDictionary<NSString *, NSString *> *integrationAttributes = @{ctCleverTapIdIntegrationKey:cleverTapID};
-            [[MParticle sharedInstance] setIntegrationAttributes:integrationAttributes forKit:[[self class] kitCode]];
-        }
     });
 }
 
@@ -147,8 +148,10 @@ NSString *const ctCleverTapIdIntegrationKey = @"clevertap_id_integration_setting
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
         [dateFormatter setLocale:enUSPOSIXLocale];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
-        profile[@"DOB"] = [dateFormatter dateFromString:value];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZZZ"];
+        NSDate *d = [dateFormatter dateFromString:value];
+        profile[@"DOB"] = d;
+        profile[key] = value;
     } else {
         profile[key] = value;
     }
@@ -229,12 +232,14 @@ NSString *const ctCleverTapIdIntegrationKey = @"clevertap_id_integration_setting
                  details[key] = commerceEventAttributes[key];
              }
          }
-         
+         NSString *transactionId = commerceEventAttributes[kCTTransactionID];
+         if (transactionId) {
+             details[kCTChargedID] = transactionId;
+         }
          NSArray *products = commerceEvent.products;
          for (MPProduct *product in products) {
              [items addObject: [product beautifiedAttributes]];
          }
-    
          [[CleverTap sharedInstance] recordChargedEventWithDetails:details andItems:items];
          [execStatus incrementForwardCount];
      } else {

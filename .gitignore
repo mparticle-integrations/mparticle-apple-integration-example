@@ -66,4 +66,4 @@ fastlane/test_output
 **/*.xcworkspace
 **/Cartfile.resolved
 **/Pods
-
+KitsExample
