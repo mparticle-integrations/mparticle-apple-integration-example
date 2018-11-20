@@ -7,13 +7,13 @@ This repository contains the [CleverTap](https://www.clevertap.com/) integration
 1. Add the kit dependency to your app's Podfile or Cartfile:
 
     ```
-    pod 'mParticle-Example', '~> 1.2'
+    pod 'mParticle-CleverTap', '~> 1.2'
     ```
 
     OR
 
     ```
-    github 'mparticle-integrations/mparticle-apple-integration-example' ~> 1.2.3
+    github 'mparticle-integrations/mparticle-apple-integration-clevertap' ~> 1.2.3
     ```
 
 2. Follow the mParticle iOS SDK [quick-start](https://github.com/mParticle/mparticle-apple-sdk), then rebuild and launch your app, and verify that you see `"Included kits: { Example }"` in your Xcode console 
