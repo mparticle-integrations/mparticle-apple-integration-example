@@ -16,8 +16,8 @@
 }
 
 - (void)testModuleID {
-    XCTAssertEqualObjects([MPKitCleverTap kitCode], @123);
-}0
+    XCTAssertEqualObjects([MPKitCleverTap kitCode], @135);
+}
 
 - (void)testStarted {
     MPKitCleverTap *clevertapKit = [[MPKitCleverTap alloc] init];

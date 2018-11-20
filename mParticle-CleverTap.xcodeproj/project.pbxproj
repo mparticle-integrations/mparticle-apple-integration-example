@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D02BDC6521A3B03100209F59 /* CleverTapSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D076C317218E3DEE00185E1A /* CleverTapSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D02BDC6621A3B03500209F59 /* mParticle_Apple_SDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D071FD9C21A3AB600060F803 /* CleverTapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D076C317218E3DEE00185E1A /* CleverTapSDK.framework */; };
+		D071FD9D21A3AB630060F803 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
 		D076C318218E3DEE00185E1A /* CleverTapSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D076C317218E3DEE00185E1A /* CleverTapSDK.framework */; };
 		D076C320218E413700185E1A /* mParticle_CleverTapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D076C31F218E413700185E1A /* mParticle_CleverTapTests.m */; };
 		D076C322218E413700185E1A /* mParticle_CleverTap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A5B1DC1478A00A7B188 /* mParticle_CleverTap.framework */; };
@@ -16,17 +20,22 @@
 		DBB01A6B1DC1491D00A7B188 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		D076C323218E413700185E1A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBB01A521DC1478A00A7B188 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DBB01A5A1DC1478A00A7B188;
-			remoteInfo = "mParticle-CleverTap";
+/* Begin PBXCopyFilesBuildPhase section */
+		D02BDC6421A3B02600209F59 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D02BDC6621A3B03500209F59 /* mParticle_Apple_SDK.framework in CopyFiles */,
+				D02BDC6521A3B03100209F59 /* CleverTapSDK.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXContainerItemProxy section */
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D071FD9A21A3A9700060F803 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		D076C317218E3DEE00185E1A /* CleverTapSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleverTapSDK.framework; path = Carthage/Build/iOS/CleverTapSDK.framework; sourceTree = "<group>"; };
 		D076C31D218E413700185E1A /* mParticle_CleverTapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mParticle_CleverTapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D076C31F218E413700185E1A /* mParticle_CleverTapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mParticle_CleverTapTests.m; sourceTree = "<group>"; };
@@ -44,7 +53,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D071FD9C21A3AB600060F803 /* CleverTapSDK.framework in Frameworks */,
 				D076C322218E413700185E1A /* mParticle_CleverTap.framework in Frameworks */,
+				D071FD9D21A3AB630060F803 /* mParticle_Apple_SDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +115,7 @@
 		FF13226121878D9C002AA653 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D071FD9A21A3A9700060F803 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -130,11 +142,11 @@
 				D076C319218E413700185E1A /* Sources */,
 				D076C31A218E413700185E1A /* Frameworks */,
 				D076C31B218E413700185E1A /* Resources */,
+				D02BDC6421A3B02600209F59 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D076C324218E413700185E1A /* PBXTargetDependency */,
 			);
 			name = mParticle_CleverTapTests;
 			productName = mParticle_CleverTapTests;
@@ -234,14 +246,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		D076C324218E413700185E1A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DBB01A5A1DC1478A00A7B188 /* mParticle-CleverTap */;
-			targetProxy = D076C323218E413700185E1A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
 		D076C326218E413700185E1A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -253,6 +257,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A5J34NR598;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = mParticle_CleverTapTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -261,6 +269,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.clevertap.mParticle-CleverTapTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -275,6 +284,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A5J34NR598;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = mParticle_CleverTapTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -282,6 +295,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.clevertap.mParticle-CleverTapTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
