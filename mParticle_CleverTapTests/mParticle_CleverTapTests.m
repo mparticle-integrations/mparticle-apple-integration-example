@@ -21,7 +21,7 @@
 
 - (void)testStarted {
     MPKitCleverTap *clevertapKit = [[MPKitCleverTap alloc] init];
-    [clevertapKit didFinishLaunchingWithConfiguration:@{@"<dictionary key to retrieve API Key>":@"12345"}];
+    [clevertapKit didFinishLaunchingWithConfiguration:@{@"AccountID":@"12345", @"AccountToken":@"54321"}];
     XCTAssertTrue(clevertapKit.started);
 }
 
