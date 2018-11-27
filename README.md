@@ -24,7 +24,7 @@ This repository contains the [Example](https://www.example.com/) integration for
 
 ### Documentation
 
-[Example integration](https://docs.mparticle.com/integrations/REPLACEME/event/)
+[Example integration](https://docs.mparticle.com/developers/partners/kit-integrations/ios-kit/)
 
 ### License
 
