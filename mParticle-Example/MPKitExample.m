@@ -1,24 +1,24 @@
 #import "MPKitExample.h"
+#import <Pilgrim/Pilgrim.h>
 
-/* Import your header file here
-*/
-//#if defined(__has_include) && __has_include(<Example/Example.h>)
-//#import <Example/Example.h>
-//#else
-//#import "Example.h"
-//#endif
+NSString *const PILGRIM_SDK_KEY = @"pilgrim_sdk_key";
+NSString *const PILGRIM_SDK_SECRET = @"pilgrim_sdk_secret";
+NSString *const PERSIST_LOGS = @"pilgrim_sdk_persistent_logs";
+NSString *const MPARTICLE_USER_ID = @"mParticleUserId";
+
+@interface MPKitExample() {
+    FSQPPilgrimManager *pilgrimManager;
+}
+
+@end
 
 @implementation MPKitExample
-
-/*
-    mParticle will supply a unique kit code for you. Please contact our team
-*/
 + (NSNumber *)kitCode {
-    return @123;
+    return @211;
 }
 
 + (void)load {
-    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"Example" className:@"MPKitExample"];
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"Pilgrim" className:@"MPKitPilgrim"];
     [MParticle registerExtension:kitRegister];
 }
 
@@ -30,10 +30,20 @@
 
 #pragma mark Kit instance and lifecycle
 - (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
-    NSString *apiKey = configuration[@"<dictionary key to retrieve API Key>"];
-    if (!apiKey) {
+    NSString *consumerKey = configuration[PILGRIM_SDK_KEY];
+    NSString *secretKey = configuration[PILGRIM_SDK_SECRET];
+    BOOL persistLogs = configuration[PERSIST_LOGS];
+    if (!consumerKey || !secretKey) {
         return [self execStatus:MPKitReturnCodeRequirementsNotMet];
     }
+    pilgrimManager = [FSQPPilgrimManager sharedManager];
+    if (!pilgrimManager) {
+        return nil;
+    }
+
+    [pilgrimManager configureWithConsumerKey:consumerKey secret:secretKey delegate:nil completion:nil];
+
+    pilgrimManager.debugLogsEnabled = persistLogs;
 
     _configuration = configuration;
 
@@ -43,14 +53,13 @@
 }
 
 - (void)start {
+
     static dispatch_once_t kitPredicate;
 
     dispatch_once(&kitPredicate, ^{
-        /*
-            Start your SDK here. The configuration dictionary can be retrieved from self->_configuration
-         */
-
         self->_started = YES;
+
+        [pilgrimManager start];
 
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
@@ -62,13 +71,23 @@
     });
 }
 
+- (void)updateUserWithMParticleUser:(FilteredMParticleUser *)mparticleUser {
+    FSQPUserInfo *userInfo = [pilgrimManager userInfo];
+    NSString *mParticleUserId = [mparticleUser.userId stringValue];
+    NSString *customerId = [mparticleUser.userIdentities objectForKey:@(MPUserIdentityCustomerId)];
+    if (customerId) {
+        [userInfo setUserId:customerId];
+    }
+    [userInfo setUserInfo:mParticleUserId forKey:MPARTICLE_USER_ID];
+}
+
 - (id const)providerKitInstance {
     if (![self started]) {
         return nil;
     }
 
     /*
-        If your company SDK instance is available and is applicable (Please return nil if your SDK is based on class methods)
+     If your company SDK instance is available and is applicable (Please return nil if your SDK is based on class methods)
      */
     BOOL kitInstanceAvailable = NO;
     if (kitInstanceAvailable) {
@@ -79,11 +98,26 @@
     }
 }
 
+#pragma mark Identity
+- (MPKitExecStatus *)onIdentifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+    [self updateUserWithMParticleUser:user];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
+
+- (MPKitExecStatus *)onLoginComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+    [self updateUserWithMParticleUser:user];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
+
+- (MPKitExecStatus *)onModifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+    [self updateUserWithMParticleUser:user];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
 
 #pragma mark Application
 /*
-    Implement this method if your SDK handles a user interacting with a remote notification action
-*/
+ Implement this method if your SDK handles a user interacting with a remote notification action
+ */
 // - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
@@ -94,8 +128,8 @@
 // }
 
 /*
-    Implement this method if your SDK receives and handles remote notifications
-*/
+ Implement this method if your SDK receives and handles remote notifications
+ */
 // - (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
@@ -106,8 +140,8 @@
 // }
 
 /*
-    Implement this method if your SDK registers the device token for remote notifications
-*/
+ Implement this method if your SDK registers the device token for remote notifications
+ */
 // - (MPKitExecStatus *)setDeviceToken:(NSData *)deviceToken {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
@@ -118,8 +152,8 @@
 // }
 
 /*
-    Implement this method if your SDK handles continueUserActivity method from the App Delegate
-*/
+ Implement this method if your SDK handles continueUserActivity method from the App Delegate
+ */
 // - (nonnull MPKitExecStatus *)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
@@ -130,8 +164,8 @@
 // }
 
 /*
-    Implement this method if your SDK handles the iOS 9 and above App Delegate method to open URL with options
-*/
+ Implement this method if your SDK handles the iOS 9 and above App Delegate method to open URL with options
+ */
 // - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url options:(nullable NSDictionary<NSString *, id> *)options {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
@@ -142,8 +176,8 @@
 // }
 
 /*
-    Implement this method if your SDK handles the iOS 8 and below App Delegate method open URL
-*/
+ Implement this method if your SDK handles the iOS 8 and below App Delegate method open URL
+ */
 // - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nullable id)annotation {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
@@ -155,8 +189,8 @@
 
 #pragma mark User attributes
 /*
-    Implement this method if your SDK allows for incrementing numeric user attributes.
-*/
+ Implement this method if your SDK allows for incrementing numeric user attributes.
+ */
 //- (MPKitExecStatus *)onIncrementUserAttribute:(FilteredMParticleUser *)user {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
@@ -167,8 +201,8 @@
 //}
 
 /*
-    Implement this method if your SDK resets user attributes.
-*/
+ Implement this method if your SDK resets user attributes.
+ */
 //- (MPKitExecStatus *)onRemoveUserAttribute:(FilteredMParticleUser *)user {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
@@ -179,8 +213,8 @@
 //}
 
 /*
-    Implement this method if your SDK sets user attributes.
-*/
+ Implement this method if your SDK sets user attributes.
+ */
 //- (MPKitExecStatus *)onSetUserAttribute:(FilteredMParticleUser *)user {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
@@ -191,58 +225,9 @@
 //}
 
 /*
-    Implement this method if your SDK supports setting value-less attributes
-*/
+ Implement this method if your SDK supports setting value-less attributes
+ */
 //- (MPKitExecStatus *)onSetUserTag:(FilteredMParticleUser *)user {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
-
-#pragma mark Identity
-/*
-    Implement this method if your SDK should be notified any time the mParticle ID (MPID) changes. This will occur on initial install of the app, and potentially after a login or logout.
-*/
-//- (MPKitExecStatus *)onIdentifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
-
-/*
-    Implement this method if your SDK should be notified when the user logs in
-*/
-//- (MPKitExecStatus *)onLoginComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
-
-/*
-    Implement this method if your SDK should be notified when the user logs out
-*/
-//- (MPKitExecStatus *)onLogoutComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
-
-/*
-    Implement this method if your SDK should be notified when user identities change
-*/
-//- (MPKitExecStatus *)onModifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
 //         Please see MPKitExecStatus.h for all exec status codes
@@ -253,11 +238,11 @@
 
 #pragma mark e-Commerce
 /*
-    Implement this method if your SDK supports commerce events.
-    If your SDK does support commerce event, but does not support all commerce event actions available in the mParticle SDK,
-    expand the received commerce event into regular events and log them accordingly (see sample code below)
-    Please see MPCommerceEvent.h > MPCommerceEventAction for complete list
-*/
+ Implement this method if your SDK supports commerce events.
+ If your SDK does support commerce event, but does not support all commerce event actions available in the mParticle SDK,
+ expand the received commerce event into regular events and log them accordingly (see sample code below)
+ Please see MPCommerceEvent.h > MPCommerceEventAction for complete list
+ */
 // - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
 //     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess forwardCount:0];
 //
@@ -281,9 +266,9 @@
 
 #pragma mark Events
 /*
-    Implement this method if your SDK logs user events.
-    Please see MPEvent.h
-*/
+ Implement this method if your SDK logs user events.
+ Please see MPEvent.h
+ */
 // - (MPKitExecStatus *)logEvent:(MPEvent *)event {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
@@ -294,9 +279,9 @@
 // }
 
 /*
-    Implement this method if your SDK logs screen events
-    Please see MPEvent.h
-*/
+ Implement this method if your SDK logs screen events
+ Please see MPEvent.h
+ */
 // - (MPKitExecStatus *)logScreen:(MPEvent *)event {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
@@ -308,8 +293,8 @@
 
 #pragma mark Assorted
 /*
-    Implement this method if your SDK implements an opt out mechanism for users.
-*/
+ Implement this method if your SDK implements an opt out mechanism for users.
+ */
 // - (MPKitExecStatus *)setOptOut:(BOOL)optOut {
 //     /*  Your code goes here.
 //         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.

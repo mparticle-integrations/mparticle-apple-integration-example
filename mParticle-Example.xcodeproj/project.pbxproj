@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5868204E21F27D3600933B03 /* Pilgrim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5868204D21F27D3600933B03 /* Pilgrim.framework */; };
 		DBB01A601DC1478A00A7B188 /* mParticle_Example.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB01A5E1DC1478A00A7B188 /* mParticle_Example.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBB01A681DC1480700A7B188 /* MPKitExample.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB01A661DC1480700A7B188 /* MPKitExample.h */; };
 		DBB01A691DC1480700A7B188 /* MPKitExample.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB01A671DC1480700A7B188 /* MPKitExample.m */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5868204D21F27D3600933B03 /* Pilgrim.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pilgrim.framework; path = Carthage/Build/iOS/Pilgrim.framework; sourceTree = "<group>"; };
 		DBB01A5B1DC1478A00A7B188 /* mParticle_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mParticle_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB01A5E1DC1478A00A7B188 /* mParticle_Example.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mParticle_Example.h; sourceTree = "<group>"; };
 		DBB01A5F1DC1478A00A7B188 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBB01A6B1DC1491D00A7B188 /* mParticle_Apple_SDK.framework in Frameworks */,
+				5868204E21F27D3600933B03 /* Pilgrim.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +105,7 @@
 		FF13226121878D9C002AA653 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5868204D21F27D3600933B03 /* Pilgrim.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -129,6 +133,7 @@
 				DBB01A571DC1478A00A7B188 /* Frameworks */,
 				DBB01A581DC1478A00A7B188 /* Headers */,
 				DBB01A591DC1478A00A7B188 /* Resources */,
+				5868204F21F27D4E00933B03 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -210,6 +215,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5868204F21F27D4E00933B03 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DBB01A561DC1478A00A7B188 /* Sources */ = {
