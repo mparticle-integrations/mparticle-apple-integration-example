@@ -1,4 +1,4 @@
-#import "MPKitExample.h"
+#import "MPKitPilgrim.h"
 #import <Pilgrim/Pilgrim.h>
 
 NSString *const PILGRIM_SDK_KEY = @"pilgrim_sdk_key";
@@ -6,13 +6,15 @@ NSString *const PILGRIM_SDK_SECRET = @"pilgrim_sdk_secret";
 NSString *const PERSIST_LOGS = @"pilgrim_sdk_persistent_logs";
 NSString *const MPARTICLE_USER_ID = @"mParticleUserId";
 
-@interface MPKitExample() {
-    FSQPPilgrimManager *pilgrimManager;
-}
+NS_ASSUME_NONNULL_BEGIN
+@interface MPKitPilgrim()
+
+@property(nonatomic, nullable) FSQPPilgrimManager *pilgrimManager;
 
 @end
+NS_ASSUME_NONNULL_END
 
-@implementation MPKitExample
+@implementation MPKitPilgrim
 + (NSNumber *)kitCode {
     return @211;
 }
@@ -30,20 +32,22 @@ NSString *const MPARTICLE_USER_ID = @"mParticleUserId";
 
 #pragma mark Kit instance and lifecycle
 - (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
-    NSString *consumerKey = configuration[PILGRIM_SDK_KEY];
-    NSString *secretKey = configuration[PILGRIM_SDK_SECRET];
-    BOOL persistLogs = configuration[PERSIST_LOGS];
+    NSString *consumerKey = [self stringOrNil:configuration[PILGRIM_SDK_KEY]];
+    NSString *secretKey = [self stringOrNil:configuration[PILGRIM_SDK_SECRET]];
+    BOOL persistLogs = [configuration[PERSIST_LOGS] boolValue];
+
     if (!consumerKey || !secretKey) {
         return [self execStatus:MPKitReturnCodeRequirementsNotMet];
     }
-    pilgrimManager = [FSQPPilgrimManager sharedManager];
-    if (!pilgrimManager) {
+
+    self.pilgrimManager = [FSQPPilgrimManager sharedManager];
+
+    if (!self.pilgrimManager) {
         return nil;
     }
 
-    [pilgrimManager configureWithConsumerKey:consumerKey secret:secretKey delegate:nil completion:nil];
-
-    pilgrimManager.debugLogsEnabled = persistLogs;
+    [self.pilgrimManager configureWithConsumerKey:consumerKey secret:secretKey delegate:nil completion:nil];
+    self.pilgrimManager.debugLogsEnabled = persistLogs;
 
     _configuration = configuration;
 
@@ -52,14 +56,17 @@ NSString *const MPARTICLE_USER_ID = @"mParticleUserId";
     return [self execStatus:MPKitReturnCodeSuccess];
 }
 
-- (void)start {
+- (NSString *) stringOrNil:(id _Nullable)value {
+    return [value isKindOfClass:[NSString class]] ? (NSString *)value : nil;
+}
 
+- (void)start {
     static dispatch_once_t kitPredicate;
 
     dispatch_once(&kitPredicate, ^{
         self->_started = YES;
 
-        [pilgrimManager start];
+        [self.pilgrimManager start];
 
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
@@ -72,30 +79,19 @@ NSString *const MPARTICLE_USER_ID = @"mParticleUserId";
 }
 
 - (void)updateUserWithMParticleUser:(FilteredMParticleUser *)mparticleUser {
-    FSQPUserInfo *userInfo = [pilgrimManager userInfo];
+    FSQPUserInfo *userInfo = [self.pilgrimManager userInfo];
     NSString *mParticleUserId = [mparticleUser.userId stringValue];
     NSString *customerId = [mparticleUser.userIdentities objectForKey:@(MPUserIdentityCustomerId)];
+
     if (customerId) {
         [userInfo setUserId:customerId];
     }
+
     [userInfo setUserInfo:mParticleUserId forKey:MPARTICLE_USER_ID];
 }
 
 - (id const)providerKitInstance {
-    if (![self started]) {
-        return nil;
-    }
-
-    /*
-     If your company SDK instance is available and is applicable (Please return nil if your SDK is based on class methods)
-     */
-    BOOL kitInstanceAvailable = NO;
-    if (kitInstanceAvailable) {
-        /* Return an instance of your company's SDK (if applicable) */
-        return nil;
-    } else {
-        return nil;
-    }
+    return nil;
 }
 
 #pragma mark Identity
@@ -113,79 +109,6 @@ NSString *const MPARTICLE_USER_ID = @"mParticleUserId";
     [self updateUserWithMParticleUser:user];
     return [self execStatus:MPKitReturnCodeSuccess];
 }
-
-#pragma mark Application
-/*
- Implement this method if your SDK handles a user interacting with a remote notification action
- */
-// - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
-
-/*
- Implement this method if your SDK receives and handles remote notifications
- */
-// - (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
-
-/*
- Implement this method if your SDK registers the device token for remote notifications
- */
-// - (MPKitExecStatus *)setDeviceToken:(NSData *)deviceToken {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
-
-/*
- Implement this method if your SDK handles continueUserActivity method from the App Delegate
- */
-// - (nonnull MPKitExecStatus *)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
-
-/*
- Implement this method if your SDK handles the iOS 9 and above App Delegate method to open URL with options
- */
-// - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url options:(nullable NSDictionary<NSString *, id> *)options {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
-
-/*
- Implement this method if your SDK handles the iOS 8 and below App Delegate method open URL
- */
-// - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nullable id)annotation {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
 
 #pragma mark User attributes
 /*
@@ -235,35 +158,6 @@ NSString *const MPARTICLE_USER_ID = @"mParticleUserId";
 //
 //     return [self execStatus:MPKitReturnCodeSuccess];
 //}
-
-#pragma mark e-Commerce
-/*
- Implement this method if your SDK supports commerce events.
- If your SDK does support commerce event, but does not support all commerce event actions available in the mParticle SDK,
- expand the received commerce event into regular events and log them accordingly (see sample code below)
- Please see MPCommerceEvent.h > MPCommerceEventAction for complete list
- */
-// - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess forwardCount:0];
-//
-//     // In this example, this SDK only supports the 'Purchase' commerce event action
-//     if (commerceEvent.action == MPCommerceEventActionPurchase) {
-//             /* Your code goes here. */
-//
-//             [execStatus incrementForwardCount];
-//         }
-//     } else { // Other commerce events are expanded and logged as regular events
-//         NSArray *expandedInstructions = [commerceEvent expandedInstructions];
-//
-//         for (MPCommerceEventInstruction *commerceEventInstruction in expandedInstructions) {
-//             [self logEvent:commerceEventInstruction.event];
-//             [execStatus incrementForwardCount];
-//         }
-//     }
-//
-//     return execStatus;
-// }
-
 #pragma mark Events
 /*
  Implement this method if your SDK logs user events.
