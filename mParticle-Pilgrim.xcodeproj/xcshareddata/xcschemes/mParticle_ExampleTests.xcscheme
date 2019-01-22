@@ -19,7 +19,7 @@
                BlueprintIdentifier = "FF0BB63A217A84E800B0556C"
                BuildableName = "mParticle_ExampleTests.xctest"
                BlueprintName = "mParticle_ExampleTests"
-               ReferencedContainer = "container:mParticle-Example.xcodeproj">
+               ReferencedContainer = "container:mParticle-Pilgrim.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

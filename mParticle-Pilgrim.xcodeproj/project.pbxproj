@@ -13,7 +13,7 @@
 		DBB01A691DC1480700A7B188 /* MPKitPilgrim.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB01A671DC1480700A7B188 /* MPKitPilgrim.m */; };
 		DBB01A6B1DC1491D00A7B188 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
 		FF0BB63E217A84E800B0556C /* mParticle_ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0BB63D217A84E800B0556C /* mParticle_ExampleTests.m */; };
-		FF0BB640217A84E800B0556C /* mParticle_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A5B1DC1478A00A7B188 /* mParticle_Example.framework */; };
+		FF0BB640217A84E800B0556C /* mParticle_Pilgrim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A5B1DC1478A00A7B188 /* mParticle_Pilgrim.framework */; };
 		FF13226221878D9C002AA653 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		5868204D21F27D3600933B03 /* Pilgrim.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pilgrim.framework; path = Carthage/Build/iOS/Pilgrim.framework; sourceTree = "<group>"; };
-		DBB01A5B1DC1478A00A7B188 /* mParticle_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mParticle_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBB01A5B1DC1478A00A7B188 /* mParticle_Pilgrim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mParticle_Pilgrim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB01A5E1DC1478A00A7B188 /* mParticle_Example.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mParticle_Example.h; sourceTree = "<group>"; };
 		DBB01A5F1DC1478A00A7B188 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBB01A661DC1480700A7B188 /* MPKitPilgrim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitPilgrim.h; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF0BB640217A84E800B0556C /* mParticle_Example.framework in Frameworks */,
+				FF0BB640217A84E800B0556C /* mParticle_Pilgrim.framework in Frameworks */,
 				FF13226221878D9C002AA653 /* mParticle_Apple_SDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,7 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */,
-				DBB01A5D1DC1478A00A7B188 /* mParticle-Example */,
+				DBB01A5D1DC1478A00A7B188 /* mParticle-Pilgrim */,
 				FF0BB63C217A84E800B0556C /* mParticle_ExampleTests */,
 				DBB01A5C1DC1478A00A7B188 /* Products */,
 				FF13226121878D9C002AA653 /* Frameworks */,
@@ -76,13 +76,13 @@
 		DBB01A5C1DC1478A00A7B188 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DBB01A5B1DC1478A00A7B188 /* mParticle_Example.framework */,
+				DBB01A5B1DC1478A00A7B188 /* mParticle_Pilgrim.framework */,
 				FF0BB63B217A84E800B0556C /* mParticle_ExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DBB01A5D1DC1478A00A7B188 /* mParticle-Example */ = {
+		DBB01A5D1DC1478A00A7B188 /* mParticle-Pilgrim */ = {
 			isa = PBXGroup;
 			children = (
 				DBB01A661DC1480700A7B188 /* MPKitPilgrim.h */,
@@ -90,7 +90,7 @@
 				DBB01A5E1DC1478A00A7B188 /* mParticle_Example.h */,
 				DBB01A5F1DC1478A00A7B188 /* Info.plist */,
 			);
-			path = "mParticle-Example";
+			path = "mParticle-Pilgrim";
 			sourceTree = "<group>";
 		};
 		FF0BB63C217A84E800B0556C /* mParticle_ExampleTests */ = {
@@ -125,9 +125,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		DBB01A5A1DC1478A00A7B188 /* mParticle-Example */ = {
+		DBB01A5A1DC1478A00A7B188 /* mParticle-Pilgrim */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DBB01A631DC1478A00A7B188 /* Build configuration list for PBXNativeTarget "mParticle-Example" */;
+			buildConfigurationList = DBB01A631DC1478A00A7B188 /* Build configuration list for PBXNativeTarget "mParticle-Pilgrim" */;
 			buildPhases = (
 				DBB01A561DC1478A00A7B188 /* Sources */,
 				DBB01A571DC1478A00A7B188 /* Frameworks */,
@@ -139,9 +139,9 @@
 			);
 			dependencies = (
 			);
-			name = "mParticle-Example";
+			name = "mParticle-Pilgrim";
 			productName = "mParticle-Example";
-			productReference = DBB01A5B1DC1478A00A7B188 /* mParticle_Example.framework */;
+			productReference = DBB01A5B1DC1478A00A7B188 /* mParticle_Pilgrim.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		FF0BB63A217A84E800B0556C /* mParticle_ExampleTests */ = {
@@ -181,7 +181,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-Example" */;
+			buildConfigurationList = DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-Pilgrim" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -193,7 +193,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DBB01A5A1DC1478A00A7B188 /* mParticle-Example */,
+				DBB01A5A1DC1478A00A7B188 /* mParticle-Pilgrim */,
 				FF0BB63A217A84E800B0556C /* mParticle_ExampleTests */,
 			);
 		};
@@ -258,7 +258,7 @@
 /* Begin PBXTargetDependency section */
 		FF0BB642217A84E800B0556C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DBB01A5A1DC1478A00A7B188 /* mParticle-Example */;
+			target = DBB01A5A1DC1478A00A7B188 /* mParticle-Pilgrim */;
 			targetProxy = FF0BB641217A84E800B0556C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -372,7 +372,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "mParticle-Example/Info.plist";
+				INFOPLIST_FILE = "mParticle-Pilgrim/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -394,7 +394,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "mParticle-Example/Info.plist";
+				INFOPLIST_FILE = "mParticle-Pilgrim/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -474,7 +474,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-Example" */ = {
+		DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-Pilgrim" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DBB01A611DC1478A00A7B188 /* Debug */,
@@ -483,7 +483,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DBB01A631DC1478A00A7B188 /* Build configuration list for PBXNativeTarget "mParticle-Example" */ = {
+		DBB01A631DC1478A00A7B188 /* Build configuration list for PBXNativeTarget "mParticle-Pilgrim" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DBB01A641DC1478A00A7B188 /* Debug */,
