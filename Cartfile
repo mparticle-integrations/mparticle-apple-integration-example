@@ -1,2 +1,3 @@
 #github "Example/Example" ~> 1.2.3
 github "mparticle/mparticle-apple-sdk" ~> 7.7.0
+binary "https://foursquare.jfrog.io/foursquare/pilgrimsdk-ios/Pilgrim.json" ~> 2.1.0

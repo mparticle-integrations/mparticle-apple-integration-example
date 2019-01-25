@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DBB01A5A1DC1478A00A7B188"
-               BuildableName = "mParticle_Example.framework"
-               BlueprintName = "mParticle-Example"
-               ReferencedContainer = "container:mParticle-Example.xcodeproj">
+               BuildableName = "mParticle_Pilgrim.framework"
+               BlueprintName = "mParticle-Pilgrim"
+               ReferencedContainer = "container:mParticle-Pilgrim.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DBB01A5A1DC1478A00A7B188"
-            BuildableName = "mParticle_Example.framework"
-            BlueprintName = "mParticle-Example"
-            ReferencedContainer = "container:mParticle-Example.xcodeproj">
+            BuildableName = "mParticle_Pilgrim.framework"
+            BlueprintName = "mParticle-Pilgrim"
+            ReferencedContainer = "container:mParticle-Pilgrim.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DBB01A5A1DC1478A00A7B188"
-            BuildableName = "mParticle_Example.framework"
-            BlueprintName = "mParticle-Example"
-            ReferencedContainer = "container:mParticle-Example.xcodeproj">
+            BuildableName = "mParticle_Pilgrim.framework"
+            BlueprintName = "mParticle-Pilgrim"
+            ReferencedContainer = "container:mParticle-Pilgrim.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
