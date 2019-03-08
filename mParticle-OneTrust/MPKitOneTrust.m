@@ -1,4 +1,4 @@
-#import "MPKitExample.h"
+#import "MPKitOneTrust.h"
 
 /* Import your header file here
 */
@@ -8,17 +8,17 @@
 //#import "Example.h"
 //#endif
 
-@implementation MPKitExample
+@implementation MPKitOneTrust
 
 /*
     mParticle will supply a unique kit code for you. Please contact our team
 */
 + (NSNumber *)kitCode {
-    return @123;
+    return @134;
 }
 
 + (void)load {
-    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"Example" className:@"MPKitExample"];
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"OneTrust" className:@"MPKitOneTrust"];
     [MParticle registerExtension:kitRegister];
 }
 
@@ -30,7 +30,7 @@
 
 #pragma mark Kit instance and lifecycle
 - (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
-    NSString *apiKey = configuration[@"<dictionary key to retrieve API Key>"];
+    NSString *apiKey = configuration[@"mobileConsentGroups"];
     if (!apiKey) {
         return [self execStatus:MPKitReturnCodeRequirementsNotMet];
     }
@@ -46,10 +46,15 @@
     static dispatch_once_t kitPredicate;
 
     dispatch_once(&kitPredicate, ^{
+        
+        // Save Purpose mapping for use by OneTrust Mobile SDK
         /*
-            Start your SDK here. The configuration dictionary can be retrieved from self->_configuration
+         * @"consentGroups" = Web consent groups
+         * @"mobileConsentGroups" = Mobile consent groups
          */
-
+        NSString* purposeMappingDict = [self->_configuration valueForKey:@"mobileConsentGroups"];
+        [[NSUserDefaults standardUserDefaults] setObject:purposeMappingDict forKey:@"OT_mP_Mapping"];
+        
         self->_started = YES;
 
         dispatch_async(dispatch_get_main_queue(), ^{

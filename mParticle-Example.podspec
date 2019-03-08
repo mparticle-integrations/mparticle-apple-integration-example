@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
-    s.name             = "mParticle-Example"
+    s.name             = "mParticle-OneTrust"
     s.version          = "7.7.3"
-    s.summary          = "Example integration for mParticle"
+    s.summary          = "OneTrust integration for mParticle"
 
     s.description      = <<-DESC
-                       This is the Example integration for mParticle.
+                       This is the OneTrust integration for mParticle.
                        DESC
 
     s.homepage         = "https://www.mparticle.com"
@@ -13,8 +13,9 @@ Pod::Spec.new do |s|
     s.source           = { :git => "https://github.com/mparticle-integrations/mparticle-apple-integration-example.git", :tag => s.version.to_s }
     s.social_media_url = "https://twitter.com/mparticles"
 
+    
     s.ios.deployment_target = "9.0"
-    s.ios.source_files      = 'mParticle-Example/*.{h,m}'
+    s.ios.source_files      = 'mParticle-OneTrust/*.{h,m}'
     s.ios.dependency 'mParticle-Apple-SDK', '~> 7.7.0'
-    #s.ios.dependency 'Example', '~> 1.2'
+
 end
