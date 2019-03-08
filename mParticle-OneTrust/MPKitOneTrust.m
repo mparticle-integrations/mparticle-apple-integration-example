@@ -1,13 +1,5 @@
 #import "MPKitOneTrust.h"
 
-/* Import your header file here
-*/
-//#if defined(__has_include) && __has_include(<Example/Example.h>)
-//#import <Example/Example.h>
-//#else
-//#import "Example.h"
-//#endif
-
 @implementation MPKitOneTrust
 
 /*
@@ -48,10 +40,6 @@
     dispatch_once(&kitPredicate, ^{
         
         // Save Purpose mapping for use by OneTrust Mobile SDK
-        /*
-         * @"consentGroups" = Web consent groups
-         * @"mobileConsentGroups" = Mobile consent groups
-         */
         NSString* purposeMappingDict = [self->_configuration valueForKey:@"mobileConsentGroups"];
         [[NSUserDefaults standardUserDefaults] setObject:purposeMappingDict forKey:@"OT_mP_Mapping"];
         
