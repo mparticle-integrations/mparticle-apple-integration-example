@@ -6,4 +6,4 @@ script:
 - pod lib lint --use-libraries --allow-warnings || pod lib lint --allow-warnings
 - carthage update
 - carthage build --no-skip-current && carthage archive
-- xcodebuild -project mParticle-Example.xcodeproj -scheme mParticle_ExampleTests -destination 'platform=iOS Simulator,OS=12.0,name=iPhone XS' test
+- xcodebuild -project mParticle-Pilgrim.xcodeproj -scheme mParticle_ExampleTests -destination 'platform=iOS Simulator,OS=12.0,name=iPhone XS' test

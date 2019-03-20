@@ -1,5 +1,6 @@
 #import <XCTest/XCTest.h>
-#import "MPKitExample.h"
+#import "MPKitPilgrim.h"
+
 
 @interface mParticle_ExampleTests : XCTestCase
 
@@ -16,13 +17,7 @@
 }
 
 - (void)testModuleID {
-    XCTAssertEqualObjects([MPKitExample kitCode], @123);
-}
-
-- (void)testStarted {
-    MPKitExample *exampleKit = [[MPKitExample alloc] init];
-    [exampleKit didFinishLaunchingWithConfiguration:@{@"<dictionary key to retrieve API Key>":@"12345"}];
-    XCTAssertTrue(exampleKit.started);
+    XCTAssertEqualObjects([MPKitPilgrim kitCode], @211);
 }
 
 @end
