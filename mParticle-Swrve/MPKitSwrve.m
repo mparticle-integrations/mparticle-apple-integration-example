@@ -306,7 +306,7 @@
 */
  - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
      MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess forwardCount:0];
-     NSString* currency = commerceEvent.currency;
+     NSString* currency = commerceEvent.currency ? : @"USD";
 
      // In this example, this SDK only supports the 'Purchase' commerce event action
      if (commerceEvent.action == MPCommerceEventActionPurchase) {
