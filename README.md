@@ -1,22 +1,22 @@
-## Example Kit Integration
+## Swrve Kit Integration
 
-This repository contains the [Example](https://www.example.com/) integration for the [mParticle Apple SDK](https://github.com/mParticle/mparticle-apple-sdk).
+This repository contains the [SWrve](https://www.swrve.com/) integration for the [mParticle Apple SDK](https://github.com/mParticle/mparticle-apple-sdk).
 
 ### Adding the integration
 
 1. Add the kit dependency to your app's Podfile or Cartfile:
 
     ```
-    pod 'mParticle-Example', '~> 1.2'
+    pod 'mParticle-Swrve', '~> 1.0'
     ```
 
     OR
 
     ```
-    github 'mparticle-integrations/mparticle-apple-integration-example' ~> 1.2.3
+    github 'mparticle-integrations/mparticle-apple-integration-swrve' ~> 1.0
     ```
 
-2. Follow the mParticle iOS SDK [quick-start](https://github.com/mParticle/mparticle-apple-sdk), then rebuild and launch your app, and verify that you see `"Included kits: { Example }"` in your Xcode console 
+2. Follow the mParticle iOS SDK [quick-start](https://github.com/mParticle/mparticle-apple-sdk), then rebuild and launch your app, and verify that you see `"Included kits: { Swrve }"` in your Xcode console 
 
 > (This requires your mParticle log level to be at least Debug)
 
@@ -24,7 +24,7 @@ This repository contains the [Example](https://www.example.com/) integration for
 
 ### Documentation
 
-[Example integration](https://docs.mparticle.com/integrations/REPLACEME/event/)
+[Swrve integration](https://docs.mparticle.com/integrations/REPLACEME/event/)
 
 ### License
 
