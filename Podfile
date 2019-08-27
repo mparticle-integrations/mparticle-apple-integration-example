@@ -20,7 +20,7 @@ post_install do |installer_representation|
     installer_representation.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
             config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
-            config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'SWRVE_NO_PUSH=1'
+            #config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'SWRVE_NO_PUSH=1'
         end
     end
 end
