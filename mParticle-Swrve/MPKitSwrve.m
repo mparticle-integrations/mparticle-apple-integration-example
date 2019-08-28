@@ -168,6 +168,10 @@
 /*
     Implement this method if your SDK allows for incrementing numeric user attributes.
 */
+-(MPKitExecStatus *)incrementUserAttribute:(NSString *)key byValue:(NSNumber *)value {
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
+
 - (MPKitExecStatus *)onIncrementUserAttribute:(FilteredMParticleUser *)user {
      /*  Your code goes here.
          If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
