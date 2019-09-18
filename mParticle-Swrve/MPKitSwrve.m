@@ -129,7 +129,7 @@
  }
 
 /** SwrvePushResponseDelegate
-    Implement the following two methods if you want to interact with a push directly
+    Implement the following methods if you want to interact with a push action reponse
  **/
 
 - (void) didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
@@ -142,7 +142,7 @@
 }
 
 /** SwrvePushResponseDelegate
- Implement the following two methods if you want to determine the display type of a push in the foreground
+ Implement the following method if you want to determine the display type of a push in the foreground
  **/
 
 - (void) willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
