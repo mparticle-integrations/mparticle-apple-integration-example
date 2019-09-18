@@ -56,7 +56,7 @@
         FilteredMParticleUser *currentUser = [kitAPI getCurrentUserWithKit:self];
         //MPIdentityApi* currentId = [[MParticle sharedInstance] identity];
         NSNumber *mpid = currentUser.userId;
-        config.pushResponseDelegate = [UIApplication sharedApplication];
+        config.pushResponseDelegate = self;
         config.pushEnabled = YES;
         config.autoCollectDeviceToken = NO;
         config.pushNotificationEvents = [[NSSet alloc] init];
@@ -127,6 +127,31 @@
      [[SwrveSDK sharedInstance] setDeviceToken:deviceToken];
     return [self execStatus:MPKitReturnCodeSuccess];
  }
+
+/** SwrvePushResponseDelegate
+    Implement the following two methods if you want to interact with a push directly
+ **/
+
+- (void) didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    
+    NSLog(@"MPKitSwrve : didRecieveNotificationResponse was fired with the following push response: %@", response.actionIdentifier);
+    
+    if(completionHandler) {
+        completionHandler();
+    }
+}
+
+/** SwrvePushResponseDelegate
+ Implement the following two methods if you want to determine the display type of a push in the foreground
+ **/
+
+- (void) willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    
+    if(completionHandler) {
+        completionHandler(UNNotificationPresentationOptionNone);
+    }
+}
+
 
 /*
     Implement this method if your SDK handles continueUserActivity method from the App Delegate
@@ -318,7 +343,7 @@
          
          for (MPProduct *product in commerceEvent.products) {
              SwrveIAPRewards* rewards = [[SwrveIAPRewards alloc] init];
-             [[SwrveSDK sharedInstance] unvalidatedIap:rewards localCost:[product.price doubleValue] localCurrency:currency productId:product.sku productIdQuantity:[product.quantity integerValue]];
+             [[SwrveSDK sharedInstance] unvalidatedIap:rewards localCost:[product.price doubleValue] localCurrency:currency productId:product.sku productIdQuantity:[product.quantity intValue]];
              [execStatus incrementForwardCount];
          }
      } else { // Other commerce events are expanded and logged as regular events
