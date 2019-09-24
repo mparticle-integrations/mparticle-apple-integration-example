@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
     s.homepage         = "https://www.swrve.com"
     s.license          = { :type => 'Apache 2.0', :file => 'LICENSE' }
     s.author           = { "Swrve" => "support@swrve.com" }
-    s.source           = { :git => "https://github.com/swrve-services/mparticle-apple-integration-example.git", :tag => s.version.to_s }
+    s.source           = { :git => "https://github.com/mparticle-integrations/mparticle-apple-integration-example.git", :tag => s.version.to_s }
     s.social_media_url = "https://twitter.com/Swrve_Inc"
 
     s.ios.deployment_target = "6.0"
