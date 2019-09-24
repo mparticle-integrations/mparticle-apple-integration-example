@@ -24,7 +24,7 @@ This repository contains the [SWrve](https://www.swrve.com/) integration for the
 
 ### Documentation
 
-[Swrve integration](https://docs.mparticle.com/integrations/REPLACEME/event/)
+[Swrve integration](https://docs.mparticle.com/integrations/swrve/event/)
 
 ### License
 
