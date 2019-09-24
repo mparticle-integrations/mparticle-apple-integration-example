@@ -132,7 +132,11 @@
     Implement the following methods if you want to interact with a push action reponse
  **/
 
-- (void) didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+- (void) processNotificationResponse:(UNNotificationResponse *)response  API_AVAILABLE(ios(10.0)){
+    [[SwrveSDK sharedInstance] processNotificationResponseWithIdentifier:response.actionIdentifier andUserInfo:response.notification.request.content.userInfo];
+}
+
+- (void) didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler  API_AVAILABLE(ios(10.0)){
     
     NSLog(@"MPKitSwrve : didRecieveNotificationResponse was fired with the following push response: %@", response.actionIdentifier);
     
@@ -145,7 +149,7 @@
  Implement the following method if you want to determine the display type of a push in the foreground
  **/
 
-- (void) willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+- (void) willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler  API_AVAILABLE(ios(10.0)){
     
     if(completionHandler) {
         completionHandler(UNNotificationPresentationOptionNone);
@@ -270,7 +274,7 @@
         MPKitAPI *kitAPI = [[MPKitAPI alloc] init];
         FilteredMParticleUser *currentUser = [kitAPI getCurrentUserWithKit:self];
         NSNumber *mpid = currentUser.userId;
-        config.pushResponseDelegate = [UIApplication sharedApplication];
+        config.pushResponseDelegate = self;
         config.pushEnabled = YES;
         config.autoCollectDeviceToken = NO;
         config.pushNotificationEvents = [[NSSet alloc] init];
@@ -375,7 +379,7 @@
              return [[SwrveSDK sharedInstance] currencyGiven:givenCurrency givenAmount:[givenAmount doubleValue]] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
          }
      }
-     return [[SwrveSDK sharedInstance] event:[NSString stringWithFormat:@"%@.%@", event.typeName, event.name] payload:event.info] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
+     return [[SwrveSDK sharedInstance] event:[NSString stringWithFormat:@"%@.%@", [event.typeName lowercaseString], event.name] payload:event.info] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
  }
 
 /*
