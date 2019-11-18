@@ -1,6 +1,6 @@
 ## Swrve Kit Integration
 
-This repository contains the [SWrve](https://www.swrve.com/) integration for the [mParticle Apple SDK](https://github.com/mParticle/mparticle-apple-sdk).
+This repository contains the [Swrve](https://www.swrve.com/) integration for the [mParticle Apple SDK](https://github.com/mParticle/mparticle-apple-sdk).
 
 ### Adding the integration
 
