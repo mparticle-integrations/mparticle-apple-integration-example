@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name             = "mParticle-Swrve"
+    s.name             = "Swrve-mParticle"
     s.version          = "1.0"
     s.summary          = "Swrve integration for mParticle"
 
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
     s.social_media_url = "https://twitter.com/Swrve_Inc"
 
     s.ios.deployment_target = "6.0"
-    s.ios.source_files      = 'mParticle-Swrve/*.{h,m}'
+    s.ios.source_files      = 'Swrve-mParticle/*.{h,m}'
     s.ios.dependency 'mParticle-Apple-SDK', '~> 7'
     s.ios.dependency 'SwrveSDK', '~> 5.3'
 end

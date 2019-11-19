@@ -1,11 +1,11 @@
 #import <XCTest/XCTest.h>
 #import "MPKitSwrve.h"
 
-@interface mParticle_SwrveTests : XCTestCase
+@interface Swrve_mParticleTests : XCTestCase
 
 @end
 
-@implementation mParticle_SwrveTests
+@implementation Swrve_mParticleTests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.

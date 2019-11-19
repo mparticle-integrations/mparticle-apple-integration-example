@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "1020"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DBB01A5A1DC1478A00A7B188"
-               BuildableName = "mParticle_Swrve.framework"
-               BlueprintName = "mParticle-Swrve"
-               ReferencedContainer = "container:mParticle-Swrve.xcodeproj">
+               BuildableName = "Swrve_mParticle.framework"
+               BlueprintName = "Swrve-mParticle"
+               ReferencedContainer = "container:Swrve-mParticle.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DBB01A5A1DC1478A00A7B188"
-            BuildableName = "mParticle_Swrve.framework"
-            BlueprintName = "mParticle-Swrve"
-            ReferencedContainer = "container:mParticle-Swrve.xcodeproj">
+            BuildableName = "Swrve_mParticle.framework"
+            BlueprintName = "Swrve-mParticle"
+            ReferencedContainer = "container:Swrve-mParticle.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DBB01A5A1DC1478A00A7B188"
-            BuildableName = "mParticle_Swrve.framework"
-            BlueprintName = "mParticle-Swrve"
-            ReferencedContainer = "container:mParticle-Swrve.xcodeproj">
+            BuildableName = "Swrve_mParticle.framework"
+            BlueprintName = "Swrve-mParticle"
+            ReferencedContainer = "container:Swrve-mParticle.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
