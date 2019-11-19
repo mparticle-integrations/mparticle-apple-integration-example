@@ -100,7 +100,7 @@
          If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
          Please see MPKitExecStatus.h for all exec status codes
       */
-     [[SwrveSDK sharedInstance] pushNotificationReceived:userInfo];
+     [SwrveSDK pushNotificationReceived:userInfo];
      return [self execStatus:MPKitReturnCodeSuccess];
  }
 
@@ -112,7 +112,7 @@
          If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
          Please see MPKitExecStatus.h for all exec status codes
       */
-     [[SwrveSDK sharedInstance] pushNotificationReceived:userInfo];
+     [SwrveSDK pushNotificationReceived:userInfo];
      return [self execStatus:MPKitReturnCodeSuccess];
  }
 
@@ -124,7 +124,7 @@
          If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
          Please see MPKitExecStatus.h for all exec status codes
       */
-     [[SwrveSDK sharedInstance] setDeviceToken:deviceToken];
+     [SwrveSDK setDeviceToken:deviceToken];
     return [self execStatus:MPKitReturnCodeSuccess];
  }
 
@@ -133,7 +133,7 @@
  **/
 
 - (void) processNotificationResponse:(UNNotificationResponse *)response  API_AVAILABLE(ios(10.0)){
-    [[SwrveSDK sharedInstance] processNotificationResponseWithIdentifier:response.actionIdentifier andUserInfo:response.notification.request.content.userInfo];
+    [SwrveSDK processNotificationResponseWithIdentifier:response.actionIdentifier andUserInfo:response.notification.request.content.userInfo];
 }
 
 - (void) didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler  API_AVAILABLE(ios(10.0)){
@@ -177,7 +177,7 @@
          If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
          Please see MPKitExecStatus.h for all exec status codes
       */
-     [[SwrveSDK sharedInstance] handleDeeplink:url];
+     [SwrveSDK handleDeeplink:url];
      return [self execStatus:MPKitReturnCodeSuccess];
  }
 
@@ -189,7 +189,7 @@
          If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
          Please see MPKitExecStatus.h for all exec status codes
       */
-     [[SwrveSDK sharedInstance] handleDeeplink:url];
+     [SwrveSDK handleDeeplink:url];
      return [self execStatus:MPKitReturnCodeSuccess];
  }
 
@@ -206,7 +206,7 @@
          If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
          Please see MPKitExecStatus.h for all exec status codes
       */
-    return [[SwrveSDK sharedInstance] userUpdate: user.userAttributes] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
+    return [SwrveSDK userUpdate: user.userAttributes] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
 }
 
 /*
@@ -225,13 +225,15 @@
     Implement this method if your SDK sets user attributes.
 */
 
+
+//no-op due to bug in mParticle callback
 - (MPKitExecStatus *)setUserAttribute:(NSString *)key value:(id)value {
     return [self execStatus:MPKitReturnCodeSuccess];
 }
 
 - (MPKitExecStatus *)removeUserAttribute:(NSString *)key {
     NSDictionary* props=@{key:@""};
-    return [[SwrveSDK sharedInstance] userUpdate:props] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
+    return [SwrveSDK userUpdate:props] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
 }
 
 - (MPKitExecStatus *)onSetUserAttribute:(FilteredMParticleUser *)user {
@@ -239,7 +241,7 @@
          If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
          Please see MPKitExecStatus.h for all exec status codes
       */
-    return [[SwrveSDK sharedInstance] userUpdate: user.userAttributes] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
+    return [SwrveSDK userUpdate: user.userAttributes] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
 }
 
 /*
@@ -347,7 +349,7 @@
          
          for (MPProduct *product in commerceEvent.products) {
              SwrveIAPRewards* rewards = [[SwrveIAPRewards alloc] init];
-             [[SwrveSDK sharedInstance] unvalidatedIap:rewards localCost:[product.price doubleValue] localCurrency:currency productId:product.sku productIdQuantity:[product.quantity intValue]];
+             [SwrveSDK unvalidatedIap:rewards localCost:[product.price doubleValue] localCurrency:currency productId:product.sku productIdQuantity:[product.quantity intValue]];
              [execStatus incrementForwardCount];
          }
      } else { // Other commerce events are expanded and logged as regular events
@@ -376,10 +378,10 @@
          if ( [event.info valueForKey:@"given_currency"] && [event.info valueForKey:@"given_amount"] ) {
              NSString* givenCurrency = [event.info valueForKey:@"given_currency"];
              NSNumber* givenAmount = [event.info valueForKey:@"given_amount"];
-             return [[SwrveSDK sharedInstance] currencyGiven:givenCurrency givenAmount:[givenAmount doubleValue]] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
+             return [SwrveSDK currencyGiven:givenCurrency givenAmount:[givenAmount doubleValue]] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
          }
      }
-     return [[SwrveSDK sharedInstance] event:[NSString stringWithFormat:@"%@.%@", [event.typeName lowercaseString], event.name] payload:event.info] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
+     return [SwrveSDK event:[NSString stringWithFormat:@"%@.%@", [event.typeName lowercaseString], event.name] payload:event.info] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
  }
 
 /*
@@ -393,7 +395,7 @@
       */
      NSString* screen_name=event.name;
      NSString* event_name=[NSString stringWithFormat:@"screen_view.%@", screen_name];
-     return [[SwrveSDK sharedInstance] event:event_name payload:event.info] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
+     return [SwrveSDK event:event_name payload:event.info] == SWRVE_SUCCESS ? [self execStatus:MPKitReturnCodeSuccess] : [self execStatus:MPKitReturnCodeFail];
  }
 
 #pragma mark Assorted
