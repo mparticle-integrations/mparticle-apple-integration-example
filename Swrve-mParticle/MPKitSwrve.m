@@ -15,7 +15,7 @@ NSString *const SwrveMParticleVersionNumber = @"0.1.0";
     mParticle will supply a unique kit code for you. Please contact our team
 */
 + (NSNumber *)kitCode {
-    return @216;
+    return @1145;
 }
 
 + (void)load {

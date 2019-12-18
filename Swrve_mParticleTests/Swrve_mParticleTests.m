@@ -16,7 +16,7 @@
 }
 
 - (void)testModuleID {
-    XCTAssertEqualObjects([MPKitSwrve kitCode], @216);
+    XCTAssertEqualObjects([MPKitSwrve kitCode], @1145);
 }
 
 - (void)testStarted {
