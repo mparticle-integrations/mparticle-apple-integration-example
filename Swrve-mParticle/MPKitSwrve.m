@@ -8,6 +8,8 @@
 #import "SwrveSDK.h"
 #endif
 
+NSString *const SwrveMParticleVersionNumber = @"0.1.0";
+
 @implementation MPKitSwrve
 /*
     mParticle will supply a unique kit code for you. Please contact our team
@@ -73,6 +75,7 @@
                                    apiKey: apiKey
                                    config: config];
         self->_init_called=YES;
+        [SwrveSDK userUpdate:@{@"swrve.mparticle_sdk_version":SwrveMParticleVersionNumber}];
         
 //        self->_started = YES;
         
