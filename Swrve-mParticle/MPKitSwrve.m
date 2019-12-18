@@ -75,7 +75,7 @@ NSString *const SwrveMParticleVersionNumber = @"0.1.0";
                                    apiKey: apiKey
                                    config: config];
         self->_init_called=YES;
-        [SwrveSDK userUpdate:@{@"swrve.mparticle_integration_version":SwrveMParticleVersionNumber}];
+        [SwrveSDK userUpdate:@{@"swrve.mparticle_ios_integration_version":SwrveMParticleVersionNumber}];
         
 //        self->_started = YES;
         
