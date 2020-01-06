@@ -7,7 +7,7 @@ This repository contains the [Swrve](https://www.swrve.com/) integration for the
 1. Add the kit dependency to your app's Podfile or Cartfile:
 
     ```
-    pod 'mParticle-Swrve', '~> 1.0'
+    pod 'Swrve-mParticle', '~> 1.0'
     ```
 
     OR

@@ -8,12 +8,14 @@
 #import "SwrveSDK.h"
 #endif
 
+NSString *const SwrveMParticleVersionNumber = @"0.1.0";
+
 @implementation MPKitSwrve
 /*
     mParticle will supply a unique kit code for you. Please contact our team
 */
 + (NSNumber *)kitCode {
-    return @216;
+    return @1145;
 }
 
 + (void)load {
@@ -73,6 +75,8 @@
                                    apiKey: apiKey
                                    config: config];
         self->_init_called=YES;
+        [SwrveSDK userUpdate:@{@"swrve.mparticle_ios_integration_version":SwrveMParticleVersionNumber}];
+        [SwrveSDK sendQueuedEvents];
         
 //        self->_started = YES;
         
@@ -284,6 +288,8 @@
         config.userId = mpid.stringValue;
         [SwrveSDK sharedInstanceWithAppID:[self.configuration[@"app_id"] intValue] apiKey:self.configuration[@"api_key"] config:config];
         self->_init_called=YES;
+        [SwrveSDK userUpdate:@{@"swrve.mparticle_ios_integration_version":SwrveMParticleVersionNumber}];
+        [SwrveSDK sendQueuedEvents];
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
         

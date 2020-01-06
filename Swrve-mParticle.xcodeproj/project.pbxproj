@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6FC6F11C4608DAE0660BE60F /* Pods_mParticle_Swrve.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66BF74C762AFAED32A1D5458 /* Pods_mParticle_Swrve.framework */; };
 		9808715322F4F7D200639858 /* MPKitSwrve.h in Headers */ = {isa = PBXBuildFile; fileRef = 9808715022F4F7D200639858 /* MPKitSwrve.h */; };
-		9808715422F4F7D200639858 /* mParticle_Swrve.h in Headers */ = {isa = PBXBuildFile; fileRef = 9808715122F4F7D200639858 /* mParticle_Swrve.h */; };
+		9808715422F4F7D200639858 /* Swrve_mParticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9808715122F4F7D200639858 /* Swrve_mParticle.h */; };
 		9808715522F4F7D200639858 /* MPKitSwrve.m in Sources */ = {isa = PBXBuildFile; fileRef = 9808715222F4F7D200639858 /* MPKitSwrve.m */; };
+		A32E20904238CD7AE281C366 /* Pods_Swrve_mParticle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E57D5053CBC4B85ABC7C623D /* Pods_Swrve_mParticle.framework */; };
 		DBB01A6B1DC1491D00A7B188 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
-		F2607BAABF77A1D3EB8CCC58 /* Pods_mParticle_SwrveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B0D70524987471EFB4582E2 /* Pods_mParticle_SwrveTests.framework */; };
-		FF0BB63E217A84E800B0556C /* mParticle_SwrveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0BB63D217A84E800B0556C /* mParticle_SwrveTests.m */; };
-		FF0BB640217A84E800B0556C /* mParticle_Swrve.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A5B1DC1478A00A7B188 /* mParticle_Swrve.framework */; };
+		FEA0B806FCF73D8AA98DCBF1 /* Pods_Swrve_mParticleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 445D46D85BE0DB8A980B1216 /* Pods_Swrve_mParticleTests.framework */; };
+		FF0BB63E217A84E800B0556C /* Swrve_mParticleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0BB63D217A84E800B0556C /* Swrve_mParticleTests.m */; };
+		FF0BB640217A84E800B0556C /* Swrve_mParticle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A5B1DC1478A00A7B188 /* Swrve_mParticle.framework */; };
 		FF13226221878D9C002AA653 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,20 +29,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3B1675DC3BF6FEDE2D1A6699 /* Pods-mParticle_SwrveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mParticle_SwrveTests.release.xcconfig"; path = "Target Support Files/Pods-mParticle_SwrveTests/Pods-mParticle_SwrveTests.release.xcconfig"; sourceTree = "<group>"; };
-		66BF74C762AFAED32A1D5458 /* Pods_mParticle_Swrve.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mParticle_Swrve.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6B0D70524987471EFB4582E2 /* Pods_mParticle_SwrveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mParticle_SwrveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B606DEB8FA71DA4E27F01CB /* Pods-mParticle-Swrve.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mParticle-Swrve.debug.xcconfig"; path = "Target Support Files/Pods-mParticle-Swrve/Pods-mParticle-Swrve.debug.xcconfig"; sourceTree = "<group>"; };
+		1F2CC5CE7FB545D91C9103DC /* Pods-Swrve-mParticle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swrve-mParticle.release.xcconfig"; path = "Target Support Files/Pods-Swrve-mParticle/Pods-Swrve-mParticle.release.xcconfig"; sourceTree = "<group>"; };
+		3D184C554F7B66035CA2D310 /* Pods-Swrve_mParticleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swrve_mParticleTests.debug.xcconfig"; path = "Target Support Files/Pods-Swrve_mParticleTests/Pods-Swrve_mParticleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		41C58FB95E3248548AAF64AB /* Pods-Swrve_mParticleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swrve_mParticleTests.release.xcconfig"; path = "Target Support Files/Pods-Swrve_mParticleTests/Pods-Swrve_mParticleTests.release.xcconfig"; sourceTree = "<group>"; };
+		445D46D85BE0DB8A980B1216 /* Pods_Swrve_mParticleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swrve_mParticleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B3ED4DB9FC37E733FC10B6C /* Pods-Swrve-mParticle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swrve-mParticle.debug.xcconfig"; path = "Target Support Files/Pods-Swrve-mParticle/Pods-Swrve-mParticle.debug.xcconfig"; sourceTree = "<group>"; };
 		9808715022F4F7D200639858 /* MPKitSwrve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitSwrve.h; sourceTree = "<group>"; };
-		9808715122F4F7D200639858 /* mParticle_Swrve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mParticle_Swrve.h; sourceTree = "<group>"; };
+		9808715122F4F7D200639858 /* Swrve_mParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Swrve_mParticle.h; sourceTree = "<group>"; };
 		9808715222F4F7D200639858 /* MPKitSwrve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPKitSwrve.m; sourceTree = "<group>"; };
-		B161E9C1873155DBB82361D1 /* Pods-mParticle-Swrve.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mParticle-Swrve.release.xcconfig"; path = "Target Support Files/Pods-mParticle-Swrve/Pods-mParticle-Swrve.release.xcconfig"; sourceTree = "<group>"; };
-		DBB01A5B1DC1478A00A7B188 /* mParticle_Swrve.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mParticle_Swrve.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBB01A5B1DC1478A00A7B188 /* Swrve_mParticle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Swrve_mParticle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB01A5F1DC1478A00A7B188 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = mParticle_Apple_SDK.framework; path = Carthage/Build/iOS/mParticle_Apple_SDK.framework; sourceTree = "<group>"; };
-		EACBFBA0D011904DC2B34476 /* Pods-mParticle_SwrveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mParticle_SwrveTests.debug.xcconfig"; path = "Target Support Files/Pods-mParticle_SwrveTests/Pods-mParticle_SwrveTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FF0BB63B217A84E800B0556C /* mParticle_SwrveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mParticle_SwrveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF0BB63D217A84E800B0556C /* mParticle_SwrveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mParticle_SwrveTests.m; sourceTree = "<group>"; };
+		E57D5053CBC4B85ABC7C623D /* Pods_Swrve_mParticle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swrve_mParticle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF0BB63B217A84E800B0556C /* Swrve_mParticleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Swrve_mParticleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF0BB63D217A84E800B0556C /* Swrve_mParticleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Swrve_mParticleTests.m; sourceTree = "<group>"; };
 		FF0BB63F217A84E800B0556C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,7 +52,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBB01A6B1DC1491D00A7B188 /* mParticle_Apple_SDK.framework in Frameworks */,
-				6FC6F11C4608DAE0660BE60F /* Pods_mParticle_Swrve.framework in Frameworks */,
+				A32E20904238CD7AE281C366 /* Pods_Swrve_mParticle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,9 +60,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF0BB640217A84E800B0556C /* mParticle_Swrve.framework in Frameworks */,
+				FF0BB640217A84E800B0556C /* Swrve_mParticle.framework in Frameworks */,
 				FF13226221878D9C002AA653 /* mParticle_Apple_SDK.framework in Frameworks */,
-				F2607BAABF77A1D3EB8CCC58 /* Pods_mParticle_SwrveTests.framework in Frameworks */,
+				FEA0B806FCF73D8AA98DCBF1 /* Pods_Swrve_mParticleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,10 +72,10 @@
 		19F3FEA681E8C75FD0C187A8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8B606DEB8FA71DA4E27F01CB /* Pods-mParticle-Swrve.debug.xcconfig */,
-				B161E9C1873155DBB82361D1 /* Pods-mParticle-Swrve.release.xcconfig */,
-				EACBFBA0D011904DC2B34476 /* Pods-mParticle_SwrveTests.debug.xcconfig */,
-				3B1675DC3BF6FEDE2D1A6699 /* Pods-mParticle_SwrveTests.release.xcconfig */,
+				7B3ED4DB9FC37E733FC10B6C /* Pods-Swrve-mParticle.debug.xcconfig */,
+				1F2CC5CE7FB545D91C9103DC /* Pods-Swrve-mParticle.release.xcconfig */,
+				3D184C554F7B66035CA2D310 /* Pods-Swrve_mParticleTests.debug.xcconfig */,
+				41C58FB95E3248548AAF64AB /* Pods-Swrve_mParticleTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -84,8 +84,8 @@
 			isa = PBXGroup;
 			children = (
 				DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */,
-				DBB01A5D1DC1478A00A7B188 /* mParticle-Swrve */,
-				FF0BB63C217A84E800B0556C /* mParticle_SwrveTests */,
+				DBB01A5D1DC1478A00A7B188 /* Swrve-mParticle */,
+				FF0BB63C217A84E800B0556C /* Swrve_mParticleTests */,
 				DBB01A5C1DC1478A00A7B188 /* Products */,
 				FF13226121878D9C002AA653 /* Frameworks */,
 				19F3FEA681E8C75FD0C187A8 /* Pods */,
@@ -95,37 +95,37 @@
 		DBB01A5C1DC1478A00A7B188 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DBB01A5B1DC1478A00A7B188 /* mParticle_Swrve.framework */,
-				FF0BB63B217A84E800B0556C /* mParticle_SwrveTests.xctest */,
+				DBB01A5B1DC1478A00A7B188 /* Swrve_mParticle.framework */,
+				FF0BB63B217A84E800B0556C /* Swrve_mParticleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DBB01A5D1DC1478A00A7B188 /* mParticle-Swrve */ = {
+		DBB01A5D1DC1478A00A7B188 /* Swrve-mParticle */ = {
 			isa = PBXGroup;
 			children = (
-				9808715122F4F7D200639858 /* mParticle_Swrve.h */,
+				9808715122F4F7D200639858 /* Swrve_mParticle.h */,
 				9808715022F4F7D200639858 /* MPKitSwrve.h */,
 				9808715222F4F7D200639858 /* MPKitSwrve.m */,
 				DBB01A5F1DC1478A00A7B188 /* Info.plist */,
 			);
-			path = "mParticle-Swrve";
+			path = "Swrve-mParticle";
 			sourceTree = "<group>";
 		};
-		FF0BB63C217A84E800B0556C /* mParticle_SwrveTests */ = {
+		FF0BB63C217A84E800B0556C /* Swrve_mParticleTests */ = {
 			isa = PBXGroup;
 			children = (
-				FF0BB63D217A84E800B0556C /* mParticle_SwrveTests.m */,
+				FF0BB63D217A84E800B0556C /* Swrve_mParticleTests.m */,
 				FF0BB63F217A84E800B0556C /* Info.plist */,
 			);
-			path = mParticle_SwrveTests;
+			path = Swrve_mParticleTests;
 			sourceTree = "<group>";
 		};
 		FF13226121878D9C002AA653 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				66BF74C762AFAED32A1D5458 /* Pods_mParticle_Swrve.framework */,
-				6B0D70524987471EFB4582E2 /* Pods_mParticle_SwrveTests.framework */,
+				E57D5053CBC4B85ABC7C623D /* Pods_Swrve_mParticle.framework */,
+				445D46D85BE0DB8A980B1216 /* Pods_Swrve_mParticleTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -138,16 +138,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				9808715322F4F7D200639858 /* MPKitSwrve.h in Headers */,
-				9808715422F4F7D200639858 /* mParticle_Swrve.h in Headers */,
+				9808715422F4F7D200639858 /* Swrve_mParticle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		DBB01A5A1DC1478A00A7B188 /* mParticle-Swrve */ = {
+		DBB01A5A1DC1478A00A7B188 /* Swrve-mParticle */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DBB01A631DC1478A00A7B188 /* Build configuration list for PBXNativeTarget "mParticle-Swrve" */;
+			buildConfigurationList = DBB01A631DC1478A00A7B188 /* Build configuration list for PBXNativeTarget "Swrve-mParticle" */;
 			buildPhases = (
 				A083C2E5AD9D1B8F3F82BF12 /* [CP] Check Pods Manifest.lock */,
 				DBB01A561DC1478A00A7B188 /* Sources */,
@@ -159,14 +159,14 @@
 			);
 			dependencies = (
 			);
-			name = "mParticle-Swrve";
+			name = "Swrve-mParticle";
 			productName = "mParticle-Example";
-			productReference = DBB01A5B1DC1478A00A7B188 /* mParticle_Swrve.framework */;
+			productReference = DBB01A5B1DC1478A00A7B188 /* Swrve_mParticle.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		FF0BB63A217A84E800B0556C /* mParticle_SwrveTests */ = {
+		FF0BB63A217A84E800B0556C /* Swrve_mParticleTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FF0BB645217A84E800B0556C /* Build configuration list for PBXNativeTarget "mParticle_SwrveTests" */;
+			buildConfigurationList = FF0BB645217A84E800B0556C /* Build configuration list for PBXNativeTarget "Swrve_mParticleTests" */;
 			buildPhases = (
 				181B4425E293AA6A4CD7D6B9 /* [CP] Check Pods Manifest.lock */,
 				FF0BB637217A84E800B0556C /* Sources */,
@@ -179,9 +179,9 @@
 			dependencies = (
 				FF0BB642217A84E800B0556C /* PBXTargetDependency */,
 			);
-			name = mParticle_SwrveTests;
+			name = Swrve_mParticleTests;
 			productName = mParticle_ExampleTests;
-			productReference = FF0BB63B217A84E800B0556C /* mParticle_SwrveTests.xctest */;
+			productReference = FF0BB63B217A84E800B0556C /* Swrve_mParticleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -190,7 +190,7 @@
 		DBB01A521DC1478A00A7B188 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Swrve;
 				TargetAttributes = {
 					DBB01A5A1DC1478A00A7B188 = {
@@ -203,21 +203,21 @@
 					};
 				};
 			};
-			buildConfigurationList = DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-Swrve" */;
+			buildConfigurationList = DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "Swrve-mParticle" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = DBB01A511DC1478A00A7B188;
 			productRefGroup = DBB01A5C1DC1478A00A7B188 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DBB01A5A1DC1478A00A7B188 /* mParticle-Swrve */,
-				FF0BB63A217A84E800B0556C /* mParticle_SwrveTests */,
+				DBB01A5A1DC1478A00A7B188 /* Swrve-mParticle */,
+				FF0BB63A217A84E800B0556C /* Swrve_mParticleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -255,7 +255,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mParticle_SwrveTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Swrve_mParticleTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -268,7 +268,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mParticle_SwrveTests/Pods-mParticle_SwrveTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Swrve_mParticleTests/Pods-Swrve_mParticleTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SwrveConversationSDK/SwrveConversationSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/SwrveSDK/SwrveSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/SwrveSDKCommon/SwrveSDKCommon.framework",
@@ -283,7 +283,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mParticle_SwrveTests/Pods-mParticle_SwrveTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Swrve_mParticleTests/Pods-Swrve_mParticleTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A083C2E5AD9D1B8F3F82BF12 /* [CP] Check Pods Manifest.lock */ = {
@@ -301,7 +301,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mParticle-Swrve-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Swrve-mParticle-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -323,7 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF0BB63E217A84E800B0556C /* mParticle_SwrveTests.m in Sources */,
+				FF0BB63E217A84E800B0556C /* Swrve_mParticleTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +332,7 @@
 /* Begin PBXTargetDependency section */
 		FF0BB642217A84E800B0556C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DBB01A5A1DC1478A00A7B188 /* mParticle-Swrve */;
+			target = DBB01A5A1DC1478A00A7B188 /* Swrve-mParticle */;
 			targetProxy = FF0BB641217A84E800B0556C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -342,20 +342,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -383,7 +393,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swrve.mParticle-Swrve";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swrve.Swrve-mParticle";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -395,20 +405,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -429,7 +449,7 @@
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swrve.mParticle-Swrve";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swrve.Swrve-mParticle";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -440,7 +460,7 @@
 		};
 		DBB01A641DC1478A00A7B188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B606DEB8FA71DA4E27F01CB /* Pods-mParticle-Swrve.debug.xcconfig */;
+			baseConfigurationReference = 7B3ED4DB9FC37E733FC10B6C /* Pods-Swrve-mParticle.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -451,11 +471,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "mParticle-Swrve/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Swrve-mParticle/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swrve.mParticle-Swrve";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swrve.Swrve-mParticle";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 			};
@@ -463,7 +483,7 @@
 		};
 		DBB01A651DC1478A00A7B188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B161E9C1873155DBB82361D1 /* Pods-mParticle-Swrve.release.xcconfig */;
+			baseConfigurationReference = 1F2CC5CE7FB545D91C9103DC /* Pods-Swrve-mParticle.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -474,11 +494,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "mParticle-Swrve/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Swrve-mParticle/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swrve.mParticle-Swrve";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swrve.Swrve-mParticle";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 			};
@@ -486,7 +506,7 @@
 		};
 		FF0BB643217A84E800B0556C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EACBFBA0D011904DC2B34476 /* Pods-mParticle_SwrveTests.debug.xcconfig */;
+			baseConfigurationReference = 3D184C554F7B66035CA2D310 /* Pods-Swrve_mParticleTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -508,12 +528,12 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = mParticle_SwrveTests/Info.plist;
+				INFOPLIST_FILE = Swrve_mParticleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swrve.mParticle-SwrveTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swrve.Swrve-mParticleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -521,7 +541,7 @@
 		};
 		FF0BB644217A84E800B0556C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B1675DC3BF6FEDE2D1A6699 /* Pods-mParticle_SwrveTests.release.xcconfig */;
+			baseConfigurationReference = 41C58FB95E3248548AAF64AB /* Pods-Swrve_mParticleTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -543,11 +563,11 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = mParticle_SwrveTests/Info.plist;
+				INFOPLIST_FILE = Swrve_mParticleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swrve.mParticle-SwrveTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swrve.Swrve-mParticleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -556,7 +576,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-Swrve" */ = {
+		DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "Swrve-mParticle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DBB01A611DC1478A00A7B188 /* Debug */,
@@ -565,7 +585,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DBB01A631DC1478A00A7B188 /* Build configuration list for PBXNativeTarget "mParticle-Swrve" */ = {
+		DBB01A631DC1478A00A7B188 /* Build configuration list for PBXNativeTarget "Swrve-mParticle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DBB01A641DC1478A00A7B188 /* Debug */,
@@ -574,7 +594,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FF0BB645217A84E800B0556C /* Build configuration list for PBXNativeTarget "mParticle_SwrveTests" */ = {
+		FF0BB645217A84E800B0556C /* Build configuration list for PBXNativeTarget "Swrve_mParticleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FF0BB643217A84E800B0556C /* Debug */,
