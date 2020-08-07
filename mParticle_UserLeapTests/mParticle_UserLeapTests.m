@@ -1,11 +1,11 @@
 #import <XCTest/XCTest.h>
-#import "MPKitExample.h"
+#import "MPKitUserLeap.h"
 
-@interface mParticle_ExampleTests : XCTestCase
+@interface mParticle_UserLeapTests : XCTestCase
 
 @end
 
-@implementation mParticle_ExampleTests
+@implementation mParticle_UserLeapTests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -16,12 +16,12 @@
 }
 
 - (void)testModuleID {
-    XCTAssertEqualObjects([MPKitExample kitCode], @123);
+    XCTAssertEqualObjects([MPKitUserLeap kitCode], @123);
 }
 
 - (void)testStarted {
-    MPKitExample *exampleKit = [[MPKitExample alloc] init];
-    [exampleKit didFinishLaunchingWithConfiguration:@{@"<dictionary key to retrieve API Key>":@"12345"}];
+    MPKitUserLeap *exampleKit = [[MPKitUserLeap alloc] init];
+    [exampleKit didFinishLaunchingWithConfiguration:@{@"environmentId":@"fyi3PTZxk"}];
     XCTAssertTrue(exampleKit.started);
 }
 

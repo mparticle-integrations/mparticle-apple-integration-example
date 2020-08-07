@@ -1,2 +1,2 @@
-#github "Example/Example" ~> 1.2.3
+binary "https://raw.githubusercontent.com/UserLeap/userleap-ios-sdk-releases/master/UserLeapKit.json"
 github "mparticle/mparticle-apple-sdk" ~> 7.7.0

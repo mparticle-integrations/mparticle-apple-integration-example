@@ -1,14 +1,16 @@
-#import "MPKitExample.h"
+#import "MPKitUserLeap.h"
 
 /* Import your header file here
 */
-//#if defined(__has_include) && __has_include(<Example/Example.h>)
-//#import <Example/Example.h>
-//#else
-//#import "Example.h"
-//#endif
+#if defined(__has_include) && __has_include(<UserLeapKit/UserLeapKit.h>)
+#import <UserLeapKit/UserLeapKit.h>
+#import <UserLeapKit/UserLeapKit-Swift.h>
+#else
+#import "UserLeapKit.h"
+#import "UserLeapKit-Swift.h"
+#endif
 
-@implementation MPKitExample
+@implementation MPKitUserLeap
 
 /*
     mParticle will supply a unique kit code for you. Please contact our team
@@ -18,7 +20,7 @@
 }
 
 + (void)load {
-    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"Example" className:@"MPKitExample"];
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"UserLeap" className:@"MPKitUserLeap"];
     [MParticle registerExtension:kitRegister];
 }
 
@@ -30,8 +32,8 @@
 
 #pragma mark Kit instance and lifecycle
 - (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
-    NSString *apiKey = configuration[@"<dictionary key to retrieve API Key>"];
-    if (!apiKey) {
+    NSString *environmentId = configuration[@"environmentId"];
+    if (!environmentId || ![environmentId isKindOfClass:[NSString class]] || environmentId.length == 0) {
         return [self execStatus:MPKitReturnCodeRequirementsNotMet];
     }
 
@@ -49,6 +51,9 @@
         /*
             Start your SDK here. The configuration dictionary can be retrieved from self->_configuration
          */
+//        [[UserLeap shared] configure:@{}];
+//        [UserLeap shared];
+        [[UserLeap shared] configure:@{}];
 
         self->_started = YES;
 
