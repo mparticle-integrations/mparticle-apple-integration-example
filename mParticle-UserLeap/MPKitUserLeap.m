@@ -28,8 +28,6 @@
     return [[MPKitExecStatus alloc] initWithSDKCode:self.class.kitCode returnCode:returnCode];
 }
 
-#pragma mark - MPKitInstanceProtocol methods
-
 #pragma mark Kit instance and lifecycle
 - (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
     NSString *environmentId = configuration[@"environmentId"];
@@ -77,8 +75,9 @@
     //arrays and dicts will be handled in a later version
     if ([value isKindOfClass:[NSNumber class]] || [value isKindOfClass:[NSString class]]) {
         [[UserLeap shared] setVisitorAttributeWithKey:key value:[NSString stringWithFormat:@"%@",value]];
+        return [self execStatus:MPKitReturnCodeSuccess];
     }
-    return [self execStatus:MPKitReturnCodeSuccess];
+    return [self execStatus:MPKitReturnCodeUnavailable];
 }
 
 - (nonnull MPKitExecStatus *)setUserIdentity:(nullable NSString *)identityString identityType:(MPUserIdentity)identityType {
@@ -110,7 +109,7 @@
 - (nonnull MPKitExecStatus *)logBaseEvent:(nonnull MPBaseEvent *)event {
     UIViewController *controller = event.customAttributes[@"userleap_viewcontroller"];
     BOOL showSurvey = YES;
-    if (event.customAttributes[@"nosurvey"]) showSurvey = NO;
+    if (event.customAttributes[@"userleap_dont_show_survey"]) showSurvey = NO;
     NSString *eventName = nil;
     MPKitReturnCode returnCode;
     switch (event.messageType) {
