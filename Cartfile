@@ -1,2 +1,2 @@
-binary "https://raw.githubusercontent.com/UserLeap/userleap-ios-sdk-releases/master/UserLeapKit.json"
+binary "https://raw.githubusercontent.com/UserLeap/userleap-ios-sdk-releases/main/UserLeapKit.json"
 github "mparticle/mparticle-apple-sdk" ~> 7.7.0
