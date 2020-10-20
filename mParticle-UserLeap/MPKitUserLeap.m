@@ -11,7 +11,6 @@
 #endif
 
 @implementation MPKitUserLeap
-
 /*
     mParticle will supply a unique kit code for you. Please contact our team
 */
@@ -125,7 +124,7 @@
             returnCode = MPKitReturnCodeUnavailable;
             break;
     }
-    if (!event) return [self execStatus:MPKitReturnCodeUnavailable];
+    if (!eventName) return [self execStatus:MPKitReturnCodeUnavailable];
     
     void (^surveyDisplayer)(enum SurveyState state) = showSurvey ? ^void(enum SurveyState state) {
         if (state == SurveyStateReady) {
