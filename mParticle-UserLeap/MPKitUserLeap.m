@@ -113,11 +113,8 @@
     MPKitReturnCode returnCode;
     switch (event.messageType) {
         case MPMessageTypeEvent:
-            eventName = event.typeName;
-            returnCode = MPKitReturnCodeSuccess;
-            break;
         case MPMessageTypeCommerceEvent:
-            eventName = [NSString stringWithFormat:@"Commerce - %@",event.typeName];
+            eventName = event.typeName;
             returnCode = MPKitReturnCodeSuccess;
             break;
         default:
