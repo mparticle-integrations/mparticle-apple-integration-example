@@ -5,7 +5,7 @@
 #import "mParticle.h"
 #endif
 
-@interface MPKitExample : NSObject <MPKitProtocol>
+@interface MPKitUserLeap : NSObject <MPKitProtocol>
 
 @property (nonatomic, strong, nonnull) NSDictionary *configuration;
 @property (nonatomic, strong, nullable) NSDictionary *launchOptions;

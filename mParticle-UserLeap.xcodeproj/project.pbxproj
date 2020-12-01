@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DBB01A601DC1478A00A7B188 /* mParticle_Example.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB01A5E1DC1478A00A7B188 /* mParticle_Example.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DBB01A681DC1480700A7B188 /* MPKitExample.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB01A661DC1480700A7B188 /* MPKitExample.h */; };
-		DBB01A691DC1480700A7B188 /* MPKitExample.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB01A671DC1480700A7B188 /* MPKitExample.m */; };
+		DAD96C8624DB31DB0021695F /* UserLeapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAD96C8524DB31DB0021695F /* UserLeapKit.framework */; };
+		DAD96C8724DB31DB0021695F /* UserLeapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DAD96C8524DB31DB0021695F /* UserLeapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DADFEBB024DB2F0600F96A85 /* MPKitUserLeap.h in Headers */ = {isa = PBXBuildFile; fileRef = DADFEBAD24DB2F0600F96A85 /* MPKitUserLeap.h */; };
+		DADFEBB124DB2F0600F96A85 /* mParticle_UserLeap.h in Headers */ = {isa = PBXBuildFile; fileRef = DADFEBAE24DB2F0600F96A85 /* mParticle_UserLeap.h */; };
+		DADFEBB224DB2F0600F96A85 /* MPKitUserLeap.m in Sources */ = {isa = PBXBuildFile; fileRef = DADFEBAF24DB2F0600F96A85 /* MPKitUserLeap.m */; };
+		DADFEBB824DB30C400F96A85 /* mParticle_UserLeapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DADFEBB724DB30C400F96A85 /* mParticle_UserLeapTests.m */; };
 		DBB01A6B1DC1491D00A7B188 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
-		FF0BB63E217A84E800B0556C /* mParticle_ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0BB63D217A84E800B0556C /* mParticle_ExampleTests.m */; };
-		FF0BB640217A84E800B0556C /* mParticle_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A5B1DC1478A00A7B188 /* mParticle_Example.framework */; };
+		FF0BB640217A84E800B0556C /* mParticle_UserLeap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A5B1DC1478A00A7B188 /* mParticle_UserLeap.framework */; };
 		FF13226221878D9C002AA653 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,16 +28,31 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		DAD96C8824DB31DB0021695F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DAD96C8724DB31DB0021695F /* UserLeapKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		DBB01A5B1DC1478A00A7B188 /* mParticle_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mParticle_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DBB01A5E1DC1478A00A7B188 /* mParticle_Example.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mParticle_Example.h; sourceTree = "<group>"; };
+		DAD96C8524DB31DB0021695F /* UserLeapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserLeapKit.framework; path = Carthage/Build/iOS/UserLeapKit.framework; sourceTree = "<group>"; };
+		DADFEBAD24DB2F0600F96A85 /* MPKitUserLeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitUserLeap.h; sourceTree = "<group>"; };
+		DADFEBAE24DB2F0600F96A85 /* mParticle_UserLeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mParticle_UserLeap.h; sourceTree = "<group>"; };
+		DADFEBAF24DB2F0600F96A85 /* MPKitUserLeap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPKitUserLeap.m; sourceTree = "<group>"; };
+		DADFEBB424DB2F3800F96A85 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DADFEBB724DB30C400F96A85 /* mParticle_UserLeapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mParticle_UserLeapTests.m; sourceTree = "<group>"; };
+		DBB01A5B1DC1478A00A7B188 /* mParticle_UserLeap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mParticle_UserLeap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB01A5F1DC1478A00A7B188 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DBB01A661DC1480700A7B188 /* MPKitExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitExample.h; sourceTree = "<group>"; };
-		DBB01A671DC1480700A7B188 /* MPKitExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPKitExample.m; sourceTree = "<group>"; };
 		DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = mParticle_Apple_SDK.framework; path = Carthage/Build/iOS/mParticle_Apple_SDK.framework; sourceTree = "<group>"; };
-		FF0BB63B217A84E800B0556C /* mParticle_ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mParticle_ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF0BB63D217A84E800B0556C /* mParticle_ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mParticle_ExampleTests.m; sourceTree = "<group>"; };
-		FF0BB63F217A84E800B0556C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF0BB63B217A84E800B0556C /* mParticle_UserLeapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mParticle_UserLeapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD96C8624DB31DB0021695F /* UserLeapKit.framework in Frameworks */,
 				DBB01A6B1DC1491D00A7B188 /* mParticle_Apple_SDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF0BB640217A84E800B0556C /* mParticle_Example.framework in Frameworks */,
+				FF0BB640217A84E800B0556C /* mParticle_UserLeap.framework in Frameworks */,
 				FF13226221878D9C002AA653 /* mParticle_Apple_SDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,8 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				DBB01A6A1DC1491D00A7B188 /* mParticle_Apple_SDK.framework */,
-				DBB01A5D1DC1478A00A7B188 /* mParticle-Example */,
-				FF0BB63C217A84E800B0556C /* mParticle_ExampleTests */,
+				DBB01A5D1DC1478A00A7B188 /* mParticle-UserLeap */,
+				FF0BB63C217A84E800B0556C /* mParticle_UserLeapTests */,
 				DBB01A5C1DC1478A00A7B188 /* Products */,
 				FF13226121878D9C002AA653 /* Frameworks */,
 			);
@@ -73,35 +91,36 @@
 		DBB01A5C1DC1478A00A7B188 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DBB01A5B1DC1478A00A7B188 /* mParticle_Example.framework */,
-				FF0BB63B217A84E800B0556C /* mParticle_ExampleTests.xctest */,
+				DBB01A5B1DC1478A00A7B188 /* mParticle_UserLeap.framework */,
+				FF0BB63B217A84E800B0556C /* mParticle_UserLeapTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DBB01A5D1DC1478A00A7B188 /* mParticle-Example */ = {
+		DBB01A5D1DC1478A00A7B188 /* mParticle-UserLeap */ = {
 			isa = PBXGroup;
 			children = (
-				DBB01A661DC1480700A7B188 /* MPKitExample.h */,
-				DBB01A671DC1480700A7B188 /* MPKitExample.m */,
-				DBB01A5E1DC1478A00A7B188 /* mParticle_Example.h */,
+				DADFEBAE24DB2F0600F96A85 /* mParticle_UserLeap.h */,
+				DADFEBAD24DB2F0600F96A85 /* MPKitUserLeap.h */,
+				DADFEBAF24DB2F0600F96A85 /* MPKitUserLeap.m */,
 				DBB01A5F1DC1478A00A7B188 /* Info.plist */,
 			);
-			path = "mParticle-Example";
+			path = "mParticle-UserLeap";
 			sourceTree = "<group>";
 		};
-		FF0BB63C217A84E800B0556C /* mParticle_ExampleTests */ = {
+		FF0BB63C217A84E800B0556C /* mParticle_UserLeapTests */ = {
 			isa = PBXGroup;
 			children = (
-				FF0BB63D217A84E800B0556C /* mParticle_ExampleTests.m */,
-				FF0BB63F217A84E800B0556C /* Info.plist */,
+				DADFEBB724DB30C400F96A85 /* mParticle_UserLeapTests.m */,
+				DADFEBB424DB2F3800F96A85 /* Info.plist */,
 			);
-			path = mParticle_ExampleTests;
+			path = mParticle_UserLeapTests;
 			sourceTree = "<group>";
 		};
 		FF13226121878D9C002AA653 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DAD96C8524DB31DB0021695F /* UserLeapKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -113,48 +132,48 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBB01A601DC1478A00A7B188 /* mParticle_Example.h in Headers */,
-				DBB01A681DC1480700A7B188 /* MPKitExample.h in Headers */,
+				DADFEBB024DB2F0600F96A85 /* MPKitUserLeap.h in Headers */,
+				DADFEBB124DB2F0600F96A85 /* mParticle_UserLeap.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		DBB01A5A1DC1478A00A7B188 /* mParticle-Example */ = {
+		DBB01A5A1DC1478A00A7B188 /* mParticle-UserLeap */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DBB01A631DC1478A00A7B188 /* Build configuration list for PBXNativeTarget "mParticle-Example" */;
+			buildConfigurationList = DBB01A631DC1478A00A7B188 /* Build configuration list for PBXNativeTarget "mParticle-UserLeap" */;
 			buildPhases = (
 				DBB01A561DC1478A00A7B188 /* Sources */,
 				DBB01A571DC1478A00A7B188 /* Frameworks */,
 				DBB01A581DC1478A00A7B188 /* Headers */,
 				DBB01A591DC1478A00A7B188 /* Resources */,
+				DAD96C8824DB31DB0021695F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "mParticle-Example";
+			name = "mParticle-UserLeap";
 			productName = "mParticle-Example";
-			productReference = DBB01A5B1DC1478A00A7B188 /* mParticle_Example.framework */;
+			productReference = DBB01A5B1DC1478A00A7B188 /* mParticle_UserLeap.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		FF0BB63A217A84E800B0556C /* mParticle_ExampleTests */ = {
+		FF0BB63A217A84E800B0556C /* mParticle_UserLeapTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FF0BB645217A84E800B0556C /* Build configuration list for PBXNativeTarget "mParticle_ExampleTests" */;
+			buildConfigurationList = FF0BB645217A84E800B0556C /* Build configuration list for PBXNativeTarget "mParticle_UserLeapTests" */;
 			buildPhases = (
 				FF0BB637217A84E800B0556C /* Sources */,
 				FF0BB638217A84E800B0556C /* Frameworks */,
-				FF0BB639217A84E800B0556C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				FF0BB642217A84E800B0556C /* PBXTargetDependency */,
 			);
-			name = mParticle_ExampleTests;
+			name = mParticle_UserLeapTests;
 			productName = mParticle_ExampleTests;
-			productReference = FF0BB63B217A84E800B0556C /* mParticle_ExampleTests.xctest */;
+			productReference = FF0BB63B217A84E800B0556C /* mParticle_UserLeapTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -176,11 +195,12 @@
 					};
 				};
 			};
-			buildConfigurationList = DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-Example" */;
+			buildConfigurationList = DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-UserLeap" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = DBB01A511DC1478A00A7B188;
@@ -188,21 +208,14 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DBB01A5A1DC1478A00A7B188 /* mParticle-Example */,
-				FF0BB63A217A84E800B0556C /* mParticle_ExampleTests */,
+				DBB01A5A1DC1478A00A7B188 /* mParticle-UserLeap */,
+				FF0BB63A217A84E800B0556C /* mParticle_UserLeapTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		DBB01A591DC1478A00A7B188 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FF0BB639217A84E800B0556C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -216,7 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBB01A691DC1480700A7B188 /* MPKitExample.m in Sources */,
+				DADFEBB224DB2F0600F96A85 /* MPKitUserLeap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,7 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF0BB63E217A84E800B0556C /* mParticle_ExampleTests.m in Sources */,
+				DADFEBB824DB30C400F96A85 /* mParticle_UserLeapTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,7 +246,7 @@
 /* Begin PBXTargetDependency section */
 		FF0BB642217A84E800B0556C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DBB01A5A1DC1478A00A7B188 /* mParticle-Example */;
+			target = DBB01A5A1DC1478A00A7B188 /* mParticle-UserLeap */;
 			targetProxy = FF0BB641217A84E800B0556C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -242,6 +255,7 @@
 		DBB01A611DC1478A00A7B188 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -293,6 +307,7 @@
 		DBB01A621DC1478A00A7B188 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -347,11 +362,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "mParticle-Example/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/mParticle-UserLeap/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-UserLeap";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 			};
@@ -369,11 +384,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "mParticle-Example/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/mParticle-UserLeap/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-UserLeap";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 			};
@@ -402,12 +417,12 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = mParticle_ExampleTests/Info.plist;
+				INFOPLIST_FILE = mParticle_UserLeapTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-ExampleTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-UserLeapTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -436,11 +451,11 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = mParticle_ExampleTests/Info.plist;
+				INFOPLIST_FILE = mParticle_UserLeapTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-ExampleTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-UserLeapTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -449,7 +464,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-Example" */ = {
+		DBB01A551DC1478A00A7B188 /* Build configuration list for PBXProject "mParticle-UserLeap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DBB01A611DC1478A00A7B188 /* Debug */,
@@ -458,7 +473,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DBB01A631DC1478A00A7B188 /* Build configuration list for PBXNativeTarget "mParticle-Example" */ = {
+		DBB01A631DC1478A00A7B188 /* Build configuration list for PBXNativeTarget "mParticle-UserLeap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DBB01A641DC1478A00A7B188 /* Debug */,
@@ -467,7 +482,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FF0BB645217A84E800B0556C /* Build configuration list for PBXNativeTarget "mParticle_ExampleTests" */ = {
+		FF0BB645217A84E800B0556C /* Build configuration list for PBXNativeTarget "mParticle_UserLeapTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FF0BB643217A84E800B0556C /* Debug */,
