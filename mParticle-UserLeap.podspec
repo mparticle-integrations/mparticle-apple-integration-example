@@ -1,20 +1,20 @@
 Pod::Spec.new do |s|
-    s.name             = "mParticle-Example"
-    s.version          = "7.7.3"
-    s.summary          = "Example integration for mParticle"
+    s.name             = "mParticle-UserLeap"
+    s.version          = "1.0.0"
+    s.summary          = "UserLeap integration for mParticle"
 
     s.description      = <<-DESC
-                       This is the Example integration for mParticle.
+                       Please find updated documentation at https://docs.userleap.com/integrations/mparticle
                        DESC
 
     s.homepage         = "https://www.mparticle.com"
     s.license          = { :type => 'Apache 2.0', :file => 'LICENSE' }
     s.author           = { "mParticle" => "support@mparticle.com" }
-    s.source           = { :git => "https://github.com/mparticle-integrations/mparticle-apple-integration-example.git", :tag => s.version.to_s }
+    s.source           = { :git => "https://github.com/mparticle-integrations/mparticle-apple-integration-userleap.git", :tag => s.version.to_s }
     s.social_media_url = "https://twitter.com/mparticle"
 
     s.ios.deployment_target = "9.0"
-    s.ios.source_files      = 'mParticle-Example/*.{h,m}'
-    s.ios.dependency 'mParticle-Apple-SDK', '~> 7.7.0'
-    #s.ios.dependency 'Example', '~> 1.2'
+    s.ios.source_files      = 'mParticle-UserLeap/*.{h,m}'
+    s.ios.dependency 'mParticle-Apple-SDK', '~> 8.0.1'
+    s.ios.dependency 'UserLeapKit', '3.1.1'
 end

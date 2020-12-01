@@ -11,7 +11,6 @@
 #endif
 
 @implementation MPKitUserLeap
-
 /*
     mParticle will supply a unique kit code for you. Please contact our team
 */
@@ -114,18 +113,15 @@
     MPKitReturnCode returnCode;
     switch (event.messageType) {
         case MPMessageTypeEvent:
-            eventName = event.typeName;
-            returnCode = MPKitReturnCodeSuccess;
-            break;
         case MPMessageTypeCommerceEvent:
-            eventName = [NSString stringWithFormat:@"Commerce - %@",event.typeName];
+            eventName = event.typeName;
             returnCode = MPKitReturnCodeSuccess;
             break;
         default:
             returnCode = MPKitReturnCodeUnavailable;
             break;
     }
-    if (!event) return [self execStatus:MPKitReturnCodeUnavailable];
+    if (!eventName) return [self execStatus:MPKitReturnCodeUnavailable];
     
     void (^surveyDisplayer)(enum SurveyState state) = showSurvey ? ^void(enum SurveyState state) {
         if (state == SurveyStateReady) {
