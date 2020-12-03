@@ -105,7 +105,15 @@
 
 #pragma mark Events
 
+- (nonnull MPKitExecStatus *)logEvent:(MPEvent *)event {
+    return [self _handleEvent:event];
+}
+
 - (nonnull MPKitExecStatus *)logBaseEvent:(nonnull MPBaseEvent *)event {
+    return [self _handleEvent:event];
+}
+
+- (nonnull MPKitExecStatus *)_handleEvent:(nonnull MPBaseEvent *)event {
     UIViewController *controller = event.customAttributes[@"userleap_viewcontroller"];
     BOOL showSurvey = YES;
     if (event.customAttributes[@"userleap_dont_show_survey"]) showSurvey = NO;
