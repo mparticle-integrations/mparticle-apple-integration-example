@@ -262,7 +262,7 @@
     } else if ([event isKindOfClass:[MPCommerceEvent class]]) {
         return [self routeCommerceEvent:(MPCommerceEvent *)event];
     } else {
-        return [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppsFlyer) returnCode:MPKitReturnCodeUnavailable];
+        return [self execStatus:MPKitReturnCodeUnavailable];
     }
 }
 /*
@@ -300,7 +300,7 @@
     Please see MPCommerceEvent.h > MPCommerceEventAction for complete list
 */
  - (MPKitExecStatus *)routeCommerceEvent:(MPCommerceEvent *)commerceEvent {
-     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess forwardCount:0];
+     MPKitExecStatus *execStatus = [self execStatus:MPKitReturnCodeSuccess];
 
      // In this example, this SDK only supports the 'Purchase' commerce event action
      if (commerceEvent.action == MPCommerceEventActionPurchase) {
