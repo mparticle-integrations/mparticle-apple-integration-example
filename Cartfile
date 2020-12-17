@@ -1,2 +1,2 @@
-#github "Example/Example" ~> 1.2.3
-github "mparticle/mparticle-apple-sdk" ~> 8.1.1
+#github "Example/Example" ~> 1.0
+github "mparticle/mparticle-apple-sdk" ~> 8.0
