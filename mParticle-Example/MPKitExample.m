@@ -84,239 +84,252 @@
 /*
     Implement this method if your SDK handles a user interacting with a remote notification action
 */
-// - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+ - (MPKitExecStatus *)handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+ }
 
 /*
     Implement this method if your SDK receives and handles remote notifications
 */
-// - (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+ - (MPKitExecStatus *)receivedUserNotification:(NSDictionary *)userInfo {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+ }
 
 /*
     Implement this method if your SDK registers the device token for remote notifications
 */
-// - (MPKitExecStatus *)setDeviceToken:(NSData *)deviceToken {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+ - (MPKitExecStatus *)setDeviceToken:(NSData *)deviceToken {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+ }
 
 /*
     Implement this method if your SDK handles continueUserActivity method from the App Delegate
 */
-// - (nonnull MPKitExecStatus *)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+ - (nonnull MPKitExecStatus *)continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(void(^ _Nonnull)(NSArray * _Nullable restorableObjects))restorationHandler {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+ }
 
 /*
     Implement this method if your SDK handles the iOS 9 and above App Delegate method to open URL with options
 */
-// - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url options:(nullable NSDictionary<NSString *, id> *)options {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+ - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url options:(nullable NSDictionary<NSString *, id> *)options {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+ }
 
 /*
     Implement this method if your SDK handles the iOS 8 and below App Delegate method open URL
 */
-// - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nullable id)annotation {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+ - (nonnull MPKitExecStatus *)openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nullable id)annotation {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+ }
 
 #pragma mark User attributes
 /*
     Implement this method if your SDK allows for incrementing numeric user attributes.
 */
-//- (MPKitExecStatus *)onIncrementUserAttribute:(FilteredMParticleUser *)user {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (MPKitExecStatus *)onIncrementUserAttribute:(FilteredMParticleUser *)user {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+}
 
 /*
     Implement this method if your SDK resets user attributes.
 */
-//- (MPKitExecStatus *)onRemoveUserAttribute:(FilteredMParticleUser *)user {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (MPKitExecStatus *)onRemoveUserAttribute:(FilteredMParticleUser *)user {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+}
 
 /*
     Implement this method if your SDK sets user attributes.
 */
-//- (MPKitExecStatus *)onSetUserAttribute:(FilteredMParticleUser *)user {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (MPKitExecStatus *)onSetUserAttribute:(FilteredMParticleUser *)user {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+}
 
 /*
     Implement this method if your SDK supports setting value-less attributes
 */
-//- (MPKitExecStatus *)onSetUserTag:(FilteredMParticleUser *)user {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (MPKitExecStatus *)onSetUserTag:(FilteredMParticleUser *)user {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+}
 
 #pragma mark Identity
 /*
     Implement this method if your SDK should be notified any time the mParticle ID (MPID) changes. This will occur on initial install of the app, and potentially after a login or logout.
 */
-//- (MPKitExecStatus *)onIdentifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (MPKitExecStatus *)onIdentifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+}
 
 /*
     Implement this method if your SDK should be notified when the user logs in
 */
-//- (MPKitExecStatus *)onLoginComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (MPKitExecStatus *)onLoginComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+}
 
 /*
     Implement this method if your SDK should be notified when the user logs out
 */
-//- (MPKitExecStatus *)onLogoutComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (MPKitExecStatus *)onLogoutComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+}
 
 /*
     Implement this method if your SDK should be notified when user identities change
 */
-//- (MPKitExecStatus *)onModifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-//}
+- (MPKitExecStatus *)onModifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
 
-#pragma mark e-Commerce
-/*
-    Implement this method if your SDK supports commerce events.
-    If your SDK does support commerce event, but does not support all commerce event actions available in the mParticle SDK,
-    expand the received commerce event into regular events and log them accordingly (see sample code below)
-    Please see MPCommerceEvent.h > MPCommerceEventAction for complete list
-*/
-// - (MPKitExecStatus *)logCommerceEvent:(MPCommerceEvent *)commerceEvent {
-//     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess forwardCount:0];
-//
-//     // In this example, this SDK only supports the 'Purchase' commerce event action
-//     if (commerceEvent.action == MPCommerceEventActionPurchase) {
-//             /* Your code goes here. */
-//
-//             [execStatus incrementForwardCount];
-//         }
-//     } else { // Other commerce events are expanded and logged as regular events
-//         NSArray *expandedInstructions = [commerceEvent expandedInstructions];
-//
-//         for (MPCommerceEventInstruction *commerceEventInstruction in expandedInstructions) {
-//             [self logEvent:commerceEventInstruction.event];
-//             [execStatus incrementForwardCount];
-//         }
-//     }
-//
-//     return execStatus;
-// }
+     return [self execStatus:MPKitReturnCodeSuccess];
+}
 
 #pragma mark Events
 /*
+    Implement this method if your SDK wants to log any kind of events.
+    Please see MPBaseEvent.h
+*/
+- (nonnull MPKitExecStatus *)logBaseEvent:(nonnull MPBaseEvent *)event {
+    if ([event isKindOfClass:[MPEvent class]]) {
+        return [self routeEvent:(MPEvent *)event];
+    } else if ([event isKindOfClass:[MPCommerceEvent class]]) {
+        return [self routeCommerceEvent:(MPCommerceEvent *)event];
+    } else {
+        return [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceAppsFlyer) returnCode:MPKitReturnCodeUnavailable];
+    }
+}
+/*
     Implement this method if your SDK logs user events.
+    This requires logBaseEvent to be implemented as well.
     Please see MPEvent.h
 */
-// - (MPKitExecStatus *)logEvent:(MPEvent *)event {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+ - (MPKitExecStatus *)routeEvent:(MPEvent *)event {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
 
+     return [self execStatus:MPKitReturnCodeSuccess];
+ }
 /*
     Implement this method if your SDK logs screen events
     Please see MPEvent.h
 */
-// - (MPKitExecStatus *)logScreen:(MPEvent *)event {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+ - (MPKitExecStatus *)logScreen:(MPEvent *)event {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+ }
+
+#pragma mark e-Commerce
+/*
+    Implement this method if your SDK supports commerce events.
+    This requires logBaseEvent to be implemented as well.
+    If your SDK does support commerce event, but does not support all commerce event actions available in the mParticle SDK,
+    expand the received commerce event into regular events and log them accordingly (see sample code below)
+    Please see MPCommerceEvent.h > MPCommerceEventAction for complete list
+*/
+ - (MPKitExecStatus *)routeCommerceEvent:(MPCommerceEvent *)commerceEvent {
+     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess forwardCount:0];
+
+     // In this example, this SDK only supports the 'Purchase' commerce event action
+     if (commerceEvent.action == MPCommerceEventActionPurchase) {
+             /* Your code goes here. */
+
+             [execStatus incrementForwardCount];
+     } else { // Other commerce events are expanded and logged as regular events
+         NSArray *expandedInstructions = [commerceEvent expandedInstructions];
+
+         for (MPCommerceEventInstruction *commerceEventInstruction in expandedInstructions) {
+             [self routeEvent:commerceEventInstruction.event];
+             [execStatus incrementForwardCount];
+         }
+     }
+
+     return execStatus;
+ }
 
 #pragma mark Assorted
 /*
     Implement this method if your SDK implements an opt out mechanism for users.
 */
-// - (MPKitExecStatus *)setOptOut:(BOOL)optOut {
-//     /*  Your code goes here.
-//         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
-//         Please see MPKitExecStatus.h for all exec status codes
-//      */
-//
-//     return [self execStatus:MPKitReturnCodeSuccess];
-// }
+ - (MPKitExecStatus *)setOptOut:(BOOL)optOut {
+     /*  Your code goes here.
+         If the execution is not successful, please use a code other than MPKitReturnCodeSuccess for the execution status.
+         Please see MPKitExecStatus.h for all exec status codes
+      */
+
+     return [self execStatus:MPKitReturnCodeSuccess];
+ }
 
 @end
