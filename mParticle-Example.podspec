@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "mParticle-Example"
-    s.version          = "7.7.3"
+    s.version          = "8.0.0"
     s.summary          = "Example integration for mParticle"
 
     s.description      = <<-DESC
@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = "9.0"
     s.ios.source_files      = 'mParticle-Example/*.{h,m}'
-    s.ios.dependency 'mParticle-Apple-SDK', '~> 7.7.0'
+    s.ios.dependency 'mParticle-Apple-SDK', '~> 8.0'
     #s.ios.dependency 'Example', '~> 1.2'
 end
