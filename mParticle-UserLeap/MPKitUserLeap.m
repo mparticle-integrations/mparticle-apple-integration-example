@@ -103,10 +103,40 @@
     return [self execStatus:MPKitReturnCodeSuccess];
 }
 
+- (nonnull MPKitExecStatus *)onIdentifyComplete:(nonnull FilteredMParticleUser *)user
+                                        request:(nonnull FilteredMPIdentityApiRequest *)request {
+    return [self _handleLogin:user request:request];
+}
+
+- (nonnull MPKitExecStatus *)onLoginComplete:(nonnull FilteredMParticleUser *)user
+                                     request:(nonnull FilteredMPIdentityApiRequest *)request {
+    return [self _handleLogin:user request:request];
+}
+
+- (nonnull MPKitExecStatus *)_handleLogin:(nonnull FilteredMParticleUser *)user
+                                  request:(nonnull FilteredMPIdentityApiRequest *)request {
+    if (request.customerId) [[UserLeap shared] setUserIdentifier:request.customerId];
+    if (request.email) [[UserLeap shared] setEmailAddress:request.email];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
+
+- (nonnull MPKitExecStatus *)onModifyComplete:(FilteredMParticleUser *)user
+                                      request:(FilteredMPIdentityApiRequest *)request {
+    if (request.email) [[UserLeap shared] setEmailAddress:request.email];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
+
+- (nonnull MPKitExecStatus *)onLogoutComplete:(nonnull FilteredMParticleUser *)user
+                                      request:(nonnull FilteredMPIdentityApiRequest *)request {
+    [[UserLeap shared] logout];
+    return [self execStatus:MPKitReturnCodeSuccess];
+}
+
 #pragma mark Events
 
-- (nonnull MPKitExecStatus *)logBaseEvent:(nonnull MPBaseEvent *)event {
-    UIViewController *controller = event.customAttributes[@"userleap_viewcontroller"];
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+- (nonnull MPKitExecStatus *)logEvent:(MPEvent *)event {
     BOOL showSurvey = YES;
     if (event.customAttributes[@"userleap_dont_show_survey"]) showSurvey = NO;
     NSString *eventName = nil;
@@ -114,7 +144,7 @@
     switch (event.messageType) {
         case MPMessageTypeEvent:
         case MPMessageTypeCommerceEvent:
-            eventName = event.typeName;
+            eventName = event.name;
             returnCode = MPKitReturnCodeSuccess;
             break;
         default:
@@ -125,12 +155,13 @@
     
     void (^surveyDisplayer)(enum SurveyState state) = showSurvey ? ^void(enum SurveyState state) {
         if (state == SurveyStateReady) {
-            [[UserLeap shared] presentSurveyFrom:controller ?: [self topViewController]];
+            [[UserLeap shared] presentSurveyFrom:[self topViewController]];
         }
     } : nil;
     [[UserLeap shared] trackWithEventName:eventName handler:surveyDisplayer];
     return [self execStatus:MPKitReturnCodeSuccess];
 }
+#pragma GCC diagnostic pop
 
 - (nonnull MPKitExecStatus *)logout {
     [[UserLeap shared] logout];

@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = "9.0"
     s.ios.source_files      = 'mParticle-UserLeap/*.{h,m}'
-    s.ios.dependency 'mParticle-Apple-SDK', '~> 8.0.1'
-    s.ios.dependency 'UserLeapKit', '3.1.1'
+    s.ios.dependency 'mParticle-Apple-SDK', '~> 8.2'
+    s.ios.dependency 'UserLeapKit', '4.1.0'
 end
