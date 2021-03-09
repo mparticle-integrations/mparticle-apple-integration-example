@@ -134,34 +134,50 @@
 
 #pragma mark Events
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-- (nonnull MPKitExecStatus *)logEvent:(MPEvent *)event {
-    BOOL showSurvey = YES;
-    if (event.customAttributes[@"userleap_dont_show_survey"]) showSurvey = NO;
-    NSString *eventName = nil;
-    MPKitReturnCode returnCode;
-    switch (event.messageType) {
-        case MPMessageTypeEvent:
-        case MPMessageTypeCommerceEvent:
-            eventName = event.name;
-            returnCode = MPKitReturnCodeSuccess;
-            break;
+NSString *commerceNameFromEvent(MPCommerceEvent *event) {
+    switch (event.action) {
+        case MPCommerceEventActionClick:
+            return @"click";
+        case MPCommerceEventActionRefund:
+            return @"refund";
+        case MPCommerceEventActionCheckout:
+            return @"checkout";
+        case MPCommerceEventActionPurchase:
+            return @"purchase";
+        case MPCommerceEventActionViewDetail:
+            return @"view detail";
+        case MPCommerceEventActionAddToCart:
+            return @"add to cart";
+        case MPCommerceEventActionCheckoutOptions:
+            return @"checkout options";
+        case MPCommerceEventActionRemoveFromCart:
+            return @"remove from cart";
+        case MPCommerceEventActionRemoveFromWishlist:
+            return @"remove from wishlist";
+        case MPCommerceEventActionAddToWishList:
+            return @"add to wishlist";
         default:
-            returnCode = MPKitReturnCodeUnavailable;
             break;
     }
-    if (!eventName) return [self execStatus:MPKitReturnCodeUnavailable];
+    return nil;
+}
+
+- (nonnull MPKitExecStatus *)logBaseEvent:(MPBaseEvent *)event {
+    NSString *name = nil;
+    if ([event isKindOfClass:[MPEvent class]]) name = ((MPEvent *)event).name;
+    else if ([event isKindOfClass:[MPCommerceEvent class]]) name = commerceNameFromEvent((MPCommerceEvent *)event);
+    if (!name) return [self execStatus:MPKitReturnCodeUnavailable];
     
+    BOOL showSurvey = [event.timestamp timeIntervalSinceNow] > -5;
+    if (event.customAttributes[@"userleap_dont_show_survey"]) showSurvey = NO;
     void (^surveyDisplayer)(enum SurveyState state) = showSurvey ? ^void(enum SurveyState state) {
         if (state == SurveyStateReady) {
             [[UserLeap shared] presentSurveyFrom:[self topViewController]];
         }
     } : nil;
-    [[UserLeap shared] trackWithEventName:eventName handler:surveyDisplayer];
+    [[UserLeap shared] trackWithEventName:name handler:surveyDisplayer];
     return [self execStatus:MPKitReturnCodeSuccess];
 }
-#pragma GCC diagnostic pop
 
 - (nonnull MPKitExecStatus *)logout {
     [[UserLeap shared] logout];
