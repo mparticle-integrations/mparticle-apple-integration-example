@@ -17,4 +17,10 @@ Pod::Spec.new do |s|
     s.ios.source_files      = 'mParticle-UserLeap/*.{h,m}'
     s.ios.dependency 'mParticle-Apple-SDK', '~> 8.2'
     s.ios.dependency 'UserLeapKit', '4.1.0'
+    s.pod_target_xcconfig = { 
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' 
+    }
+    s.user_target_xcconfig = { 
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+    }
 end
