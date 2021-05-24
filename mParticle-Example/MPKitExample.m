@@ -332,4 +332,14 @@
      return [self execStatus:MPKitReturnCodeSuccess];
  }
 
+/*
+    Batching sample, added for customer-built kits
+ */
+- (NSArray<MPForwardRecord *> *)logBatch:(NSDictionary *)batch {
+    NSData *batchData = [NSJSONSerialization dataWithJSONObject:batch options:0 error:nil];
+    NSString *batchString = [[NSString alloc] initWithData:batchData encoding:NSUTF8StringEncoding];
+    NSLog(@"Batch received in Example kit: %@", batchString);
+    return nil;
+}
+
 @end
