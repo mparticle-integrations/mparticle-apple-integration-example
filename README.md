@@ -4,10 +4,12 @@ This repository contains the example integration for the [mParticle Apple SDK](h
 
 ### Adding the integration
 
-1. Add the kit dependency to your app's Podfile or Cartfile:
+**NOTE: THESE ARE EXAMPLE INSTRUCTIONS FOR YOUR NEW KIT, THIS EXAMPLE KIT IS NOT MEANT TO BE INCLUDED IN A REAL APPLICATION**
+
+1. Add the kit dependency to your app's Podfile, Cartfile, or SPM:
 
     ```
-    pod 'mParticle-Example', '~> 8.0'
+    pod 'mParticle-Integration-Example', '~> 8.0'
     ```
 
     OR

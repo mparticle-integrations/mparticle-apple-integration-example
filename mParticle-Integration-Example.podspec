@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name             = "mParticle-Example"
+    s.name             = "mParticle-Integration-Example"
     s.version          = "8.0.0"
     s.summary          = "Example integration for mParticle"
 
@@ -12,8 +12,9 @@ Pod::Spec.new do |s|
     s.author           = { "mParticle" => "support@mparticle.com" }
     s.source           = { :git => "https://github.com/mparticle-integrations/mparticle-apple-integration-example.git", :tag => s.version.to_s }
     s.social_media_url = "https://twitter.com/mparticle"
+    s.swift_version    = '5.3'
 
-    s.ios.deployment_target = "9.0"
+    s.ios.deployment_target = "11.0"
     s.ios.source_files      = 'mParticle-Example/*.{h,m}'
     s.ios.dependency 'mParticle-Apple-SDK', '~> 8.0'
     #s.ios.dependency 'Example', '~> 1.2'

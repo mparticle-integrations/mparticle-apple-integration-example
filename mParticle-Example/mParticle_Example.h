@@ -3,4 +3,8 @@
 FOUNDATION_EXPORT double mParticle_ExampleVersionNumber;
 FOUNDATION_EXPORT const unsigned char mParticle_ExampleVersionString[];
 
-#import <mParticle_Example/MPKitExample.h>
+#if defined(__has_include) && __has_include(<mParticle_Appboy/MPKitAppboy.h>)
+    #import <mParticle_Example/MPKitExample.h>
+#else
+    #import "MPKitExample.h"
+#endif
